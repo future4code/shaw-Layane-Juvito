@@ -42,17 +42,17 @@ console.log(sobreMim("layane",26,"Pedra Branca - PB", "estudante"));
 
 //a) 
 
-const soma = (num1,num2) => num1+num2;
-console.log(soma(2,4));
+const soma = (num1,num2) => num1 + num2;
+console.log(`2 + 4 = ${soma(2,4)}`);
 
 //b) 
-const ehMaior = (num1,num2) => num1>=num2;
-console.log(ehMaior(2,4));
+const ehMaior = (num1,num2) => num1 >= num2;
+console.log(`2 é maior que 4? ${ehMaior(2,4)}`);
 
 //c)
-const ehPar = num => num%2===0;
+const ehPar = num => num % 2 ===0;
 
-console.log(ehPar(68));
+console.log(`O número 68 é par? ${ehPar(68)}`);
 
 //d)
 
@@ -61,6 +61,8 @@ const infoString = (texto) => {
     const novoTexto = texto.toUpperCase();
     console.log(`Seu texto possui ${tamanho} caracteres e foi modificada para ${novoTexto}`);
 }
+
+infoString("Algum texto aqui");
 
 // 3.
 
