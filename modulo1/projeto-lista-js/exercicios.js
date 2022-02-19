@@ -97,8 +97,8 @@ function retornaPrimeiroElemento(array) {
 function retornaUltimoElemento(array) {
   // implemente sua lógica aqui
   const tamanho = array.length;
-  return array[tamanho-1];
   
+  return array[tamanho-1];
 }
 
 // EXERCÍCIO 11
