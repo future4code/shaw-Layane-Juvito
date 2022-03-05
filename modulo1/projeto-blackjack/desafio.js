@@ -44,7 +44,7 @@ while (jogarNovamente) {
          const pontos = jogador.map((carta) => {
             return carta.valor;
          });
-         return pontos;
+         return pontos.reduce((acc,cur)=>{return acc+cur});
       };
 
 
@@ -68,11 +68,9 @@ while (jogarNovamente) {
       let cartasUsuario = cartas(usuarioVerficado);
       let cartasComputador = cartas(computadorVerficado);
 
-      let pontosUsuario = pontuacao(usuarioVerficado);
-      let pontosComputador = pontuacao(computadorVerficado);
+      let pontuacaoUsuario = pontuacao(usuarioVerficado);
+      let pontuacaoComputador = pontuacao(computadorVerficado);
 
-      let pontuacaoUsuario = pontosUsuario[0] + pontosUsuario[1];
-      let pontuacaoComputador = pontosComputador[0] + pontosComputador[1];
       let compraMaisUma = true;
 
 
