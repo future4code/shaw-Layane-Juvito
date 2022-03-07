@@ -10,6 +10,15 @@ function retornaTamanhoArray(array) {
 
 // EXERCÍCIO 02
 function retornaArrayInvertido(array) {
+    let newArray=[];
+//  USANDO O FOR:
+//   for(let i=0;i<array.length;i++){
+//       newArray[i]=array[array.length-1-i]
+//   }
+//  USANDO MAP:
+    return newArray = array.map((element,index)=>{
+        return element=array[array.length-1-index]
+    });
   
 }
 
