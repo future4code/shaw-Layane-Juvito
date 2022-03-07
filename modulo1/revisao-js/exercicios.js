@@ -83,8 +83,8 @@ function retornaNPrimeirosPares(n) {
     let pares = [];
     let i = 0;
     let count = 0;
-    while(count<n){
-        if(i%2===0){
+    while (count < n) {
+        if (i % 2 === 0) {
             pares.push(i);
             count++;
         }
@@ -96,71 +96,74 @@ function retornaNPrimeirosPares(n) {
 // EXERCÍCIO 09
 function classificaTriangulo(ladoA, ladoB, ladoC) {
     let tipoTriangulo;
-    if(ladoA === ladoB && ladoA===ladoC){
-        tipoTriangulo="Equilátero";
-    }else if(ladoA === ladoB || ladoA===ladoC || ladoB===ladoC){
-        tipoTriangulo="Isósceles";
-    }else {
-        tipoTriangulo="Escaleno";
+    if (ladoA === ladoB && ladoA === ladoC) {
+        tipoTriangulo = "Equilátero";
+    } else if (ladoA === ladoB || ladoA === ladoC || ladoB === ladoC) {
+        tipoTriangulo = "Isósceles";
+    } else {
+        tipoTriangulo = "Escaleno";
     }
     return tipoTriangulo;
 }
 
 // EXERCÍCIO 10
 function retornaSegundoMaiorESegundoMenor(array) {
-    ordenar=(a,b)=>{
-        return a-b
+    ordenar = (a, b) => {
+        return a - b
     }
     array.sort(ordenar);
-    return [array[array.length-2],array[1]]
+    return [array[array.length - 2], array[1]]
 }
 
 // EXERCÍCIO 11
 function retornaChamadaDeFilme(filme) {
-return `Venha assistir ao filme ${filme.nome}, de ${filme.ano}, dirigido por ${filme.diretor} e estrelado por ${filme.atores.join(", ")}.`
+    return `Venha assistir ao filme ${filme.nome}, de ${filme.ano}, dirigido por ${filme.diretor} e estrelado por ${filme.atores.join(", ")}.`
 }
 
 // EXERCÍCIO 12
 function retornaPessoaAnonimizada(pessoa) {
-    return {...pessoa,
-            nome:"ANÔNIMO"}
+    return {
+        ...pessoa,
+        nome: "ANÔNIMO"
+    }
 }
 
 // EXERCÍCIO 13A
 function retornaPessoasAutorizadas(pessoas) {
-    return pessoas.filter((pessoa)=>{
-        return pessoa.idade>14 && pessoa.altura>=1.5 && pessoa.idade<60
+    return pessoas.filter((pessoa) => {
+        return pessoa.idade > 14 && pessoa.altura >= 1.5 && pessoa.idade < 60
     });
 }
 
 // EXERCÍCIO 13B
 function retornaPessoasNaoAutorizadas(pessoas) {
-    return pessoas.filter((pessoa)=>{
-        return pessoa.idade<=14 || pessoa.altura<1.5 || pessoa.idade>60
+    return pessoas.filter((pessoa) => {
+        return pessoa.idade <= 14 || pessoa.altura < 1.5 || pessoa.idade > 60
     });
 }
 
 // EXERCÍCIO 14
 function retornaContasComSaldoAtualizado(contas) {
-    for(let i=0; i<contas.length;i++){
+    for (let i = 0; i < contas.length; i++) {
         let aPagar;
-        console.log(contas[i].compras)
-        if(contas[i].compras.length===0){
-            aPagar=0;
-        }else{
-            aPagar=contas[i].compras.reduce((acc,cur)=>{return acc+cur});
+        if (contas[i].compras.length === 0) {
+            aPagar = 0;
+        } else {
+            aPagar = contas[i].compras.reduce((acc, cur) => { return acc + cur });
         }
-        contas[i].saldoTotal=contas[i].saldoTotal-aPagar;
-        contas[i].compras=[];
+        contas[i].saldoTotal = contas[i].saldoTotal - aPagar;
+        contas[i].compras = [];
     };
-    
+
     return contas;
-   
+
 }
 
 // EXERCÍCIO 15A
 function retornaArrayOrdenadoAlfabeticamente(consultas) {
-
+    return consultas.sort(function (a, b) {
+        return (a.nome > b.nome) ? 1 : ((b.nome > a.nome) ? -1 : 0);
+    });
 }
 
 // EXERCÍCIO 15B
