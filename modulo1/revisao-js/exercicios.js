@@ -24,7 +24,14 @@ function retornaArrayInvertido(array) {
 
 // EXERCÍCIO 03
 function retornaArrayOrdenado(array) {
-  
+    let arrayOrdenado=[];
+    const n = array.length
+    for(let i=0;i<n;i++){
+        arrayOrdenado.push(Math.min.apply(null,array));
+        let index = array.indexOf(arrayOrdenado[i]);
+        array.splice(index,1);
+    }
+    return arrayOrdenado
 }
 
 // EXERCÍCIO 04
