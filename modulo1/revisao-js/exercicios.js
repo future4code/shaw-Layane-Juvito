@@ -172,7 +172,7 @@ function retornaArrayOrdenadoPorData(consultas) {
     for(let i=0; i<consultas.length;i++){
         consultas[i].dataDaConsulta =new Date(consultas[i].dataDaConsulta.slice(3,6)+consultas[i].dataDaConsulta.slice(0,3)+consultas[i].dataDaConsulta.slice(6))
     };
-    consultas.sort(function(a,b) { 
+    consultas.sort((a,b)=> { 
         return a.dataDaConsulta - b.dataDaConsulta
     });
     const adicionaZero=(numero)=>{
