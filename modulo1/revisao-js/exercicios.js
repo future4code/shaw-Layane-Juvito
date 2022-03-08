@@ -163,6 +163,7 @@ function retornaContasComSaldoAtualizado(contas) {
 function retornaArrayOrdenadoAlfabeticamente(consultas) {
     return consultas.sort((a, b)=> {
         return (a.nome > b.nome) ? 1 : ((b.nome > a.nome) ? -1 : 0);
+        if(a.nome>b.nome){return 1}else if(b.nome>a.nome){return -1}else{return 0}
     });
 }
 
