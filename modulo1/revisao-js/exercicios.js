@@ -168,5 +168,22 @@ function retornaArrayOrdenadoAlfabeticamente(consultas) {
 
 // EXERCÍCIO 15B
 function retornaArrayOrdenadoPorData(consultas) {
-  
+    // c=consultas[0].dataDaConsulta.slice(6)+consultas[0].dataDaConsulta.slice(2,6)+consultas[0].dataDaConsulta.slice(0,2);
+    for(let i=0; i<consultas.length;i++){
+        consultas[i].dataDaConsulta =new Date(consultas[i].dataDaConsulta.slice(3,6)+consultas[i].dataDaConsulta.slice(0,3)+consultas[i].dataDaConsulta.slice(6))
+    };
+    consultas.sort(function(a,b) { 
+        return a.dataDaConsulta - b.dataDaConsulta
+    });
+    const adicionaZero=(numero)=>{
+        if (numero <= 9) 
+            return "0" + numero;
+        else
+            return numero; 
+    };
+
+    for(let i=0; i<consultas.length;i++){
+        consultas[i].dataDaConsulta =adicionaZero(consultas[i].dataDaConsulta.getDate() ) + "/" + adicionaZero(consultas[i].dataDaConsulta.getMonth() + 1) + "/" + consultas[i].dataDaConsulta.getFullYear(); 
+    };
+    return consultas;
 }
