@@ -4,66 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap" rel="stylesheet">
     <title>Controle de Estoque</title>
 </head>
 <body>
-    <div>
-        <p>Mais que Smile</p>
-    </div>
+    <header>
+        <nav>
+            <span id="logo">Mais que Smile</span>
+            <a href="index.html">Página Inicial</a>
+            <a href="ctrl-estoque.html">Controle de Estoque</a>
+            <a href="add-produto.html">Adicionar Produto</a>
+            <a href="funcionarios.html">Funcionários</a>
+        </nav>
+    </header>
+   
+   <main class="conteudo-pagina">
+
+       <h2 class="titulo">Controle de Estoque</h2>
+       <hr>
     
-    <div>
-        <a href="index.html">Página Inicial</a>
-        <a href="ctrl-estoque.html">Controle de Estoque</a>
-        <a href="add-produto.html">Adicionar Produto</a>
-        <a href="funcionarios.html">Funcionários</a>
-    </div>
+       <table class="container-produtos">
+           <tr>
+               <th>Produto</th>
+               <th>Descrição</th>
+               <th>Preço (฿)</th>
+               <th>Quantidade disponível</th>
+           </tr>
+           <tr>
+               <td><img src="./imagens/produtos/artificial.png" alt="Akuma no Mi Artificial"/></td>
+               <td class="descricao"> Akuma no Mi Artificial: primeira fruta feita por humanos</td>
+               <td> 1.500.000 </td>
+               <td> 1 </td>
+           </tr>
+    
+           <tr>
+               <td><img src="./imagens/produtos/smile.png" alt="Smile"/></td>
+               <td class="descricao"> Smile: Akuma no Mi artificiais do tipo Zoan criadas com SAD. </td>
+               <td> 2.500.000 </td>
+               <td> 1589 </td>
+           </tr>
+    
+           <tr>
+               <td><img src="./imagens/produtos/awa_awa_no-mi.png" alt="Awa Aea no Mi"/></td>
+               <td class="descricao">Awa Awa no Mi é uma Akuma no Mi do tipo Paramecia que permite ao usuário de emitir e controlar bolhas de sabão.</td>
+               <td> 3.000.000 </td>
+               <td>1</td>
+           </tr>
+    
+           <tr>
+               <td><img src="./imagens/produtos/gomu_gomu_no_mi.jpg" alt="Gomu Gomu no Mi"/></td>
+               <td class="descricao"> A Gomu Gomu no Mi é uma Akuma no Mi do tipo Paramecia que dá ao corpo do usuário as propriedades da borracha </td>
+               <td> 25.000.000 </td>
+               <td> 1 </td>
+           </tr>
+           
+           <tr>
+               <td><img src="./imagens/produtos/mera_mera_no_mi.png" alt="Mera Mera no Mi"/></td>
+               <td class="descricao">A Mera Mera no Mi é uma Akuma no Mi do tipo Logia que permite ao usuário criar, controlar e se transformar em Chamas à vontade.</td>
+               <td> 45.000.000 </td>
+               <td> 1 </td>
+           </tr>
+    
+       </table>
+   </main> 
+    
 
-    <h2>Controle de Estoque</h2>
 
-    <table>
-        <tr>
-            <th>Produto</th>
-            <th>Descrição</th>
-            <th>Preço (฿)</th>
-            <th>Quantidade disponível</th>
-        </tr>
-
-        <tr>
-            <td><img src="./imagens/produtos/Artificial_Devil_Fruit_Infobox.webp" alt="Akuma no Mi Artificial"/></td>
-            <td> Akuma no Mi Artificial: primeira fruta feita por humanos</td>
-            <td> 1.500.000 </td>
-            <td> 1 </td>
-        </tr>
-
-        <tr>
-            <td><img src="./imagens/produtos/SMILE_Infobox.webp" alt="Smile"/></td>
-            <td> Smile: Akuma no Mi artificiais do tipo Zoan criadas com SAD. </td>
-            <td> 2.500.000 </td>
-            <td> 1589 </td>
-        </tr>
-
-        <tr>
-            <td><img src="./imagens/produtos/Awa_Awa_no_Mi_Infobox.webp" alt="Awa Aea no Mi"/></td>
-            <td>Awa Awa no Mi é uma Akuma no Mi do tipo Paramecia que permite ao usuário de emitir e controlar bolhas de sabão.</td>
-            <td> 3.000.000 </td>
-            <td>1</td>
-        </tr>
-
-        <tr>
-            <td><img src="./imagens/produtos/Gomu_Gomu_no_Mi_Infobox.webp" alt="Gomu Gomu no Mi"/></td>
-            <td> A Gomu Gomu no Mi[1] é uma Akuma no Mi do tipo Paramecia que dá ao corpo do usuário as propriedades da borracha </td>
-            <td> 25.000.000 </td>
-            <td> 1 </td>
-        </tr>
-        
-        <tr>
-            <td><img src="./imagens/produtos/Mera_Mera_no_Mi_Infobox.webp" alt="Mera Mera no Mi"/></td>
-            <td>A Mera Mera no Mi é uma Akuma no Mi do tipo Logia que permite ao usuário criar, controlar e se transformar em Chamas à vontade.</td>
-            <td> 45.000.000 </td>
-            <td> 1 </td>
-        </tr>
-
-    </table>
+    <footer>
+        <p>Para mais informações nos contate via Den Den Mushi.</p>
+        <p> © Organização Família Domquixote</p>  
+    </footer>
 
 </body>
 </html>
