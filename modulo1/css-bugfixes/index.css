@@ -105,7 +105,9 @@ div input{
     border: none;
     border-bottom: 2px solid;
 }
+
 table {
+    margin: auto;
     width: 60%;
     text-align: center;
 }
