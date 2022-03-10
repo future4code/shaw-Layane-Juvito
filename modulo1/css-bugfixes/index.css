@@ -109,7 +109,12 @@ div input{
     border: none;
     border-bottom: 2px solid;
 }
-
+.icone:hover{
+    opacity: 50%;
+}
+.icone:active{
+    opacity: 100%;
+}
 table {
     margin: auto;
     width: 60%;
