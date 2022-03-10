@@ -100,7 +100,10 @@ div:nth-child(2),
 div:last-child {
     text-align: center;
 }
-
+div input{
+    border: none;
+    border-bottom: 2px solid;
+}
 table {
     width: 60%;
     text-align: center;
