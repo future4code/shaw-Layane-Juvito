@@ -1,0 +1,151 @@
+/* estilização comum a todas as paginas */
+body{
+    /* margin: 0; */
+    padding: 0;
+    margin: 0;
+    /* font-size: 10px; */
+
+}
+nav{
+    background-color:rgb(31, 218, 231) ;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content:flex-end;
+}
+
+nav a{
+    text-decoration: none;
+    margin:25px;
+    font-size: 1.2rem;
+    color:rgb(230, 25, 151);
+    font-weight: bold;
+}
+nav a:hover{
+    color:blueviolet
+}
+nav #logo{
+    position: absolute;
+    left:25px;
+}
+#current{
+    color:blueviolet;
+}
+footer{
+    padding-top: 10px;
+    text-align: center; 
+    height: 10vh;
+    background-color:rgb(31, 218, 231) ;
+}
+.conteudo-pagina{
+    min-height: 82vh;
+    background-color: rgb(241, 185, 213);
+    text-align: center; 
+}
+#logo{
+    
+    font-family: 'Syne Mono', monospace;
+    margin-left: 25px;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+#smile{
+    background-color:blueviolet ;
+    color: white;
+    padding: 2px;
+    font-size: 1.4rem;
+}
+/* estilização index.html */
+.sobre{
+    text-align: justify;
+}
+.sobre p,h3{
+    margin: 15px 170px;
+}
+.titulo-h1{
+    margin:0;
+    font-family: 'Syne Mono', monospace;
+    padding-top: 10px;
+    /* font-size: 1.6rem; */
+}
+.titulo h1, p, h2{
+    margin:0;
+}
+.titulo h2{
+    font-family: 'Syne Mono', monospace;
+    padding-top: 10px;
+}
+
+/* estilização estoque */
+.container-produtos{
+    padding: 30px;
+}
+.container-produtos tr td img{
+    height: 100px;
+    border-radius: 50%;
+}
+.descricao{
+    width: 40%;
+}
+/* estilização add produto */
+.container-form{
+    margin: 50px;
+}
+
+
+.container-form input{
+    padding: 5px;
+    margin: 10px;
+    width: 300px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.container-form button{
+    width: 250px;
+    height: 35px;
+    border:none;
+    border-radius: 5px;;
+    padding: 5px;
+    background-color: blueviolet;
+    color: beige;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin:10px;
+}
+
+/* estilização funcionario */
+.lista-funcionarios li{
+    list-style-type: none;
+    margin: 10px;
+}
+.lista-funcionarios{
+    margin: 10px 0 0 0;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+}
+
+/* estilização vender produto */
+.forma-pagamento{
+    padding: 5px;
+    margin: 10px;
+    width: 300px;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+.lista-produtos{
+    display: flex;
+    justify-content: center;
+}
+.lista-produtos li{
+    list-style-type: none;
+    margin:50px;
+}
+.lista-produtos img{
+    height: 100px;
+    border-radius: 50%;
+}
