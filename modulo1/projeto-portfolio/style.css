@@ -6,6 +6,10 @@ body{
     padding: 0;
     margin: 0;
 }
+h2{
+    font-family: 'Fjalla One', sans-serif;
+    text-align: left;
+}
 nav{
     display: flex;
     align-items: center;
@@ -17,6 +21,11 @@ nav a{
     color:rgb(85, 235, 172);
     margin: 25px;
 }
+nav a:hover{
+    text-decoration: underline;
+    color:rgb(140, 72, 204);
+}
+
 nav .nome{
     position: absolute;
     top:8px;
@@ -104,9 +113,6 @@ nav .nome{
     justify-content: space-around;
     align-items: center;
 }
-.ensino-container h2{
-    font-family: 'Fjalla One', sans-serif;
-}
 .card{
     background-color:rgb(85, 235, 172);
     border-radius: 10px;
@@ -123,10 +129,6 @@ nav .nome{
 .projetos{
     max-width: 900px;
     margin: 50px auto;
-}
-.projetos h2{
-    font-family: 'Fjalla One', sans-serif;
-    text-align: left;
 }
 .card-container{
     display: grid;
@@ -167,4 +169,89 @@ nav .nome{
 }
 .contato img{
     width: 50px;
+}
+.contato{
+    max-width: 900px;
+    margin: auto;
+}
+.wrapper{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: center;
+    align-items: center;
+}
+.mensagem{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+form{
+    text-align: center;
+}
+form label{
+    display: block;
+    text-align: left;
+}
+form textarea{
+    width: 95%;
+    height: 100px;
+    outline: none;
+    margin: 10px;
+    background-color: rgb(212, 209, 209);
+    padding: 10px;
+    color:  rgb(14, 94, 60);;
+}
+form input{
+    border: none;
+    outline: none;
+    height: 40px;
+    width:90%;
+    margin: 10px;
+    background-color: rgb(212, 209, 209);
+    padding: 0px 10px;
+    color:  rgb(14, 94, 60);
+}
+
+.btn{
+    background-color: rgb(90, 15, 160);
+    color: white;
+    font-weight: bold;
+    border:none;
+    outline: none;
+    border-radius: 5px;
+    padding: 8px;
+    margin: 10px;
+}
+.links{
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+}
+
+/* pagina de projetos */
+.container{
+    max-width: 900px;
+    margin: auto;
+}
+.galeria{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* overflow: hidden;
+    overflow-x: scroll; */
+}
+.galeria p{
+    display: block;
+}
+.galeria img{
+    width: 50%;
+    margin:20px;
+}
+.btn-con {
+    text-align: center;
+}
+.btn-con button:hover{
+    background-color:rgb(14, 94, 60) ;
+}
+.btn-con button:active{
+    color:rgb(14, 94, 60) ;
 }
