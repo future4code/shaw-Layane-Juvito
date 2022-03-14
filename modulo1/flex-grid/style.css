@@ -1,0 +1,81 @@
+*{
+    margin: 0px;
+    padding:0px;
+}
+
+.container{
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 8vh 1fr 8vh; 
+}
+/* Estilo do header e seus elementos */
+header{
+    display: grid;
+    height: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: mediumvioletred;
+}
+header button{
+    margin-right: 10px;
+}
+header img{
+    width: 20px;
+    margin: 0px 10px;
+}
+.logo{
+    display: flex;
+    margin: 5px;
+}
+/* dividindo o main */
+main{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 20vw 78.5vw;
+    
+}
+/* Estilo do menu lateral e seus elementos */
+.menu-lateral{
+    width: 100%;
+    background-color: #f2d0e0;
+}
+.menu-lateral img{
+    width: 15px;
+    margin-right:10px;
+}
+.menu-lateral a{
+    text-decoration: none;
+    color: black;
+}
+.iten-menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+}
+/* Estilo itens principal  */
+.container-card{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.card{
+    max-width: 270px;
+    box-shadow: 5px 5px 5px darkgray;
+    text-align: center;
+    margin: 10px;
+}
+.card img{
+    max-width: 270px;
+}
+/* Estilo rodapé */
+footer{
+    display: flex;
+    background-color:mediumvioletred;
+    width: 100%;
+}
+footer p{
+    margin: auto;
+}
