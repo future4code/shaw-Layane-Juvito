@@ -6,7 +6,32 @@ body {
     font-size: 10px;
     color: white;
 }
-
+#main-container{
+    height: 100%;
+    display: grid;
+    grid-template-rows: 50px 3fr 200px 50px;
+    text-align: center;
+}
+#top-container{
+    height: 100%;
+    display: grid;
+    grid-template-columns:1fr 2fr ;
+    
+}
+#middle-container{
+    height: 100%;
+    display: grid;
+    grid-template-columns:2fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+#content2{
+    height: 100%;
+}
+#vertical-middle-container{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    height: 100%;
+}
 .green-background {
     background-color: green;
 }
@@ -33,4 +58,5 @@ body {
 
 .purple-background {
     background-color: purple;
+    height: 100%;
 }
