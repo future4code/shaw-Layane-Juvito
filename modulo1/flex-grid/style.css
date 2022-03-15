@@ -27,7 +27,8 @@ header img{
 }
 .logo{
     display: flex;
-    margin: 5px;
+    align-items: center;
+    justify-content: space-between;
 }
 /* dividindo o main */
 main{
