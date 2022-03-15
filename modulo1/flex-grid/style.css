@@ -1,6 +1,7 @@
 *{
     margin: 0px;
     padding:0px;
+    box-sizing: border-box;
 }
 
 .container{
@@ -17,18 +18,22 @@ header{
     justify-content: space-between;
     align-items: center;
     background-color: mediumvioletred;
-}
-header button{
-    margin-right: 10px;
+    padding: 10px;
 }
 header img{
     width: 20px;
-    margin: 0px 10px;
+}
+header button{
+    width: 80px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
 }
 .logo{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 8vw;
 }
 /* dividindo o main */
 main{
@@ -60,16 +65,27 @@ main{
 .container-card{
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    /* grid-template-columns: repeat(4,1fr); */
+    grid-template-columns: repeat(auto-fill,minmax(270px, 1fr));
+    padding: 10px;
+    gap: 10px;
 }
 .card{
     max-width: 270px;
     box-shadow: 5px 5px 5px darkgray;
+    display: flex;
+    flex-direction: column;
     text-align: center;
-    margin: 10px;
+    gap: 5px;
+}
+.texto{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 8px;
 }
 .card img{
-    max-width: 270px;
+    width: 100%;
 }
 /* Estilo rodapé */
 footer{

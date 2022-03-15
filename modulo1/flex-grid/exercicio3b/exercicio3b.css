@@ -9,14 +9,13 @@ body {
 #main-container{
     height: 100%;
     display: grid;
-    grid-template-rows: 50px 3fr 200px 50px;
+    grid-template-rows: 8vh 60vh 24vh 8vh;
     text-align: center;
 }
 #top-container{
     height: 100%;
     display: grid;
     grid-template-columns:1fr 2fr ;
-    
 }
 #content2{
     grid-area: content2;
@@ -40,9 +39,6 @@ body {
 }
 #middle-container{
     height: 100%;
-    /* display: grid; */
-    /* grid-template-columns:2fr 1fr 1fr; */
-    /* grid-template-rows: 1fr 1fr; */
     display: grid;
     grid-template-areas:
     'content2 content2 blank duo'
@@ -57,32 +53,53 @@ body {
 }
 .green-background {
     background-color: green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .yellow-background {
     background-color: yellow;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .pink-background {
     background-color: fuchsia;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .blue-background {
     background-color: blue;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .red-background {
     background-color: red;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .lightgreen-background {
     background-color: lightgreen;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .purple-background {
     background-color: purple;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
