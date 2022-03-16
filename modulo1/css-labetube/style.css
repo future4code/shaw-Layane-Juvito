@@ -109,10 +109,6 @@ footer{
         flex-direction: column;
         flex-grow: 1;
     }
-    .card:hover{
-        border:2px solid rgb(122, 57, 11);
-        opacity: 60%;
-    }
     #main-media video{
         width: 90%;
     }
