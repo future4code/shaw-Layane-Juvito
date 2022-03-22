@@ -1,11 +1,14 @@
 import './App.css';
 import {FaHome, FaAngleDoubleUp, FaCircleNotch, FaYoutube, FaPenSquare, FaSistrix, FaCaretSquareRight, FaMicrophone} from 'react-icons/fa';
+import {CardVideo} from './components/CardVideo';
+import { BotaoMenu } from './components/BotaoMenu';
 
-const titulo = "Título do vídeo";
-function reproduzVideo() {
-  alert("O vídeo está sendo reproduzido")
-};
 function App() {
+  const titulo = "Título do vídeo";
+    function reproduzVideo() {
+      alert("O vídeo está sendo reproduzido")
+    };
+  const linkImg = "https://picsum.photos/400/400?a=1";
   return (
     <div className="tela-inteira">
         <header>
@@ -23,65 +26,29 @@ function App() {
             <nav className="menu-vertical">
                 <ul id="division-section">
                   <div >
-                    <li className="botoes-meunu-vertical">
-                      <FaHome /> Início</li>
-                    <li className="botoes-meunu-vertical">
-                      <FaAngleDoubleUp /> Em alta</li>
-                    <li className="botoes-meunu-vertical ultimo-item">
-                      <FaPenSquare /> Inscrições</li>
+                    <BotaoMenu icon={<FaHome />} texto = "Início"/>
+                    <BotaoMenu icon={<FaAngleDoubleUp />} texto = "Em alta"/>
+                    <BotaoMenu icon={<FaPenSquare />} texto = "Inscrições"/>
                   </div>
                   </ul>
                 <ul>
                   <div>
-                    <li className="botoes-meunu-vertical">
-                      <FaYoutube /> Originais</li>
-                    <li className="botoes-meunu-vertical">
-                      <FaCircleNotch /> Histórico</li>
+                    <BotaoMenu icon={<FaYoutube />} texto = "Originais"/>
+                    <BotaoMenu icon={<FaCircleNotch />} texto = "Histórico"/>
                   </div>
                 </ul>
             </nav>
 
             <section className="painel-de-videos">
-                <div className="box-pagina-principal media1" onClick={reproduzVideo}>
-                    <img src="https://picsum.photos/400/400?a=1 " alt="" />
-                    <h4>{titulo}</h4>
-                    <p>Descrição do vídeo vem aqui</p>
-                </div>
-                <div className="box-pagina-principal media2" onClick={reproduzVideo}>
-                    <img src="https://picsum.photos/400/400?a=2 " alt="" />
-                    <h4>{titulo}</h4>
-                    <p>Descrição do vídeo vem aqui</p>
-                </div>
-                <div className="box-pagina-principal media3" onClick={reproduzVideo}>
-                    <img src="https://picsum.photos/400/400?a=3 " alt="" />
-                    <h4>{titulo}</h4>
-                    <p>Descrição do vídeo vem aqui</p>
-                </div>
-                <div className="box-pagina-principal media4" onClick={reproduzVideo}>
-                    <img src="https://picsum.photos/400/400?a=4 " alt="" />
-                    <h4>{titulo}</h4>
-                    <p>Descrição do vídeo vem aqui</p>
-                </div>
-                <div className="box-pagina-principal media5" onClick={reproduzVideo}>
-                    <img src="https://picsum.photos/400/400?a=5 " alt="" />
-                    <h4>{titulo}</h4>
-                    <p>Descrição do vídeo vem aqui</p>
-                </div>
-                <div className="box-pagina-principal media6" onClick={reproduzVideo}>
-                    <img src="https://picsum.photos/400/400?a=6 " alt="" />
-                    <h4>{titulo}</h4>
-                    <p>Descrição do vídeo vem aqui</p>
-                </div>
-                <div className="box-pagina-principal media7" onClick={reproduzVideo}>
-                    <img src="https://picsum.photos/400/400?a=7 " alt="" />
-                    <h4>{titulo}</h4>
-                    <p>Descrição do vídeo vem aqui</p>
-                </div>
-                <div className="box-pagina-principal media8" onClick={reproduzVideo}>
-                    <img src="https://picsum.photos/400/400?a=8 " alt="" />
-                    <h4>{titulo}</h4>
-                    <p>Descrição do vídeo vem aqui</p>
-                </div>
+                <CardVideo titulo ={titulo} funcao={reproduzVideo} link={linkImg} />
+                <CardVideo titulo ={titulo} funcao={reproduzVideo} link={linkImg} />
+                <CardVideo titulo ={titulo} funcao={reproduzVideo} link={linkImg} />
+                <CardVideo titulo ={titulo} funcao={reproduzVideo} link={linkImg} />
+                <CardVideo titulo ={titulo} funcao={reproduzVideo} link={linkImg} />
+                <CardVideo titulo ={titulo} funcao={reproduzVideo} link={linkImg} />
+                <CardVideo  titulo ={titulo} funcao={reproduzVideo} link={linkImg} />
+                <CardVideo titulo ={titulo} funcao={reproduzVideo} link={linkImg} />
+               
             </section>
         </main>
 
