@@ -92,6 +92,7 @@ main {
   padding-bottom: 10px;
 }
 .botoes-meunu-vertical {
+  cursor: pointer;
   list-style-type: none;
   display: flex;
   align-items: center;
@@ -111,8 +112,11 @@ main {
   grid-template-columns: repeat(4, 23.3% 0.2%);
   grid-template-rows: repeat(4, 250px 20px);
   gap: 10px;
+  cursor: pointer;
 }
-
+.box-pagina-principal:hover{
+  opacity: 60%;
+}
 .media1 {
   grid-column-start: 1;
   grid-row-start: 1;
