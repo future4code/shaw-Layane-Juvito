@@ -86,7 +86,7 @@ function App() {
         </main>
 
         <footer>
-            <h4>Oi! Eu moro no footer!</h4>
+          &copy; Desenvolvido por Layane Bastos.
         </footer>
     </div >
   );
