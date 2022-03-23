@@ -1,6 +1,6 @@
 import './App.css';
 import {FaHome, FaAngleDoubleUp, FaCircleNotch, FaYoutube, FaPenSquare, FaSistrix, FaCaretSquareRight, FaMicrophone} from 'react-icons/fa';
-import {CardVideo} from './components/CardVideo';
+import CardVideo from './components/CardVideo';
 import { BotaoMenu } from './components/BotaoMenu';
 
 function App() {

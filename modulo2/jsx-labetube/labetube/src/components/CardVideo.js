@@ -3,10 +3,11 @@ import React from "react";
 import styled from "styled-components";
 
 const BoxPaginaPrincipal = styled.div`
+    
     display: flex;
     flex-direction: column;
-    align-items: start;
-    width:24.2% ;
+    align-items: start; 
+    width:100%;
     gap: 2px;
     color: white;
     :hover{
@@ -16,7 +17,7 @@ const BoxPaginaPrincipal = styled.div`
     width: 100%;
     height: 200px;}
 `
-export function CardVideo(props) {
+function CardVideo(props) {
     
     return (
         <BoxPaginaPrincipal onClick={props.funcao}>
@@ -26,3 +27,4 @@ export function CardVideo(props) {
         </BoxPaginaPrincipal>
     )
 }
+export default CardVideo
