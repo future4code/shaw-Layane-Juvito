@@ -26,16 +26,16 @@ export class SecaoCompartilhar extends React.Component{
         })
     }
     onClickFace = ()=>{
-        this.props.onClickCompartilhar1()
-        console.log(this.state.mensagem)
+        this.props.onClickCompartilhar()
+        console.log("Post compartilhado no Facebook com a mensagem: ", this.state.mensagem)
     }
     onClickInsta = ()=>{
-        this.props.onClickCompartilhar2()
-        console.log(this.state.mensagem)
+        this.props.onClickCompartilhar()
+        console.log("Post compartilhado no Instagram com a mensagem: ", this.state.mensagem)
     }
     onClickTwitter = ()=>{
-        this.props.onClickCompartilhar3()
-        console.log(this.state.mensagem)
+        this.props.onClickCompartilhar()
+        console.log("Post compartilhado no Twitter com a mensagem: ", this.state.mensagem)
     }
     render(){
         return(

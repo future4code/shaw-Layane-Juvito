@@ -89,7 +89,6 @@ class Post extends React.Component {
     this.setState({
       salvo:!this.state.salvo
     })
-    console.log("O post foi salvo")
   }
 
   onClickCompartilhar = () => {
@@ -97,24 +96,7 @@ class Post extends React.Component {
       compartilhar:!this.state.compartilhar
     })
   }
-  onClickCompartilharFacebook = () =>{
-    this.setState({
-      compartilhar:!this.state.compartilhar
-    })
-    console.log("Post compartilhado no Facebookno com a mensagem: ")
-  }
-  onClickCompartilharInstagram = () =>{
-    this.setState({
-      compartilhar:!this.state.compartilhar
-    })
-    console.log("Post compartilhado no Instagram com a mensagem: ")
-  }
-  onClickCompartilharTwitter = () =>{
-    this.setState({
-      compartilhar:!this.state.compartilhar
-    })
-    console.log("Post compartilhado no Twitter com a mensagem: ")
-  }
+  
   render() {
     let iconeCurtida
 
@@ -143,9 +125,7 @@ class Post extends React.Component {
       icone1={iconeFacebook}
       icone2={iconeInstagram}
       icone3={iconeTwitter}
-      onClickCompartilhar1={this.onClickCompartilharFacebook} 
-      onClickCompartilhar2={this.onClickCompartilharInstagram} 
-      onClickCompartilhar3={this.onClickCompartilharTwitter}
+      onClickCompartilhar={this.onClickCompartilhar}
       mensagem={this.mensagemCompartilhar}
       />
     }
