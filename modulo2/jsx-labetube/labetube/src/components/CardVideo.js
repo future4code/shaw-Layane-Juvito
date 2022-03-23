@@ -17,14 +17,15 @@ const BoxPaginaPrincipal = styled.div`
     width: 100%;
     height: 200px;}
 `
-function CardVideo(props) {
-    
-    return (
-        <BoxPaginaPrincipal onClick={props.funcao}>
-                <img src={props.link} alt="" />
-                <h4>{props.titulo}</h4>
-                <p>Descrição do vídeo vem aqui</p>
-        </BoxPaginaPrincipal>
-    )
+class CardVideo extends React.Component {
+    render() {
+        return (
+            <BoxPaginaPrincipal onClick={this.props.funcao}>
+                    <img src={this.props.link} alt="" />
+                    <h4>{this.props.titulo}</h4>
+                    <p>Descrição do vídeo vem aqui</p>
+            </BoxPaginaPrincipal>
+        )
+    }
 }
 export default CardVideo
