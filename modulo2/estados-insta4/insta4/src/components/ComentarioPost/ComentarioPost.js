@@ -21,11 +21,14 @@ const ContainerComentario = styled.div`
 	}
 
 `
-export function ComentarioPost (props){
-	return (
-		<ContainerComentario>
-			<UserPhoto src={'https://picsum.photos/50/48'} alt={'Imagem do usuario'}/>
-			<p><span>lay</span> {props.comentario}</p>
-		</ContainerComentario>
-	)
+export class ComentarioPost extends React.Component{
+	
+	render(){
+		return (
+			<ContainerComentario>
+				<UserPhoto src={this.props.imagem} alt={'Imagem do usuario'}/>
+				<p><span>lay</span> {this.props.comentario}</p>
+			</ContainerComentario>
+		)
+	}
 }

@@ -11,7 +11,6 @@ import iconeSalvoBranco from '../../img/turned_in_not_black.svg'
 import iconeCompartilhar from '../../img/launch_black.svg'
 import {SecaoComentario} from '../SecaoComentario/SecaoComentario'
 import { SecaoCompartilhar } from '../SecaoCompartilhar/SecaoCompartilhar'
-import { ComentarioPost } from '../ComentarioPost/ComentarioPost'
 import iconeFacebook from '../../img/icons8-facebook.svg'
 import iconeInstagram from '../../img/icons8-instagram.svg'
 import iconeTwitter from '../../img/icons8-twitter-circled.svg'
@@ -54,9 +53,11 @@ class Post extends React.Component {
     curtido: false,
     numeroCurtidas: 0,
     comentando: false,
+    comentado:false,
     numeroComentarios: 0,
     salvo:false,
     compartilhar: false,
+    listaComentarios:[]
   }
 
   onClickCurtida = () => {
@@ -83,7 +84,8 @@ class Post extends React.Component {
   aoEnviarComentario = () => {
     this.setState({
       comentando: false,
-      numeroComentarios: this.state.numeroComentarios + 1
+      numeroComentarios: this.state.numeroComentarios + 1,
+      comentado:true,
     })
   }
   onClickSalvo = () => {
@@ -99,13 +101,12 @@ class Post extends React.Component {
   }
   
   render() {
-    let textoComentario = localStorage.getItem(`texto`);
-    let comentado = localStorage.getItem('comentado');
-    let postComentario;
-    if(comentado){
-     postComentario =  <ComentarioPost comentario={textoComentario} />
-     localStorage.removeItem(`texto`)
-    }
+    // let postComentario
+    // if(this.state.comentado){
+    //  postComentario =  <ComentarioPost comentario={""} comentado={this.state.comentado}/>
+  
+    // }
+  
     let iconeCurtida
 
     if(this.state.curtido) {
@@ -124,7 +125,13 @@ class Post extends React.Component {
     let componenteComentario
 
     if(this.state.comentando) {
-      componenteComentario = <SecaoComentario aoEnviar={this.aoEnviarComentario}/>
+      componenteComentario = <SecaoComentario 
+        aoEnviar={this.aoEnviarComentario}
+        listaComentarios = {this.state.listaComentarios}
+        comentado={this.state.comentado}
+        imagem={this.props.fotoUsuario}
+        nome={this.props.nomeUsuario}
+      />
     }
     let componenteCompartilhar
 
@@ -171,7 +178,7 @@ class Post extends React.Component {
       </PostFooter>
       {componenteComentario}
       {componenteCompartilhar}
-      {postComentario}
+      {/* {postComentario} */}
     </PostContainer>
   }
 }
