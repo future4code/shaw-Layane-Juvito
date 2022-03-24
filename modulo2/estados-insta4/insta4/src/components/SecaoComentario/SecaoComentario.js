@@ -25,7 +25,6 @@ export class SecaoComentario extends Component {
 	}
 	onClickCOmentario = () =>{
 		this.setState({comentado:!this.comentado})
-		this.setState({id:this.id+1})
 		localStorage.setItem(`texto`, this.state.texto);
 		localStorage.setItem(`comentado`, this.state.comentado);
 		this.props.aoEnviar()
