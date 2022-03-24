@@ -11,6 +11,7 @@ import iconeSalvoBranco from '../../img/turned_in_not_black.svg'
 import iconeCompartilhar from '../../img/launch_black.svg'
 import {SecaoComentario} from '../SecaoComentario/SecaoComentario'
 import { SecaoCompartilhar } from '../SecaoCompartilhar/SecaoCompartilhar'
+import { ComentarioPost } from '../ComentarioPost/ComentarioPost'
 import iconeFacebook from '../../img/icons8-facebook.svg'
 import iconeInstagram from '../../img/icons8-instagram.svg'
 import iconeTwitter from '../../img/icons8-twitter-circled.svg'
@@ -19,7 +20,7 @@ import iconeTwitter from '../../img/icons8-twitter-circled.svg'
 const PostContainer = styled.div`
   border: 1px solid gray;
   width: 300px;
-  margin-bottom: 10px;
+  margin-top:10px ;
 `
 
 const PostHeader = styled.div`
@@ -98,6 +99,13 @@ class Post extends React.Component {
   }
   
   render() {
+    let textoComentario = localStorage.getItem(`texto`);
+    let comentado = localStorage.getItem('comentado');
+    let postComentario;
+    if(comentado){
+     postComentario =  <ComentarioPost comentario={textoComentario} />
+     localStorage.removeItem(`texto`)
+    }
     let iconeCurtida
 
     if(this.state.curtido) {
@@ -163,6 +171,7 @@ class Post extends React.Component {
       </PostFooter>
       {componenteComentario}
       {componenteCompartilhar}
+      {postComentario}
     </PostContainer>
   }
 }

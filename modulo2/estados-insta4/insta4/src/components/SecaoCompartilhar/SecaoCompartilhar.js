@@ -7,7 +7,9 @@ const CompartilharContainer = styled.div`
     flex-direction:column ;
     align-items:center;
     justify-content:center ;
-    
+    textarea{
+        width:90%;
+    }
 `
 const OpcoesContainer = styled.div`
     display:flex;
@@ -40,10 +42,9 @@ export class SecaoCompartilhar extends React.Component{
     render(){
         return(
             <CompartilharContainer>
-                <div>
-                    <h4>Mensagem:</h4>
-                    <input value={this.props.mensagem} onChange={this.onChangeArea}></input>
-                </div>
+                
+                <textarea value={this.props.mensagem} onChange={this.onChangeArea} placeholder="Insira uma mensagem"/>
+              
                 <OpcoesContainer>
                     <h4>Compartilhar com:</h4>
                     <img 
