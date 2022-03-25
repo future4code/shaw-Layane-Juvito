@@ -30,10 +30,10 @@ export class SecaoComentario extends Component {
 	}
 	onClickComentario = () =>{
 		this.props.listaComentarios.push(this.state.texto)
-		console.log(this.props.listaComentarios)
 		this.setState({
-			comentado:!this.state.comentado})
+			comentado:!this.state.comentado,texto:""})
 		this.props.aoEnviar()
+		
 
 	}
 

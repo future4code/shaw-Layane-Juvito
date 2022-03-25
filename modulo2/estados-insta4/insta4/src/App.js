@@ -7,7 +7,66 @@ const MainContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  background-color:black;
+  color:white;
+
 `
+const InputsContainer = styled.div`
+  display:flex ;
+  flex-direction:column ;
+  gap:10px;
+  padding:10px;
+  border: 1px solid black;
+  width:300px;
+  background-color:rgb(49, 48, 48);
+  border-radius:5px ;
+  margin-top:10px;
+ 
+  div{
+    display:flex;
+    align-items:center;
+    justify-content:center ;
+  }
+  label{
+    padding-left:10px ;
+    font-size:17px;
+    font-weight:bold;
+  }
+  button{
+    cursor: pointer;
+    padding:10px;
+    border:none;
+    border-radius:5px;
+    width:50%;
+    background-color:rgb(119, 238, 119);
+    color:blueviolet;
+    font-weight:bold;
+    font-size:16px;
+    outline:none;
+
+    :hover{
+      background-color:blueviolet;
+      color:rgb(119, 238, 119);
+    }
+  }
+`
+
+const InputBox = styled.input`
+  padding: 10px;
+  border:none;
+  background-color: rgba(130, 14, 238, 0.368);
+  font-size:16px;
+  box-shadow:1px 1px 1px rgba(197, 230, 197, 0.822);
+  border-radius:5px;
+  color:white;
+  outline:none;
+  ::-webkit-input-placeholder{
+    color:rgb(119, 238, 119);
+    opacity:80%;
+    font-weight:bold;
+  }
+`
+
 
 class App extends React.Component {
   state = {
@@ -70,21 +129,27 @@ class App extends React.Component {
     return (
       
       <MainContainer>
-        <div>
+        <InputsContainer>
           <div>
+            <h3>Adicionar Postagem</h3>
+          </div>
             <label>Identifique-se</label>
-            <input onChange={this.onChangeUser} value={this.state.user}/>
-          </div>
-          <div>
+            <InputBox onChange={this.onChangeUser} value={this.state.user}
+            placeholder={"Insira seu nome"}/>
+          
+        
             <label>Insira sua foto</label>
-            <input  onChange={this.onChangeFoto} value={this.state.fotoUser} />
-          </div>
-          <div>
+            <InputBox  onChange={this.onChangeFoto} value={this.state.fotoUser} 
+            placeholder={"Link da foto"}/>
+          
+        
             <label>Insira a postagem</label>
-            <input  onChange={this.onChangePost} value={this.state.fotoPost} />
-          </div>
-        </div>
-        <button onClick={this.onClickPostar}>Postar</button>
+            <InputBox  onChange={this.onChangePost} value={this.state.fotoPost}
+            placeholder={"Link do post"} />
+            <div>
+              <button onClick={this.onClickPostar}>Postar</button>
+            </div>
+        </InputsContainer>
         {renderizanatela}
       </MainContainer>
     );

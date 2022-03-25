@@ -20,6 +20,8 @@ const PostContainer = styled.div`
   border: 1px solid gray;
   width: 300px;
   margin-top:10px ;
+  background-color:white;
+  color: black;
 `
 
 const PostHeader = styled.div`
@@ -83,7 +85,7 @@ class Post extends React.Component {
 
   aoEnviarComentario = () => {
     this.setState({
-      comentando: false,
+      // comentando: false,
       numeroComentarios: this.state.numeroComentarios + 1,
       comentado:true,
     })
@@ -101,11 +103,6 @@ class Post extends React.Component {
   }
   
   render() {
-    // let postComentario
-    // if(this.state.comentado){
-    //  postComentario =  <ComentarioPost comentario={""} comentado={this.state.comentado}/>
-  
-    // }
   
     let iconeCurtida
 
@@ -178,7 +175,6 @@ class Post extends React.Component {
       </PostFooter>
       {componenteComentario}
       {componenteCompartilhar}
-      {/* {postComentario} */}
     </PostContainer>
   }
 }
