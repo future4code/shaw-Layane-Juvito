@@ -73,21 +73,25 @@ class App extends React.Component {
     user:"",
     fotoUser:"",
     fotoPost:"",
+    texto:"",
     postagens:[
       {
         nomeUsuario:'Paulinha',
         fotoUsuario:'https://picsum.photos/50/50',
-        fotoPost:'https://picsum.photos/200/150'
+        fotoPost:'https://picsum.photos/200/150',
+        textoPostagem:'A vida é bela, nós é que fode ela'
       },
       {
         nomeUsuario:'mina',
         fotoUsuario:'https://picsum.photos/50/49',
-        fotoPost:'https://picsum.photos/200/149'
+        fotoPost:'https://picsum.photos/200/149',
+        textoPostagem:'O naruto teve uma vida sofrida sabiam, ele cresceu sozinho, sem os pais...'
       },
       {
         nomeUsuario:'lay',
         fotoUsuario:'https://picsum.photos/50/48',
-        fotoPost:'https://picsum.photos/200/148'
+        fotoPost:'https://picsum.photos/200/148',
+        textoPostagem:'Pani no sistema alguém me desconfigurou!! Aonde estão meus olhos de robô?'
       }
     ]
   }
@@ -100,18 +104,24 @@ class App extends React.Component {
   onChangePost = (event) =>{
     this.setState({fotoPost:event.target.value})
   }
+  onChangetextoPost = (event) =>{
+    this.setState({texto:event.target.value})
+  }
   onClickPostar = () => {
     let novaPostagem = [...this.state.postagens,
       {
         nomeUsuario:this.state.user,
         fotoUsuario:this.state.fotoUser,
-        fotoPost:this.state.fotoPost
+        fotoPost:this.state.fotoPost,
+        textoPostagem:this.state.texto
+
       }];
       this.setState({
         postagens:novaPostagem,
         user:"",
         fotoPost:"",
-        fotoUser:""
+        fotoUser:"",
+        texto:""
       })
   }
   render() {
@@ -123,6 +133,7 @@ class App extends React.Component {
           nomeUsuario={postagem.nomeUsuario}
           fotoUsuario={postagem.fotoUsuario}
           fotoPost={postagem.fotoPost}
+          textoPostagem={postagem.textoPostagem}
         />
       )
    })
@@ -143,7 +154,11 @@ class App extends React.Component {
             placeholder={"Link da foto"}/>
           
         
-            <label>Insira a postagem</label>
+            <label>Postagem</label>
+            <InputBox  onChange={this.onChangetextoPost} value={this.state.texto}
+            placeholder={"Sobre o que ta pensando..."} />
+
+            <label>Adicionar foto</label>
             <InputBox  onChange={this.onChangePost} value={this.state.fotoPost}
             placeholder={"Link do post"} />
             <div>

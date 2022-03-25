@@ -21,7 +21,7 @@ const InputComentario = styled.input`
 // componente de comentario que será incorporado ao post
 export class SecaoComentario extends Component {
 	state = {
-		texto:"",
+		texto:""
 	}
 
 	onChangeComentario = (event) => {
@@ -37,16 +37,23 @@ export class SecaoComentario extends Component {
 
 	}
 
+	
+
 
 	render() {
-		
+		const onClickExcluir = (id) =>{
+			this.props.listaComentarios.splice(id,1)
+			this.props.aoExcluir()
+		}
 		let renderLista = this.props.listaComentarios.map((comentario,index)=>{
 			return (
 				<ComentarioPost 
 					key={index}
+					id={index}
 					imagem={this.props.imagem}
 					comentario={comentario} 
 					nome={this.props.nome}
+					onClickFuncao={onClickExcluir}
 				/>
 			)
 		})
@@ -62,6 +69,7 @@ export class SecaoComentario extends Component {
 				<button onClick={this.onClickComentario}>Enviar</button>
 			</div>
 			{renderLista}
+			
 		</CommentContainer>
 	}
 }

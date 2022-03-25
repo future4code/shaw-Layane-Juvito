@@ -28,6 +28,7 @@ export class ComentarioPost extends React.Component{
 			<ContainerComentario>
 				<UserPhoto src={this.props.imagem} alt={'Imagem do usuario'}/>
 				<p><span>lay</span> {this.props.comentario}</p>
+				<button onClick={()=>this.props.onClickFuncao(this.props.id)}>Excluir</button>
 			</ContainerComentario>
 		)
 	}

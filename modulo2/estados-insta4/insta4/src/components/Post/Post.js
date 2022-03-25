@@ -22,6 +22,7 @@ const PostContainer = styled.div`
   margin-top:10px ;
   background-color:white;
   color: black;
+  border-radius:5px;
 `
 
 const PostHeader = styled.div`
@@ -48,6 +49,10 @@ const UserPhoto = styled.img`
 
 const PostPhoto = styled.img`
   width: 100%;
+`
+const PostTexto = styled.p`
+  text-align:justify;
+  padding: 0 10px;
 `
 
 class Post extends React.Component {
@@ -79,7 +84,8 @@ class Post extends React.Component {
  
   onClickComentario = () => {
     this.setState({
-      comentando: !this.state.comentando
+      comentando: !this.state.comentando,
+      compartilhar: false,
     })
   }
 
@@ -98,10 +104,16 @@ class Post extends React.Component {
 
   onClickCompartilhar = () => {
     this.setState({
-      compartilhar:!this.state.compartilhar
+      compartilhar:!this.state.compartilhar,
+      comentando:false
     })
   }
-  
+  onclickExcluirComentario = () =>{
+    this.setState({
+      numeroComentarios: this.state.numeroComentarios - 1,
+
+    })
+  }
   render() {
   
     let iconeCurtida
@@ -128,6 +140,7 @@ class Post extends React.Component {
         comentado={this.state.comentado}
         imagem={this.props.fotoUsuario}
         nome={this.props.nomeUsuario}
+        aoExcluir={this.onclickExcluirComentario}
       />
     }
     let componenteCompartilhar
@@ -147,7 +160,9 @@ class Post extends React.Component {
         <UserPhoto src={this.props.fotoUsuario} alt={'Imagem do usuario'}/>
         <p>{this.props.nomeUsuario}</p>
       </PostHeader>
-
+      <PostTexto>
+        {this.props.textoPostagem}
+      </PostTexto>
       <PostPhoto src={this.props.fotoPost} alt={'Imagem do post'}/>
 
       <PostFooter>
