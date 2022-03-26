@@ -1,5 +1,6 @@
 import React from "react";
-import iconeEnviar from "./rocket_launch.svg";
+import iconeEnviar from "./img/rocket_launch.svg";
+import iconeDoubleCheck from "./img/doublecheck.svg"
 import styled from "styled-components"
 
 const ContainerApp = styled.div`
@@ -10,12 +11,17 @@ const ContainerApp = styled.div`
   box-sizing:border-box;
   background-color:rgba(15, 15, 15, 0.986);
   display: flex;
+  flex-direction:column;
   align-items:center;
   justify-content:center;
+  header{
+    color:white;
+    
+  }
 `
 const ContainerChat = styled.div`
   height: 100%;
-  width: 30%;
+  min-width: 30%;
   border:6px solid orange;
   background-color:rgba(34, 33, 33, 0.986);
   border-radius:10px;
@@ -23,6 +29,9 @@ const ContainerChat = styled.div`
   flex-direction:column;
   align-items: center;
   justify-content:center; 
+  @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    width:90% ;
+  }
 `
 const ContainerMensagens = styled.div`
   height:95%;
@@ -32,50 +41,65 @@ const ContainerMensagens = styled.div`
   justify-content:flex-end ;
   padding:10px;
  
-  /* background-color:blue; */
 
 `
 const MinhaMensagem = styled.div`
   display:flex ;
   color:darkgray;
-  font-size:25px;
+  font-size:16px;
   justify-content:right;
   p{
     background-color: rgba(255, 166, 0, 0.281);
-    padding:30px ;
+    padding:10px 25px;
     box-shadow: -2px 3px 5px 0px rgba(0,0,0,0.75);
-    border-radius:5px;
+    border-radius:15px 15px 0px 15px;
     word-wrap: break-word;
     max-width: 80%;
   }
+  @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    font-size: 12px;
+  }
+`
+const DoubleCheck = styled.img`
+  position: relative;
+  right: -15px;
+  bottom: -5px;
+  height: 5px;
 `
 const MensagemDele = styled.div`
   display:flex ;
   color:darkgray;
-  font-size:25px;
+  font-size:16px;
   justify-content:left;
   p{
-    padding:30px ;
+    display:flex;
+    flex-direction:column;
+    padding:10px 25px ;
     background-color: rgba(137, 43, 226, 0.329);
     word-wrap: break-word;
     box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
-    border-radius:5px;
+    border-radius:15px 15px 15px 0px;
     max-width: 80%;
   }
   span{
     color:orange ;
-    font-weight:bold;
+    opacity:60% ;
+    font-weight:500;
+    font-size:14px ;
     
+  }
+  @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    font-size: 12px;
   }
 `
 const ContainerInputs = styled.div`
   height:5%;
   width:100% ;
   display:grid;
-  grid-template-columns:18% 68% 6%;
+  grid-template-columns:25% 58% 6%;
   background-color:rgba(24, 23, 23, 0.342);
   justify-content:center ;
-  gap:20px ;
+  gap:5px ;
   padding: 20px;
   input{
     padding:10px;
@@ -83,11 +107,20 @@ const ContainerInputs = styled.div`
     border:none;
     outline:none;
     background-color:rgb(43, 42, 41);
-    font-size:25px;
+    font-size:16px;
     color:orange;
     ::-webkit-input-placeholder{
-      font-size:25px;
+      font-size:16px;
       font-weight:bold ;
+    }
+  }
+  @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    padding:10px;
+    input{
+      font-size: 12px;
+      ::-webkit-input-placeholder{
+      font-size:12px;
+    }
     }
   }
 `
@@ -95,7 +128,7 @@ const ImgEnviar = styled.img`
   cursor: pointer;
   height:80%;
   :hover{
-    
+    opacity:60%;
   }
 `
 
@@ -104,8 +137,10 @@ export default class App extends React.Component {
     mensagens: [],
     userInput: "",
     mensagemInput: "",
-    enviado: false
+    enviado: false,
+    id:0
   }
+  
   onChangeUser = (event) => {
     this.setState({ userInput: event.target.value })
   }
@@ -114,6 +149,7 @@ export default class App extends React.Component {
   }
   onClickButton = () =>{
     const msgUser = {
+      id:this.state.id,
       nome: this.state.userInput,
       texto: this.state.mensagemInput
     };
@@ -122,26 +158,35 @@ export default class App extends React.Component {
     this.setState({
       mensagens:novaLista,
       mensagemInput:"",
-      enviado:true
+      enviado:true,
+      id:this.state.id+1
     })
-    
   }
+  onDoubleClick = (index) =>{
+    
+      this.state.mensagens.splice(index,1)
+      console.log(this.state.id)
+  }
+  
   render() {
     let renderizarMensagem
     if(this.state.enviado){
       renderizarMensagem = this.state.mensagens.map((mensagem,index)=>{
         if(mensagem.nome.toUpperCase() === "EU"){
-          console.log(mensagem.nome)
           return(
             <MinhaMensagem key={index}>
-               <p>{mensagem.texto}</p>
+               <p>{mensagem.texto}
+                <DoubleCheck src={iconeDoubleCheck} />
+               </p>
             </MinhaMensagem>
           )
         } else {
           return(
             
             <MensagemDele key={index}>
-              <p><span>{mensagem.nome}</span>: {mensagem.texto}</p>
+              <p>
+                <span>{mensagem.nome}</span>
+                {mensagem.texto}</p>
             </MensagemDele>
           )
         }
@@ -149,6 +194,9 @@ export default class App extends React.Component {
     }
     return (
       <ContainerApp>
+        <header>
+          <span>whats</span><span>Lab</span>
+        </header>
         <ContainerChat>
           <ContainerMensagens>
             {renderizarMensagem}
