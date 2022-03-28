@@ -16,7 +16,7 @@ const MinhaMensagem = styled.div`
 `
 const Balao = styled.div`
   background-color: rgba(255, 166, 0, 0.281);
-  padding:10px 20px;
+  padding:0px 20px;
   box-shadow: -2px 3px 5px 0px rgba(0,0,0,0.75);
   border-radius:15px 15px 0px 20px;
   overflow-wrap:break-word;
@@ -34,6 +34,7 @@ const Balao = styled.div`
 `
 const DoubleCheck = styled.img`
   position: relative;
+  bottom:5px;
   right: -10px;
   height: 5px;
 `

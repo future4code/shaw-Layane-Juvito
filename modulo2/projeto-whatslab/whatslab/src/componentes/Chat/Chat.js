@@ -94,8 +94,7 @@ export default class Chat extends React.Component {
     mensagens: [],
     userInput: "",
     mensagemInput: "",
-    enviado: false,
-    mensagemExcluida: []
+    enviado: false
   }
 
   onChangeUser = (event) => {
@@ -110,13 +109,11 @@ export default class Chat extends React.Component {
       texto: this.state.mensagemInput
     };
     const novaLista = [msgUser, ...this.state.mensagens,];
-    const arrayExcluida =[...this.state.mensagemExcluida]
-    arrayExcluida.push("");
+  
     this.setState({
       mensagens: novaLista,
       mensagemInput: "",
-      enviado: true,
-      mensagemExcluida:arrayExcluida
+      enviado: true
     })
   }
 
@@ -126,13 +123,15 @@ export default class Chat extends React.Component {
     let renderizarMensagens
     if (this.state.enviado) {
       const onDoubleClickMsg = (index) => {
-        let excluir = window.confirm(`deseja excluir a mensagem: ${this.state.mensagens[index].texto}`)
+        let excluir = window.confirm(`deseja excluir a mensagem: ${this.state.mensagens[index].texto}`);
+        console.log("O array das mensagens foi atualizado, veja: ", this.state.mensagens);
         if (excluir) {
           const novoLista = [...this.state.mensagens]
           novoLista[index].texto = "excluida"
           this.setState({ mensagens: novoLista })
-          // this.state.mensagens.splice(index, 1)
+          this.state.mensagens.splice(index, 1)
         }
+        
       }
       renderizarMensagens = this.state.mensagens.map((mensagem, index) => {
         return <Mensagens
@@ -140,7 +139,6 @@ export default class Chat extends React.Component {
           id={index}
           mensagem={mensagem}
           onDbClickFuncao={onDoubleClickMsg}
-          mensagemExcluida={this.state.mensagemExcluida[index]}
         />
       })
     }
@@ -163,12 +161,21 @@ export default class Chat extends React.Component {
             onChange={this.onChangeMensagem}
             placeholder={"Mensagem"}
             onKeyPress={event => {
-              if (event.key === 'Enter' && this.state.mensagemInput !== "") {
+              if (event.key === 'Enter' && this.state.mensagemInput !== "" && this.state.userInput !=="") {
                 this.onClickButton()
               }
             }}
           />
-          <ImgEnviar src={iconeEnviar} alt={"icone enviar"} onClick={this.onClickButton} />
+          <ImgEnviar 
+            src={iconeEnviar} 
+            alt={"icone enviar"} 
+            onClick={
+              event => {
+                if (event.detail === 1 && this.state.mensagemInput !=="" && this.state.userInput !=="" ) {
+                  this.onClickButton()
+                }
+              }
+            } />
 
         </ContainerInputs>
       </ContainerChat>
