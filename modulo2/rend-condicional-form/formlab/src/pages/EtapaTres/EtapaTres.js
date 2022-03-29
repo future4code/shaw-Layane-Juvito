@@ -1,7 +1,7 @@
 import React from "react";
 import PerguntaAberta from "../../components/PerguntaAberta/PerguntaAberta";
 import PerguntaFechada from "../../components/PerguntaFechada/PerguntaFechada";
-import { FieldsetForm,Button, Legend } from "../../style/StyleGlobalApp/StyleGlobalApp";
+import { FieldsetForm, Button, Legend } from "../../style/StyleGlobalApp/StyleGlobalApp";
 
 
 export default class EtapaTres extends React.Component {
