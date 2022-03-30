@@ -1,39 +1,132 @@
 import React from 'react'
-import styled from 'styled-components'
-import './styles.css'
+import styled,{createGlobalStyle} from 'styled-components'
 
+const GlobalStyle = createGlobalStyle`
+  *{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    font-size: 11px;
+    h1{
+      font-size: 18px; 
+    }
+  }
+  }
+  body{
+    background-color:rgb(32, 30, 30);
+    color:white;
+  }
+`
+const MainContainer = styled.div`
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top:50px;
+  margin: auto;
+  height: 100vh;
+  @media screen and (min-device-width : 320px) and (max-device-width : 800px) {
+    width: 100%;
+  }
+ 
+`
 const TarefaList = styled.ul`
-  padding: 0;
-  width: 60%;
+  padding: 10px;
+  width: 80%;
+  border: 2px solid orange;
 `
 
 const Tarefa = styled.li`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 5px;
   text-align: left;
   text-decoration: ${({ completa }) => (completa ? 'line-through' : 'none')};
+  background-color: ${({ completa }) => (completa ? 'rgb(41, 231, 120)' : '')};
+  color: ${({ completa }) => (completa ? 'rgb(48, 46, 46)' : '')};
   list-style: none;
+  height: 100%;
+  border-radius: 5px;
+ 
 `
 
 const InputsContainer = styled.div`
   display: grid;
   grid-auto-flow: column;
   gap: 10px;
-`
-const TarefasContainer = styled.div`
-  border: 1px solid black;
   width: 80%;
-  display: flex;
-  flex-direction: column;
-`
-const Container = styled.div`
-  display: grid;
-  grid-template-columns:50% 25% 25%;
-  align-items: center;
-  /* gap:10px; */
-  margin: 5px;
-  width: 100%;
-  border:1px solid black ;
 `
 
+const Container = styled.div`
+  display: grid;
+  grid-template-columns:70% 15% 15%;
+  align-items: center;
+  padding: 2px;
+  margin-top:5px;
+  width: 100%;
+  /* border:1px solid black ; */
+  @media screen and (min-device-width : 320px) and (max-device-width : 800px) {
+    grid-template-columns:60% 20% 20%;
+  }
+`
+const Button = styled.button`
+  cursor: pointer;
+  background-color: orange;
+  border: 2px solid orange;
+  outline:none;
+  font-weight:bold;
+  padding:5px;
+  margin-left:5px;
+  border-radius:5px;
+  box-shadow:2px 2px 2px rgb(63, 61, 61);
+  :hover{
+    border: 2px solid black;
+    color:orange;
+    background-color: transparent;
+  }
+  @media screen and (min-device-width : 320px) and (max-device-width : 800px) {
+    padding: 5px 2px;
+  }
+`
+const Input = styled.input`
+  padding:5px 10px;
+  border:none;
+  outline: none;
+  color: orange;
+  background-color: rgb(48, 46, 46);
+  border-radius:5px 0px 5px 0px;
+  font-size: 14px;
+  @media screen and (min-device-width : 320px) and (max-device-width : 800px) {
+    font-size: 10px;
+  }
+`
+const Label = styled.label`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`
+const Select = styled.select`
+  background-color: rgb(48, 46, 46);
+  border: none;
+  outline: none;
+  border-radius:5px;
+  color:white;
+  font-weight: bold;
+  padding: 5px;
+`
+const Editar = styled.div`
+  display: grid;
+  grid-template-columns: 80% 20%;
+  @media screen and (min-device-width : 320px) and (max-device-width : 800px) {
+    grid-template-columns: 60% 40%;
+  }
+`
+const MensagemInicial = styled.p`
+text-align: center;
+
+`
 class App extends React.Component {
   state = {
     tarefas: [],
@@ -163,32 +256,39 @@ class App extends React.Component {
     })
 
     return (
-      <div className="App">
+      <MainContainer>
+        <GlobalStyle />
         <h1>Lista de tarefas</h1>
+        <br />
         <InputsContainer>
-          <input value={this.state.inputValue} onChange={this.onChangeInput} />
-          <button onClick={this.criaTarefa}>Adicionar</button>
+          <Input 
+            value={this.state.inputValue} 
+            onChange={this.onChangeInput} 
+            placeholder={"Insira uma tarefa"}
+          />
+          <Button onClick={this.criaTarefa}>Adicionar</Button>
         </InputsContainer>
         <br />
-
         <InputsContainer>
-          <label>Filtro</label>
-          <input
+          <Label>Filtro</Label>
+          <Input
             placeholder='Buscar por nome'
             onChange={this.onChangeBuscaInput}
             value={this.state.buscaInputValues}
           />
-          <select value={this.state.filtro} onChange={this.onChangeFilter}>
+          <Select value={this.state.filtro} onChange={this.onChangeFilter}>
             <option value="">Todas</option>
             <option value="pendentes">Pendentes</option>
             <option value="completas">Completas</option>
-          </select>
+          </Select>
         </InputsContainer>
+        <br />
         <InputsContainer>
-          <button onClick={this.ordemCrescente}>Ordem crescente</button>
-          <button onClick={this.ordemDecrescente}>Ordem decrescente</button>
-          <button onClick={this.apagarTudo}>Apagar tudo</button>
+          <Button onClick={this.ordemCrescente}>Ordem crescente</Button>
+          <Button onClick={this.ordemDecrescente}>Ordem decrescente</Button>
+          <Button onClick={this.apagarTudo}>Apagar tudo</Button>
         </InputsContainer>
+        <br />
         <TarefaList>
           {listaFiltrada.map(tarefa => {
             return (
@@ -200,21 +300,23 @@ class App extends React.Component {
                 >
                   {tarefa.texto}
                 </Tarefa>
-                <button onClick={() => this.apagarTarefa(tarefa.id)}>Apagar</button>
-                <button onClick={() => this.editarTarefa(tarefa.id)}>Editar</button>
+                <Button onClick={() => this.apagarTarefa(tarefa.id)}>Apagar</Button>
+                <Button onClick={() => this.editarTarefa(tarefa.id)}>Editar</Button>
                 {tarefa.editar &&
-                  <div>
-                    <input
+                  <Editar>
+                    <Input
                       placeholder='Editar tarefa'
                       value={this.state.editInputValue}
                       onChange={this.onChangeEditInput} />
-                    <button onClick={() => this.atualizarTarefa(tarefa.id)}>Atualizar</button>
-                  </div>}
+                    <Button onClick={() => this.atualizarTarefa(tarefa.id)}>Atualizar</Button>
+                    
+                  </Editar>}
               </Container>
             )
           })}
+          {!listaFiltrada.length && <MensagemInicial>Você não possui tarefas, adicione algumas!!</MensagemInicial>}
         </TarefaList>
-      </div>
+      </MainContainer>
     )
   }
 }
