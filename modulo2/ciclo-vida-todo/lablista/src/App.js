@@ -18,13 +18,13 @@ const InputsContainer = styled.div`
   grid-auto-flow: column;
   gap: 10px;
 `
-const TarefasContainer=styled.div`
+const TarefasContainer = styled.div`
   border: 1px solid black;
   width: 80%;
   display: flex;
   flex-direction: column;
 `
-const Container=styled.div`
+const Container = styled.div`
   display: grid;
   grid-template-columns:50% 25% 25%;
   align-items: center;
@@ -38,22 +38,33 @@ class App extends React.Component {
   state = {
     tarefas: [],
     inputValue: '',
-    filtro: ''
+    editInputValue: '',
+    buscaInputValues: '',
+    filtro: '',
+    ordemCrescente:false,
+    ordemDecrescente:false
   }
 
-  componentDidUpdate(prevProps,prevState) {
-    if(prevState.tarefas !== this.state.tarefas){
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.tarefas !== this.state.tarefas) {
       localStorage.setItem("tarefas", JSON.stringify(this.state.tarefas));
     }
   };
 
   componentDidMount() {
     const tarefasSalvas = JSON.parse(localStorage.getItem("tarefas"));
-    tarefasSalvas && this.setState({tarefas: tarefasSalvas})
+    tarefasSalvas && this.setState({ tarefas: tarefasSalvas })
   };
 
   onChangeInput = (event) => {
     this.setState({ inputValue: event.target.value });
+  }
+  onChangeEditInput = (event) => {
+    this.setState({ editInputValue: event.target.value });
+  }
+  onChangeBuscaInput = (event) => {
+    this.setState({ buscaInputValues: event.target.value });
+
   }
 
   criaTarefa = () => {
@@ -61,23 +72,29 @@ class App extends React.Component {
     novaTarefa.push({
       id: Date.now(),
       texto: this.state.inputValue,
-      completa:false
+      completa: false,
+      editar: false
     });
-    this.setState({ tarefas: novaTarefa })
+    this.setState({ 
+      tarefas: novaTarefa,
+      inputValue:''
+    })
   }
 
   selectTarefa = (id) => {
-    const copiaTarefas = [...this.state.tarefas];
-    const attCompleta= copiaTarefas.map((tarefa) => {
+    const copiaTarefas = [...this.state.tarefas]; // cópia do state tarefas
+    const attCompleta = copiaTarefas.map((tarefa) => {
       if (tarefa.id === id) {
-        return {...tarefa,
-                completa:!tarefa.completa}
-      }else{
+        return {
+          ...tarefa,
+          completa: !tarefa.completa
+        }
+      } else {
         return tarefa
       }
 
     });
-    this.setState({tarefas:attCompleta})
+    this.setState({ tarefas: attCompleta })
   }
 
   onChangeFilter = (event) => {
@@ -85,14 +102,41 @@ class App extends React.Component {
   }
 
   apagarTarefa = (id) => {
-    const copiaTarefas =[...this.state.tarefas]
-    const index=copiaTarefas.findIndex((tarefa)=>{return tarefa.id===id})
-    copiaTarefas.splice(index,1) 
-    this.setState({tarefas:copiaTarefas})
+    const copiaTarefas = [...this.state.tarefas] // cópia do state tarefas
+    const index = copiaTarefas.findIndex((tarefa) => { return tarefa.id === id })
+    copiaTarefas.splice(index, 1)
+    this.setState({ tarefas: copiaTarefas })
   }
-
+  editarTarefa = (id) => {
+    const copiaTarefas = [...this.state.tarefas] // cópia do state tarefas
+    const index = copiaTarefas.findIndex((tarefa) => { return tarefa.id === id })
+    copiaTarefas[index].editar = !copiaTarefas[index].editar;
+    this.setState({ tarefas: copiaTarefas });
+    // this.setState({editar:!this.state.editar})
+  }
+  atualizarTarefa = (id) => {
+    const copiaTarefas = [...this.state.tarefas]; // cópia do state tarefas
+    const index = copiaTarefas.findIndex((tarefa) => { return tarefa.id === id });
+    copiaTarefas[index].texto = this.state.editInputValue;
+    copiaTarefas[index].editar = !copiaTarefas[index].editar;
+    this.setState({
+      tarefas: copiaTarefas,
+      editInputValue: ""
+    })
+  }
+  ordemCrescente = () => {
+    this.setState({ordemCrescente:!this.state.ordemCrescente})
+  }
+  ordemDecrescente = () => {
+    this.setState({ordemDecrescente:!this.state.ordemDecrescente})
+  }
+  apagarTudo = () => {
+    this.setState({tarefas:[]})
+  }
   render() {
-    const listaFiltrada = this.state.tarefas.filter(tarefa => {
+
+    let listaFiltrada;
+    listaFiltrada = this.state.tarefas.filter(tarefa => {
       switch (this.state.filtro) {
         case 'pendentes':
           return !tarefa.completa
@@ -102,6 +146,21 @@ class App extends React.Component {
           return true
       }
     });
+
+    if (this.state.buscaInputValues) {
+      listaFiltrada = listaFiltrada.filter(tarefa => {
+        return tarefa.texto.includes(this.state.buscaInputValues)
+      })
+    }
+    this.state.ordemCrescente && listaFiltrada.sort((a,b)=>{
+      let x=a.texto.toUpperCase(), y=b.texto.toUpperCase();
+      return x===y ? 0 : x>y ? 1:-1
+    })
+
+    this.state.ordemDecrescente && listaFiltrada.sort((a,b)=>{
+      let x=a.texto.toUpperCase(), y=b.texto.toUpperCase();
+      return x===y ? 0 : x>y ? -1:1
+    })
 
     return (
       <div className="App">
@@ -114,11 +173,21 @@ class App extends React.Component {
 
         <InputsContainer>
           <label>Filtro</label>
+          <input
+            placeholder='Buscar por nome'
+            onChange={this.onChangeBuscaInput}
+            value={this.state.buscaInputValues}
+          />
           <select value={this.state.filtro} onChange={this.onChangeFilter}>
-            <option value="">Nenhum</option>
+            <option value="">Todas</option>
             <option value="pendentes">Pendentes</option>
             <option value="completas">Completas</option>
           </select>
+        </InputsContainer>
+        <InputsContainer>
+          <button onClick={this.ordemCrescente}>Ordem crescente</button>
+          <button onClick={this.ordemDecrescente}>Ordem decrescente</button>
+          <button onClick={this.apagarTudo}>Apagar tudo</button>
         </InputsContainer>
         <TarefaList>
           {listaFiltrada.map(tarefa => {
@@ -131,8 +200,16 @@ class App extends React.Component {
                 >
                   {tarefa.texto}
                 </Tarefa>
-                <button onClick={()=>this.apagarTarefa(tarefa.id)}>Apagar</button>
-                <button>Editar</button>
+                <button onClick={() => this.apagarTarefa(tarefa.id)}>Apagar</button>
+                <button onClick={() => this.editarTarefa(tarefa.id)}>Editar</button>
+                {tarefa.editar &&
+                  <div>
+                    <input
+                      placeholder='Editar tarefa'
+                      value={this.state.editInputValue}
+                      onChange={this.onChangeEditInput} />
+                    <button onClick={() => this.atualizarTarefa(tarefa.id)}>Atualizar</button>
+                  </div>}
               </Container>
             )
           })}
