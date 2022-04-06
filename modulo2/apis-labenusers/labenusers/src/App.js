@@ -210,22 +210,22 @@ export default class App extends React.Component {
         })
       })
   }
-  deleteUser = (id) => {
+  deleteUser = async (id) => {
     this.setState({ loading: true })
-    axios.delete(`${baseUrl}/${id}`, headers)
-      .then(() => {
-        this.getAllUsers()
-        this.setState({
-          loading: false
-        })
-        toast.success('Usuário deletado!')
+    try {
+      await axios.delete(`${baseUrl}/${id}`, headers)
+      this.getAllUsers()
+      this.setState({
+        loading: false
       })
-      .catch((e) => {
-        toast.error(`${e.response.data.message}`)
-        this.setState({
-          loading: false
-        })
+      toast.success('Usuário deletado!')
+    }
+    catch (e) {
+      toast.error(`${e.response.data.message}`)
+      this.setState({
+        loading: false
       })
+    }
   }
   pageRoute = () => {
     this.setState({ pageRoute: !this.state.pageRoute })
@@ -293,7 +293,7 @@ export default class App extends React.Component {
             loading={this.state.loading}
             usersList={this.state.usersList}
             pageRoute={this.pageRoute}
-            getAllUsers = {this.getAllUsers}
+            getAllUsers={this.getAllUsers}
             editUser={this.editUser}
             deleteUser={this.deleteUser}
             confirm={this.confirm}
