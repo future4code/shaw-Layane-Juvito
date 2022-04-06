@@ -2,9 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import UserDetail from "../UserDetail/UserDatail";
 import Loader from "../../components/Loader";
-import DeleteIcon from '../../lixeira.png'
-import SearchIcon from '../../procurar.png'
-import IconBack from '../../voltar.png'
+import DeleteIcon from '../../lixeira.png';
+import SearchIcon from '../../procurar.png';
+import IconBack from '../../voltar.png';
+import IconReload from '../../sincronizar.png';
 
 const Border = styled.div`
     border-radius:15px;
@@ -19,9 +20,9 @@ const Border = styled.div`
     align-items: center;
     justify-content: center;
     @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
-  
         width: 90%;
-  }
+        min-height: 70%;
+    }
 `
 const MainContainer = styled.div`
     border-radius:15px;
@@ -74,7 +75,7 @@ const UserName = styled.p`
 const Header = styled.div`
     display: grid;
     width: 100%;
-    grid-template-columns: 10% 80% 10%;
+    grid-template-columns: 10% 10% 70% 10%;
     grid-template-rows: 25px;
     gap: 10px;
     padding-bottom: 5px;
@@ -119,6 +120,7 @@ export default class UsersList extends React.Component {
                             <MainContainer>
                                 <Header>
                                     <Img src={IconBack} onClick={this.props.pageRoute} />
+                                    <Img src={IconReload} onClick={this.props.getAllUsers} />
                                     <Inputs 
                                         placeholder="Busca" 
                                         value = {this.props.inputSearchController}
@@ -137,7 +139,7 @@ export default class UsersList extends React.Component {
                             <UserDetail
                                 user={this.props.user}
                                 detailRouteChange={this.props.detailRouteChange}
-                                deleteUser={this.props.deleteUser}
+                                deleteUser={this.props.confirm}
                                 onChangeInputName={this.props.onChangeInputName}
                                 onChangeInputEmail={this.props.onChangeInputEmail}
                                 inputNameController={this.props.inputNameController}

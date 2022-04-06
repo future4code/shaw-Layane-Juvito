@@ -15,6 +15,7 @@ const Border = styled.div`
     justify-content: center;
     @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
         width: 90%;
+        height: 70%;
     }
 `
 const LoadContainer = styled.div `

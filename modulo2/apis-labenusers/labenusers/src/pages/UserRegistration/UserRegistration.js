@@ -14,10 +14,12 @@ const Borda = styled.div`
     background-clip: content-box, border-box;
     @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
         width: 90%;
+        height: 70%;
     }
 `
 const RegisterContainer = styled.div`
     width: 80%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;

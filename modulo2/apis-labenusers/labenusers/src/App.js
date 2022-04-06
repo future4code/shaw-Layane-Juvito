@@ -293,6 +293,7 @@ export default class App extends React.Component {
             loading={this.state.loading}
             usersList={this.state.usersList}
             pageRoute={this.pageRoute}
+            getAllUsers = {this.getAllUsers}
             editUser={this.editUser}
             deleteUser={this.deleteUser}
             confirm={this.confirm}
