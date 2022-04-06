@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import UserDetail from "../UserDetail/UserDatail";
+import Loader from "../../components/Loader";
 
 const Border = styled.div`
     border-radius:15px;
@@ -23,7 +24,7 @@ const MainContainer = styled.div`
     align-items: center;
     padding: 10px;
     height: 80% ;
-    width: 100%;
+    width: 80%;
 `
 
 const ScroolContainer = styled.div`
@@ -104,32 +105,37 @@ export default class UsersList extends React.Component {
                 </ListItem>
             )
         })
-        return (
-            <Border>
+        if (this.props.loading) {
+            return <Loader />
+        } else {
+            return (
+                <Border>
 
-                {
-                    this.props.detailRoute ?
-                        <MainContainer>
-                            <ReturnButton onClick={this.props.pageRoute}>Retornar à página inical</ReturnButton>
+                    {
+                        this.props.detailRoute ?
+                            <MainContainer>
+                                <ReturnButton onClick={this.props.pageRoute}>Retornar à página inical</ReturnButton>
 
-                            <ScroolContainer>
-                                {renderUsersList}
-                                
-                            </ScroolContainer>
-                        </MainContainer>
-                        :
-                        <UserDetail
-                            user={this.props.user}
-                            detailRouteChange={this.props.detailRouteChange}
-                            deleteUser={this.props.deleteUser}
-                            onChangeInputName={this.props.onChangeInputName}
-                            onChangeInputEmail={this.props.onChangeInputEmail}
-                            inputNameController={this.props.inputNameController}
-                            inputEmailController={this.props.inputEmailController}
-                            editUser={this.props.editUser}
-                        />
-                }
-            </Border>
-        )
+                                <ScroolContainer>
+
+                                    {renderUsersList}
+
+                                </ScroolContainer>
+                            </MainContainer>
+                            :
+                            <UserDetail
+                                user={this.props.user}
+                                detailRouteChange={this.props.detailRouteChange}
+                                deleteUser={this.props.deleteUser}
+                                onChangeInputName={this.props.onChangeInputName}
+                                onChangeInputEmail={this.props.onChangeInputEmail}
+                                inputNameController={this.props.inputNameController}
+                                inputEmailController={this.props.inputEmailController}
+                                editUser={this.props.editUser}
+                            />
+                    }
+                </Border>
+            )
+        }
     }
 }

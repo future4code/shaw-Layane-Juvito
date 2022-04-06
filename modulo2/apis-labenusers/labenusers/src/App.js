@@ -49,9 +49,12 @@ export default class App extends React.Component {
     user: {}
   }
   componentDidMount = () => {
+    this.setState({loading:true})
     this.getAllUsers()
   }
+  
   getAllUsers = () => {
+    this.setState({loading:true})
     axios.get(baseUrl, headers)
       .then((response) => {
         this.setState({
@@ -64,11 +67,13 @@ export default class App extends React.Component {
       })
   }
   getUserById = (id) => {
+    this.setState({loading:true})
     axios.get(`${baseUrl}/${id}`, headers)
       .then((response) => {
         this.setState({
           user: response.data,
           detailRoute: false,
+          loading:false
           
         })
       })
@@ -81,12 +86,14 @@ export default class App extends React.Component {
       "name": this.state.inputNameController,
       "email": this.state.inputEmailController
     }
+    this.setState({loading:true})
     axios.post(baseUrl, body, headers)
       .then(() => {
         this.getAllUsers()
         this.setState({
           inputNameController:'',
           inputEmailController:'',
+          loading:false
         })
         toast.success('Usuário cadastrado com sucesso!')
       })
@@ -95,6 +102,7 @@ export default class App extends React.Component {
       })
   }
   editUser = (id) => {
+    this.setState({loading:true})
     let body 
     if(this.state.inputNameController!=='' && this.state.inputEmailController!==''){
       body= {
@@ -109,22 +117,35 @@ export default class App extends React.Component {
       body= {
         "email": this.state.inputEmailController
       }
+    } else{
+      this.setState({loading:false})
+      return toast.warn('Você não realizou nenhuma alteração no usuário!')
     }
     axios.put(`${baseUrl}/${id}`, body,headers)
     .then(()=>{
       toast.success('Usuário editado com sucesso!!')
       this.getAllUsers()
+      this.getUserById(id)
+      this.setState({
+        loading:false,
+        inputEmailController:'',
+        inputNameController:'',
+      })
     })
     .catch((e)=>{
       toast.error(`${e.response.data.message}`)
     })
   }
   deleteUser = (id) => {
+    this.setState({loading:true})
     const excluir = window.confirm('Tem certeza que deseja deletar este usuário?');
     if (excluir) {
       axios.delete(`${baseUrl}/${id}`, headers)
         .then(() => {
           this.getAllUsers()
+          this.setState({
+            loading:false
+          })
           toast.success('Usuário deletado!')
         })
         .catch((e) => {

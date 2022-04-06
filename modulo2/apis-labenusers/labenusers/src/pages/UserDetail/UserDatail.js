@@ -35,6 +35,15 @@ const SaveContainer = styled.div`
     justify-content: center;
     gap:5px;
     padding: 5px;
+    div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap:10px;
+    }
+`
+const MainContainer = styled.div`
+    width: 80%;
 `
 const Inputs = styled.input`
     border:0.5px solid orange;
@@ -53,34 +62,12 @@ const Buttons = styled.button`
     font-size: 0.7rem;
     background-color:darkblue;
     margin-left:10px;
-    margin-bottom: 10px;
 
     :hover{
         border: 2px solid rgb(228, 60, 161);
         background-color: transparent;
         color: darkblue
     }
-
-`
-const ReturnButton = styled.button`
-    cursor: pointer;
-    border:2px solid blueviolet;
-    outline:none;
-    padding:5px;
-    border-radius: 5px;
-    color:darkblue;
-    font-weight: bold;
-    font-size: 0.7rem;
-    background-color:transparent;
-    margin-right: 5px;
-    position: relative;
-
-    :hover{
-        border: 2px solid orange;
-        background-color: transparent;
-        color: darkblue
-    }
-
 `
 
 export default class UserDetail extends React.Component {
@@ -102,8 +89,7 @@ export default class UserDetail extends React.Component {
     }
     render() {
         return (
-            <>
-                <div>
+                <MainContainer>
 
                     <Title> <Img src={IconBack} onClick={this.props.detailRouteChange} /> Detalhes do Usuário</Title>
                     <UserInformation><span>Nome:</span> {this.props.user.name}</UserInformation>
@@ -115,26 +101,23 @@ export default class UserDetail extends React.Component {
                             :
                             <SaveContainer>
                                 <EditLabel>Editar usuário</EditLabel>
-                                <Inputs
-                                    placeholder={"Nome"}
-                                    value={this.props.inputNameController}
-                                    onChange={this.props.onChangeInputName}
-                                />
-                                <Inputs
-                                    placeholder={"E-mail"}
-                                    value={this.props.inputEmailController}
-                                    onChange={this.props.onChangeInputEmail}
-                                />
-                                <Buttons onClick={() => { this.saveUser(this.props.user.id) }}>Salvar</Buttons>
+                                <div>
+                                    <Inputs
+                                        placeholder={"Nome"}
+                                        value={this.props.inputNameController}
+                                        onChange={this.props.onChangeInputName}
+                                    />
+                                    <Inputs
+                                        placeholder={"E-mail"}
+                                        value={this.props.inputEmailController}
+                                        onChange={this.props.onChangeInputEmail}
+                                    />
+                                    <Buttons onClick={() => { this.saveUser(this.props.user.id) }}>Salvar</Buttons>
+                                </div>
                             </SaveContainer>
 
                     }
-                </div>
-
-
-
-
-            </>
+                </MainContainer>
         )
     }
 }
