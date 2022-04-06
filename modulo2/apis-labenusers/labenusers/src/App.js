@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css'
 import UserRegistration from './pages/UserRegistration/UserRegistration';
 import UsersList from './pages/UsersList/UsersList';
 import { createGlobalStyle } from 'styled-components';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 const GlobalStyle = createGlobalStyle`
 *{
@@ -21,6 +23,38 @@ const GlobalStyle = createGlobalStyle`
     
     border-radius: 5px;
   }
+  
+`
+const ConfirmContainer = styled.div`
+  background-color: whitesmoke;
+  padding: 10px;
+  border:3px double orange;
+  border-radius: 5px;
+
+  p{
+    font-size: 0.9rem;
+    color: darkblue;
+  }
+  div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:20px;
+  }
+  button{
+    border:3px double blueviolet;
+    outline: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: blueviolet;
+    color: white;
+    font-weight: bold;
+    :hover{
+      background-color: transparent;
+      color: blueviolet;
+    }
+  }
+
 `
 const MainContainer = styled.div`
   height: 100vh;
@@ -44,17 +78,17 @@ export default class App extends React.Component {
     loading: true,
     inputNameController: '',
     inputEmailController: '',
+    inputSearchController: '',
     pageRoute: true,
     detailRoute: true,
     user: {}
   }
   componentDidMount = () => {
-    this.setState({loading:true})
+    this.setState({ loading: true })
     this.getAllUsers()
   }
-  
   getAllUsers = () => {
-    this.setState({loading:true})
+    this.setState({ loading: true })
     axios.get(baseUrl, headers)
       .then((response) => {
         this.setState({
@@ -64,21 +98,55 @@ export default class App extends React.Component {
       })
       .catch((error) => {
         console.log(error.response.data)
+        this.setState({
+          loading: false
+        })
       })
   }
   getUserById = (id) => {
-    this.setState({loading:true})
+    this.setState({ loading: true })
     axios.get(`${baseUrl}/${id}`, headers)
       .then((response) => {
         this.setState({
           user: response.data,
           detailRoute: false,
-          loading:false
-          
+          loading: false
+
         })
       })
       .catch((error) => {
         console.log(error.response.data.message)
+        this.setState({
+          loading: false
+        })
+      })
+  }
+  searchUsers = () => {
+    // &email=${this.inputSearchController}
+    this.setState({ loading: true })
+    console.log(this.state.inputSearchController)
+    axios.get(`${baseUrl}/search?name=${this.state.inputSearchController}`, headers)
+      .then((response) => {
+        if (response.data.length) {
+          this.setState({
+            usersList: response.data,
+            inputSearchController: '',
+            loading: false
+          })
+        } else {
+          toast.warn('Usuário não encontrado')
+          this.setState({
+            loading: false,
+            inputSearchController: '',
+          })
+        }
+      })
+      .catch((e) => {
+        this.setState({
+          loading: false,
+          inputSearchController: '',
+        })
+        toast.error(e.response.data.message)
       })
   }
   addUser = () => {
@@ -86,83 +154,94 @@ export default class App extends React.Component {
       "name": this.state.inputNameController,
       "email": this.state.inputEmailController
     }
-    this.setState({loading:true})
+    this.setState({ loading: true })
     axios.post(baseUrl, body, headers)
       .then(() => {
         this.getAllUsers()
         this.setState({
-          inputNameController:'',
-          inputEmailController:'',
-          loading:false
+          inputNameController: '',
+          inputEmailController: '',
+          loading: false
         })
         toast.success('Usuário cadastrado com sucesso!')
       })
       .catch((e) => {
         toast.error(`${e.response.data.message}`)
+        this.setState({
+          loading: false
+        })
       })
   }
   editUser = (id) => {
-    this.setState({loading:true})
-    let body 
-    if(this.state.inputNameController!=='' && this.state.inputEmailController!==''){
-      body= {
+    this.setState({ loading: true })
+    let body
+    if (this.state.inputNameController !== '' && this.state.inputEmailController !== '') {
+      body = {
         "name": this.state.inputNameController,
         "email": this.state.inputEmailController
       }
-    }else if(this.state.inputNameController!=='' && this.state.inputEmailController===''){
-      body= {
+    } else if (this.state.inputNameController !== '' && this.state.inputEmailController === '') {
+      body = {
         "name": this.state.inputNameController
       }
-    }else if(this.state.inputNameController==='' && this.state.inputEmailController!==''){
-      body= {
+    } else if (this.state.inputNameController === '' && this.state.inputEmailController !== '') {
+      body = {
         "email": this.state.inputEmailController
       }
-    } else{
-      this.setState({loading:false})
+    } else {
+      this.setState({ loading: false })
       return toast.warn('Você não realizou nenhuma alteração no usuário!')
     }
-    axios.put(`${baseUrl}/${id}`, body,headers)
-    .then(()=>{
-      toast.success('Usuário editado com sucesso!!')
-      this.getAllUsers()
-      this.getUserById(id)
-      this.setState({
-        loading:false,
-        inputEmailController:'',
-        inputNameController:'',
+    axios.put(`${baseUrl}/${id}`, body, headers)
+      .then(() => {
+        toast.success('Usuário editado com sucesso!!')
+        this.getAllUsers()
+        this.getUserById(id)
+        this.setState({
+          loading: false,
+          inputEmailController: '',
+          inputNameController: '',
+        })
       })
-    })
-    .catch((e)=>{
-      toast.error(`${e.response.data.message}`)
-    })
+      .catch((e) => {
+        toast.error(`${e.response.data.message}`)
+        this.setState({
+          loading: false
+        })
+      })
   }
   deleteUser = (id) => {
-    this.setState({loading:true})
-    const excluir = window.confirm('Tem certeza que deseja deletar este usuário?');
-    if (excluir) {
-      axios.delete(`${baseUrl}/${id}`, headers)
-        .then(() => {
-          this.getAllUsers()
-          this.setState({
-            loading:false
-          })
-          toast.success('Usuário deletado!')
+    this.setState({ loading: true })
+    axios.delete(`${baseUrl}/${id}`, headers)
+      .then(() => {
+        this.getAllUsers()
+        this.setState({
+          loading: false
         })
-        .catch((e) => {
-          toast.error(`${e.response.data.message}`)
+        toast.success('Usuário deletado!')
+      })
+      .catch((e) => {
+        toast.error(`${e.response.data.message}`)
+        this.setState({
+          loading: false
         })
-    }
-
+      })
   }
   pageRoute = () => {
     this.setState({ pageRoute: !this.state.pageRoute })
   }
   detailRouteChange = () => {
-    this.setState({detailRoute:true})
+    this.setState({ detailRoute: true })
+    this.getAllUsers()
   }
   onChangeInputName = (event) => {
     this.setState({
       inputNameController: event.target.value
+    })
+  }
+  onChangeInputSearch = (event) => {
+    this.setState({
+      inputSearchController: event.target.value
     })
   }
   onChangeInputEmail = (event) => {
@@ -170,6 +249,31 @@ export default class App extends React.Component {
       inputEmailController: event.target.value
     })
   }
+  confirm = (id) => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <ConfirmContainer>
+            <p>Tem certeza que deseja excluir este usuário?</p>
+            <div>
+              <button onClick={onClose}>
+                Não
+              </button>
+              <button
+                onClick={() => {
+                  this.deleteUser(id);
+                  onClose();
+                }}
+              >
+                Sim
+              </button>
+            </div>
+          </ConfirmContainer>
+        );
+      }
+    });
+
+  };
   render() {
     return (
       <MainContainer>
@@ -185,19 +289,23 @@ export default class App extends React.Component {
           />
           :
           <UsersList
-            usersList={this.state.usersList}
-            deleteUser={this.deleteUser}
-            pageRoute={this.pageRoute}
             user={this.state.user}
-            detailRoute = {this.state.detailRoute}
-            getUserById = {this.getUserById}
-            detailRouteChange = {this.detailRouteChange}
+            loading={this.state.loading}
+            usersList={this.state.usersList}
+            pageRoute={this.pageRoute}
+            editUser={this.editUser}
+            deleteUser={this.deleteUser}
+            confirm={this.confirm}
+            searchUsers={this.searchUsers}
+            detailRoute={this.state.detailRoute}
+            getUserById={this.getUserById}
+            detailRouteChange={this.detailRouteChange}
             onChangeInputName={this.onChangeInputName}
             onChangeInputEmail={this.onChangeInputEmail}
+            onChangeInputSearch={this.onChangeInputSearch}
             inputNameController={this.state.inputNameController}
             inputEmailController={this.state.inputEmailController}
-            editUser={this.editUser}
-            loading ={this.state.loading}
+            inputSearchController={this.state.inputSearchController}
           />
         }
       </MainContainer>

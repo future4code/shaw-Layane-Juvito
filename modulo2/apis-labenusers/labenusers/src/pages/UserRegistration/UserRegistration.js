@@ -2,23 +2,29 @@ import React from "react";
 import styled from "styled-components";
 
 const Borda = styled.div`
+    height: 50%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius:15px;
     border: solid 2px transparent;
     background-image: linear-gradient(white, white), linear-gradient(45deg,orange,rgb(228, 60, 161),blueviolet);
     background-origin: border-box;
     background-clip: content-box, border-box;
+    @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+        width: 90%;
+    }
 `
 const RegisterContainer = styled.div`
+    width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: white;
     gap:20px;
-    padding: 30px;
     border-radius: 15px;
-    
-
 `
 const ButtonsContainer = styled.div`
    display: flex;
@@ -30,10 +36,14 @@ const Inputs = styled.input`
     outline: none;
     padding: 5px;
     color: rgb(228, 60, 161);
+    width: 90%;
 `
 const Titulo = styled.label`
     color:blueviolet;
+    text-align: center;
+    width: 90%;
     font-weight: bold;
+    border-bottom: 3px double rgb(228, 60, 161);
 `
 const Buttons = styled.button`
     border:2px solid darkblue;

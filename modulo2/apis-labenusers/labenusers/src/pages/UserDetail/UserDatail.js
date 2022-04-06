@@ -6,11 +6,15 @@ const Title = styled.h3`
     color: blueviolet;
     text-align: center;
     padding: 2px;
-    border-bottom: 1px solid rgb(228, 60, 161);
 `
 const Img = styled.img`
     cursor: pointer;
-    height: 1rem;
+    height: 1.5rem;
+    position: relative;
+    left:0px;
+    :hover{
+            filter:drop-shadow(2px 2px 2px orange)
+    }
 `
 const UserInformation = styled.p`
     color: darkblue;
@@ -25,8 +29,7 @@ const EditLabel = styled.label`
     text-align: center;
     font-size: 0.8rem;
     font-weight: bold;
-    /* border-bottom: 1px solid rgb(228, 60, 161); */
-    border-top: 1px solid rgb(228, 60, 161);
+    border-top: 3px double rgb(228, 60, 161);
 `
 const SaveContainer = styled.div`
     display: flex;
@@ -41,9 +44,20 @@ const SaveContainer = styled.div`
         justify-content: center;
         gap:10px;
     }
+    @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+        div{
+            flex-direction: column;
+        }
+    }
 `
 const MainContainer = styled.div`
     width: 80%;
+`
+const Header = styled.div`
+    display: grid;
+    grid-template-columns: 10% 90%;
+    align-items: center;
+    border-bottom: 3px double rgb(228, 60, 161);
 `
 const Inputs = styled.input`
     border:0.5px solid orange;
@@ -90,8 +104,10 @@ export default class UserDetail extends React.Component {
     render() {
         return (
                 <MainContainer>
-
-                    <Title> <Img src={IconBack} onClick={this.props.detailRouteChange} /> Detalhes do Usuário</Title>
+                    <Header>
+                        <Img src={IconBack} onClick={this.props.detailRouteChange} />
+                        <Title>Detalhes do Usuário</Title>
+                    </Header>
                     <UserInformation><span>Nome:</span> {this.props.user.name}</UserInformation>
                     <UserInformation><span>E-mail:</span> {this.props.user.email}</UserInformation>
                     <Buttons onClick={() => { this.deleteUser(this.props.user.id) }}>deletar usuário</Buttons>

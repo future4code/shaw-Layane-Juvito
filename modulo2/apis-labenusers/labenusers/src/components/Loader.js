@@ -13,6 +13,9 @@ const Border = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+        width: 90%;
+    }
 `
 const LoadContainer = styled.div `
     display:flex;
@@ -20,6 +23,7 @@ const LoadContainer = styled.div `
     justify-content: center;
     height: 50%;
     width: 50%;
+    
 `
 export default class Loader extends React.Component{
     render(){

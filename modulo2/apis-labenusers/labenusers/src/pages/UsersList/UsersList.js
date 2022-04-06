@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import UserDetail from "../UserDetail/UserDatail";
 import Loader from "../../components/Loader";
+import DeleteIcon from '../../lixeira.png'
+import SearchIcon from '../../procurar.png'
+import IconBack from '../../voltar.png'
 
 const Border = styled.div`
     border-radius:15px;
@@ -15,6 +18,10 @@ const Border = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+  
+        width: 90%;
+  }
 `
 const MainContainer = styled.div`
     border-radius:15px;
@@ -35,13 +42,21 @@ const ScroolContainer = styled.div`
     overflow-y: scroll;
     height:100%;
     width: 100%;
-    padding: 10px;
 `
 const ListItem = styled.div`
     display: grid;
-    grid-template-columns:65% 35%;   
+    grid-template-columns:84% 15%;   
     align-items: center;
-    gap:10px;
+    justify-content: center;
+    margin:5px;
+    gap:2px;
+    img{
+        height: 1.8rem;
+        cursor: pointer;
+        :hover{
+            filter:drop-shadow(2px 2px 2px orange)
+        }
+    }
 `
 const UserName = styled.p`
     cursor: pointer;
@@ -51,46 +66,34 @@ const UserName = styled.p`
     text-align: center;
     border-radius: 5px;
     color: darkblue;
-`
-const Buttons = styled.button`
-    cursor: pointer;
-    border:2px solid darkblue;
-    outline:none;
-    padding:5px;
-    border-radius: 5px;
-    color:orange;
-    font-weight: bold;
-    font-size: 0.7rem;
-    background-color:darkblue;
-    margin-right: 5px;
-
+    margin:0px;
     :hover{
-        border: 2px solid rgb(228, 60, 161);
-        background-color: transparent;
-        color: darkblue
+        box-shadow: 1px 1px 5px orange;
     }
-
 `
-const ReturnButton = styled.button`
+const Header = styled.div`
+    display: grid;
+    width: 100%;
+    grid-template-columns: 10% 80% 10%;
+    grid-template-rows: 25px;
+    gap: 10px;
+    padding-bottom: 5px;
+    justify-content: center;
+`
+const Img = styled.img`
     cursor: pointer;
-    border:2px solid blueviolet;
-    outline:none;
-    padding:5px;
-    border-radius: 5px;
-    color:darkblue;
-    font-weight: bold;
-    font-size: 0.7rem;
-    background-color:transparent;
-    margin-right: 5px;
-
+    height: 1.5rem;
     :hover{
-        border: 2px solid orange;
-        background-color: transparent;
-        color: darkblue
+            filter:drop-shadow(2px 2px 2px orange)
     }
-
 `
-
+const Inputs = styled.input`
+    border:0.5px solid blueviolet;
+    border-radius:5px;
+    outline: none;
+    padding: 5px;
+    color: rgb(228, 60, 161);
+`
 
 export default class UsersList extends React.Component {
     render() {
@@ -101,7 +104,7 @@ export default class UsersList extends React.Component {
                     <UserName onClick={() => this.props.getUserById(user.id)}>
                         {user.name}
                     </UserName>
-                    <Buttons onClick={() => { this.props.deleteUser(user.id) }}>Exluir</Buttons>
+                    <img src={DeleteIcon} onClick={() => { this.props.confirm(user.id) }} alt={'delete icon'}/>
                 </ListItem>
             )
         })
@@ -114,7 +117,15 @@ export default class UsersList extends React.Component {
                     {
                         this.props.detailRoute ?
                             <MainContainer>
-                                <ReturnButton onClick={this.props.pageRoute}>Retornar à página inical</ReturnButton>
+                                <Header>
+                                    <Img src={IconBack} onClick={this.props.pageRoute} />
+                                    <Inputs 
+                                        placeholder="Busca" 
+                                        value = {this.props.inputSearchController}
+                                        onChange = {this.props.onChangeInputSearch}
+                                    />
+                                    <Img src={SearchIcon} alt={'lupa'} onClick = {() => this.props.searchUsers()} />
+                                </Header>
 
                                 <ScroolContainer>
 
