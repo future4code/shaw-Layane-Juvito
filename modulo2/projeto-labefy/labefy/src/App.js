@@ -1,11 +1,14 @@
 import React from 'react';
+import SideMenu from './components/SideMenu/SideMenu';
 import CreatePlaylistPage from './pages/CreatePlaylistPage/CreatePlaylistPage';
 import DetailPlaylistPage from './pages/DetailPlaylistPage/DetailPlaylistPage';
 import PlaylistsPage from './pages/PlaylistsPage/PlaylistsPage';
+import { MainContainer, GlobalStyle } from './styled';
 
 export default class App extends React.Component {
   state = {
-    currentPage: 'create'
+    currentPage: 'create',
+    detailPageId:''
   }
 
   selectPage = () => {
@@ -13,20 +16,42 @@ export default class App extends React.Component {
       case 'create':
         return <CreatePlaylistPage />
       case 'playlist':
-        return <PlaylistsPage />
+        return <PlaylistsPage goToDetailPage = {this.goToDetailPage}/>
       case 'detail':
         return <DetailPlaylistPage
-                 id={'3b906ec9-eda2-4f77-9d99-305b958ec443'}/>
+                 id={this.state.detailPageId}/>
       default:
         return <CreatePlaylistPage />
     }
   }
+  goToDetailPage = (id) =>  {
+    this.setState({
+      currentPage:'detail',
+      detailPageId:id
+    })
+  }
+  goToCreatePage = () =>  {
+    this.setState({currentPage:'create'})
+  }
+  goToPlaylistsPage = () =>  {
+    this.setState({currentPage:'playlist'})
+  }
+  // goToSearchPage = () =>  {
+  //   this.setState({currentPage:'detail'})
+  // }
 
   render() {
     return (
-      <div>
+      <MainContainer>
+        <GlobalStyle />
+        <SideMenu 
+          goToDetailPage = {this.goToDetailPage}
+          goToCreatePage = {this.goToCreatePage}
+          goToPlaylistsPage = {this.goToPlaylistsPage}
+
+        />
         {this.selectPage()}
-      </div>
+      </MainContainer>
     );
   }
 }

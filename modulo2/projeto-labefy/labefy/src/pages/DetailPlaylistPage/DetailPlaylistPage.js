@@ -2,7 +2,8 @@ import axios from 'axios';
 import React from 'react';
 import { baseUrl, headers } from '../../constants/urls';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
+import 'react-toastify/dist/ReactToastify.css';
+import {MainContainer} from './styled'
 toast.configure()
 
 export default class DetailPlaylistPage extends React.Component {
@@ -37,9 +38,9 @@ export default class DetailPlaylistPage extends React.Component {
        
 
         return (
-            <div>
+            <MainContainer>
                 {renderTracks}
-            </div>
+            </MainContainer>
         );
     }
 }

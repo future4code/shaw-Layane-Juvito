@@ -4,6 +4,8 @@ import { headers, baseUrl } from '../../constants/urls';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import AddTrackToPlaylist from '../../components/AddTrackToPlaylist/AddTrackToPlaylist';
+import {MainContainer} from './styled';
+
 toast.configure()
 export default class CreatePlaylistPage extends React.Component {
     state = {
@@ -11,11 +13,13 @@ export default class CreatePlaylistPage extends React.Component {
         inputArtistName: '',
         inputTrackUrl: '',
         inputTracktName: '',
-        currentPlaylistId:''
+        currentPlaylistId:'',
+        currentPlaylistName:''
     }
     onChangeInputPlaylistName = (event) => {
         this.setState({
-            inputPlaylistName: event.target.value
+            inputPlaylistName: event.target.value,
+            currentPlaylistName: event.target.value,
         })
         
     }
@@ -33,6 +37,7 @@ export default class CreatePlaylistPage extends React.Component {
         const body = {
             'name': this.state.inputPlaylistName
         }
+        const name = this.state.inputPlaylistName
         axios.post(baseUrl, body, headers)
             .then(() => {
                 this.searchPlaylist()
@@ -45,10 +50,12 @@ export default class CreatePlaylistPage extends React.Component {
             })
     }
     searchPlaylist = () => {
-        axios.get(`${baseUrl}/search?name=${this.state.inputPlaylistName}`, headers)
+        axios.get(`${baseUrl}/search?name=${this.state.currentPlaylistName}`, headers)
         .then((response)=>{
+            const list = [... response.data.result.playlist];
+            let playlist = list.filter(element=>element.name===this.state.currentPlaylistName)
             this.setState({
-                currentPlaylistId:response.data.result.playlist[0].id
+                currentPlaylistId:playlist[0].id
             })
         })
         .catch((e)=>{
@@ -59,7 +66,7 @@ export default class CreatePlaylistPage extends React.Component {
     render() {
         
         return (
-            <div>
+            <MainContainer>
                 <header>
                     <input
                         onChange={this.onChangeInputPlaylistName}
@@ -72,7 +79,7 @@ export default class CreatePlaylistPage extends React.Component {
                 <AddTrackToPlaylist 
                     playlistId = {this.state.currentPlaylistId}
                 />
-            </div>
+            </MainContainer>
         );
     }
 }
