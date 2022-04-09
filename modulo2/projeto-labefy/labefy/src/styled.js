@@ -6,6 +6,17 @@ export const GlobalStyle = createGlobalStyle`
         padding:0px;
         box-sizing: border-box;
     }
+    *::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+    }
+    *::-webkit-scrollbar-thumb {
+        background-color: orange;
+        opacity:40%;
+    }
+    *::-webkit-scrollbar-track {
+        background: transparent;
+    }
 `
 export const MainContainer = styled.div`
     display: flex;

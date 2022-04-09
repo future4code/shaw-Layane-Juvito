@@ -11,20 +11,20 @@ export default class SideMenu extends React.Component{
                     <FaDiceD20 />
                     <h3>LabeFy</h3>
                 </Logo>
-                <MenuItems onClick = {this.props.goToCreatePage}>
-                    <FaHome />
+                <MenuItems onClick = {this.props.goToHomePage}>
+                    <span> <FaHome /></span>
                     Inicio
                 </MenuItems>
                 <MenuItems onClick = {this.props.goToDetailPage}>
-                    <FaSearch />
+                    <span><FaSearch /></span>
                     Buscar
                 </MenuItems>
                 <MenuItems onClick = {this.props.goToPlaylistsPage}>
-                    <MdOutlineLibraryMusic />
+                    <span><MdOutlineLibraryMusic /></span>
                     Sua Biblioteca
                 </MenuItems>
                 <MenuItems onClick = {this.props.goToCreatePage}>
-                    <FaPlusSquare />
+                    <span><FaPlusSquare /></span>
                     Criar playlist
                 </MenuItems>
 

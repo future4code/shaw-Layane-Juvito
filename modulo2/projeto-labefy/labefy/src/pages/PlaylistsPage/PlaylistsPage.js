@@ -1,53 +1,47 @@
-import axios from 'axios';
 import React from 'react';
-import { baseUrl, headers } from '../../constants/urls';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import {MainContainer} from './styled'
-
-toast.configure()
+import {getAllPlaylists, deletePlaylist} from '../../services/requests';
+import {PlaylistImg,MainContainer,PlaylistContainer,ScrollContainer,ListContainer,DeleteButton,CardText } from './styled';
+import { FaMusic } from 'react-icons/fa';
+import {GoTrashcan} from 'react-icons/go';
 
 export default class PlaylistsPage extends React.Component {
     state = {
         playlists:[]
     }
     componentDidMount (){
-        this.getAllPlaylists()
+        getAllPlaylists(this.saveAllPlaylists)
       }
-    getAllPlaylists = () => {
-        axios.get(baseUrl, headers)
-            .then((response) => {
-                this.setState({
-                    playlists:response.data.result.list
-                })
-                // console.log(response.data.result.list)
-            })
-            .catch((e) => {
-                toast.error(e.response.data.message)
-            })
+    saveAllPlaylists = (data) => {
+        this.setState({playlists:data})
     }
-    deletePlaylist = (id) => {
-        axios.delete(`${baseUrl}/${id}`, headers)
-        .then(()=>{
-            // toast.success('Playlist deletada!')
-            this.getAllPlaylists()
-        })
-        .catch((e)=>{
-            toast.error(e.response.data.message)
-        })
+    saveDeletePlaylist = (id) => {
+        deletePlaylist(id, this.saveAllPlaylists)
     }
     render() {
         const renderPlaylists = this.state.playlists.map((playlist)=>{
             return(
-                <div key={playlist.id}>
-                    <p onClick={()=>this.props.goToDetailPage(playlist.id)}>{playlist.name}</p>
-                    <button onClick={()=>{this.deletePlaylist(playlist.id)}}>excluir</button>
-                </div>)
+                <PlaylistContainer key={playlist.id}  >
+                    <PlaylistImg onClick={()=>this.props.goToDetailPage(playlist)}>
+                        <FaMusic />
+                    </PlaylistImg>
+                    <CardText>
+                        <h3 onClick={()=>this.props.goToDetailPage(playlist)}>{playlist.name}</h3>
+                        <DeleteButton onClick={()=>{this.saveDeletePlaylist(playlist.id)}}>
+                            <GoTrashcan />
+                        </DeleteButton>
+                    </CardText>
+                </PlaylistContainer>)
         })
-
+        
         return (
             <MainContainer>
-                {renderPlaylists}
+                <h1>Playlists</h1>
+                
+                <ScrollContainer>
+                    <ListContainer>
+                        {renderPlaylists}
+                    </ListContainer>
+                </ScrollContainer>
             </MainContainer>
         );
     }

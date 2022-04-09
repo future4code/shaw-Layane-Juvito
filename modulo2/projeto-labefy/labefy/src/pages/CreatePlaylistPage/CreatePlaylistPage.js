@@ -1,27 +1,27 @@
 import React from 'react';
-import axios from 'axios';
-import { headers, baseUrl } from '../../constants/urls';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
-import AddTrackToPlaylist from '../../components/AddTrackToPlaylist/AddTrackToPlaylist';
-import {MainContainer} from './styled';
+import TrackList from '../../components/TrackList/TrackList';
+import { MainContainer, PlaylistImg, InputPlaylist, InputContainer, SaveButton,MessageContainer } from './styled';
+import { FaMusic } from 'react-icons/fa';
+import { createPlaylist } from '../../services/requests';
 
-toast.configure()
 export default class CreatePlaylistPage extends React.Component {
     state = {
         inputPlaylistName: '',
         inputArtistName: '',
         inputTrackUrl: '',
         inputTracktName: '',
-        currentPlaylistId:'',
-        currentPlaylistName:''
+        currentPlaylistId: '',
+        currentPlaylistName: 'Minha Playlist',
+        edit: true,
+        trackList:'',
+        showPlaylist:false
     }
     onChangeInputPlaylistName = (event) => {
         this.setState({
             inputPlaylistName: event.target.value,
             currentPlaylistName: event.target.value,
         })
-        
+
     }
     onChangeInputTrackName = (event) => {
         this.setState({
@@ -33,52 +33,70 @@ export default class CreatePlaylistPage extends React.Component {
             inputTrackUrl: event.target.value
         })
     }
-    createPlaylist = () => {
-        const body = {
-            'name': this.state.inputPlaylistName
-        }
-        const name = this.state.inputPlaylistName
-        axios.post(baseUrl, body, headers)
-            .then(() => {
-                this.searchPlaylist()
-                this.setState({
-                    inputPlaylistName: ''
-                })
-            })
-            .catch((e) => {
-                toast.error(e.response.data)
-            })
-    }
-    searchPlaylist = () => {
-        axios.get(`${baseUrl}/search?name=${this.state.currentPlaylistName}`, headers)
-        .then((response)=>{
-            const list = [... response.data.result.playlist];
-            let playlist = list.filter(element=>element.name===this.state.currentPlaylistName)
-            this.setState({
-                currentPlaylistId:playlist[0].id
-            })
-        })
-        .catch((e)=>{
-            console.log(e.response)
+    saveData = (data) => {
+        this.setState({
+            inputPlaylistName: data,
+            edit:!this.state.edit,
+            
         })
     }
-  
+    saveId = (data) => {
+        this.setState({
+            currentPlaylistId: data,
+            showPlaylist:true
+        })
+    }
+    editPlaylist = () => {
+        this.setState({
+            edit:!this.state.edit
+        })
+    }
     render() {
-        
+        console.log(this.state.currentPlaylistId)
         return (
             <MainContainer>
                 <header>
-                    <input
-                        onChange={this.onChangeInputPlaylistName}
-                        value={this.state.inputPlaylistName}
-                        placeholder={'Nome da playlist'}
-                    />
-                    <button onClick={this.createPlaylist}>salvar</button>
+                    <PlaylistImg>
+                        <FaMusic />
+                    </PlaylistImg>
+                    <InputContainer>
+                        <p>PLAYLIST</p>
+                        
+                        {
+                            this.state.edit ?
+                            <div>
+                                <InputPlaylist
+                                    onChange={this.onChangeInputPlaylistName}
+                                    value={this.state.inputPlaylistName}
+                                    placeholder={'Nome da playlist'}
+                                />
+                                <SaveButton 
+                                onClick={()=>createPlaylist(this.state.inputPlaylistName,this.saveData,this.saveId)}>salvar</SaveButton>
+                                <SaveButton onClick={this.editPlaylist}>cancelar</SaveButton>
+
+                            </div>
+                                :
+                            <h1 onClick={this.editPlaylist}>
+                                {this.state.currentPlaylistName}
+                            </h1>
+                        }
+                    </InputContainer>
+
                 </header>
-                
-                <AddTrackToPlaylist 
-                    playlistId = {this.state.currentPlaylistId}
-                />
+                <main>
+                    {
+                        
+                        this.state.showPlaylist ?
+                        
+                            <TrackList
+                                id={this.state.currentPlaylistId}
+                            />
+                        :
+                        <MessageContainer>
+                            <p>Essa playlist ainda não possui músicas</p>
+                        </MessageContainer>
+                    }
+                </main>
             </MainContainer>
         );
     }

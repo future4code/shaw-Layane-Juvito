@@ -14,14 +14,16 @@ export const MainContainer = styled.div`
 export const MenuItems = styled.div`
     cursor: pointer;
     display: grid;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 25% 75%;
     align-items: center;
     width: 80%;
+    /* font-size: 1rem; */
+    font-weight: bold;
+    span{
+        font-size: 1.5rem;
+    }
 
     :hover{
-        color: orange;
-    }
-    &:active{
         color: orange;
     }
 `
