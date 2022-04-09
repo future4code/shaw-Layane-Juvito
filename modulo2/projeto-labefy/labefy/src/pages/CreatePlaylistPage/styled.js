@@ -22,7 +22,6 @@ export const MainContainer = styled.div`
 `
 export const MessageContainer = styled.div`
     display: flex;
-    /* align-items: center; */
     margin:20px ;
     justify-content: center;
     color: #808080;

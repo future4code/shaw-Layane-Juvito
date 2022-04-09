@@ -18,7 +18,7 @@ export default class TrackList extends React.Component {
         inputTracktName: '',
     }
     componentDidMount() {
-        getPlaylistTracks(this.props.id, this.savePlaylistTracks)
+        getPlaylistTracks(this.props.id, this.savePlaylistTracks,this.props.headers)
     }
     onChangeInputArtistName = (event) => {
         this.setState({
@@ -37,7 +37,7 @@ export default class TrackList extends React.Component {
         })
     }
     addTrack = () => {
-        addTrackToPlaylist(this.state.inputTracktName, this.state.inputArtistName, this.state.inputTrackUrl, this.props.id, this.saveData, this.savePlaylistTracks)
+        addTrackToPlaylist(this.state.inputTracktName, this.state.inputArtistName, this.state.inputTrackUrl, this.props.id, this.saveData, this.savePlaylistTracks,this.props.headers)
     }
     saveData = (name, url, artist) => {
         this.setState({
@@ -70,7 +70,7 @@ export default class TrackList extends React.Component {
                         showJumpControls={false}
                         customControlsSection={['MAIN_CONTROLS', 'VOLUME_CONTROLS']}
                     />
-                    <DeleteButton onClick={() => deleteTrackFromPlaylist(this.props.id, track.id, this.savePlaylistTracks)}>
+                    <DeleteButton onClick={() => deleteTrackFromPlaylist(this.props.id, track.id, this.savePlaylistTracks,this.props.headers)}>
                         <FaTrashAlt />
                     </DeleteButton>
                 </TrackContainer>

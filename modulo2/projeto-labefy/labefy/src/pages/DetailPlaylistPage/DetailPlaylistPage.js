@@ -35,7 +35,7 @@ export default class DetailPlaylistPage extends React.Component {
 
                 </header>
                 <main>
-                    <TrackList id={this.props.page.id}/>
+                    <TrackList id={this.props.page.id} headers={this.props.headers}/>
                 </main>
             </MainContainer>
         );

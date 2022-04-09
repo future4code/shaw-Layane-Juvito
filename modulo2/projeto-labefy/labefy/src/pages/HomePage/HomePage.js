@@ -1,29 +1,32 @@
 import React from "react";
-import { changeUser } from "../../constants/urls";
+import { MainContainer, LogInContainer, Input, Button } from "./styled";
 
-
-export default class HomePage extends React.Component{
+export class HomePage extends React.Component{
     state = {
         inputUser : ''
     }
     onChangeInputUser = (event) => {
-        this.setState({inputUser:event.target.value})
+        this.setState({inputUser:event.target.value}) 
     }
+  
+
     render(){
         return(
-            <div>
+            <MainContainer>
                 <h1>Labefy, o melhor streaming de músicas do Brasil!!</h1>
 
-                <div>
-                    <label>Informe suas credenciais</label>
-                    <input 
+                <LogInContainer>
+                    <h3>Informe suas credenciais</h3>
+                    <p>O usuário padrão é layane-bastos-shaw</p>
+                    <p>Caso deseje visitar as playlists de outros usuários, informe a credencial abaixo</p>
+                    <Input 
                         placeholder={'nome-sobrenome-turma'}
                         value={this.state.inputUser}
                         onChange={this.onChangeInputUser}
                     />
-                    <button onClick={()=>changeUser(this.state.inputUser)}>Pegar minhas playlist</button>
-                </div>
-            </div>
+                    <Button onClick={()=>this.props.changeUser(this.state.inputUser)}>Acessar novo usuário</Button>
+                </LogInContainer>
+            </MainContainer>
         )
     }
 }

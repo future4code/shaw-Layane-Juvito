@@ -71,7 +71,7 @@ export default class CreatePlaylistPage extends React.Component {
                                     placeholder={'Nome da playlist'}
                                 />
                                 <SaveButton 
-                                onClick={()=>createPlaylist(this.state.inputPlaylistName,this.saveData,this.saveId)}>salvar</SaveButton>
+                                onClick={()=>createPlaylist(this.state.inputPlaylistName,this.saveData,this.saveId,this.props.headers)}>salvar</SaveButton>
                                 <SaveButton onClick={this.editPlaylist}>cancelar</SaveButton>
 
                             </div>
@@ -90,6 +90,7 @@ export default class CreatePlaylistPage extends React.Component {
                         
                             <TrackList
                                 id={this.state.currentPlaylistId}
+                                headers = {this.props.headers}
                             />
                         :
                         <MessageContainer>

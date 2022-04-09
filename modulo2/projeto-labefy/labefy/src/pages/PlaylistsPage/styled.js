@@ -5,11 +5,32 @@ export const MainContainer = styled.div`
     background-color: darkgray;
     background-color: rgba(40, 37, 37, 0.948);
     height: 100%;
+`
+export const Header = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px double  #808080;
     h1{
         color: whitesmoke;
         padding: 5px 20px;
-        border-bottom: 3px double  #808080;
+        
     }
+    input{
+        padding: 5px 10px;
+        background-color: transparent;
+        border: none;
+        color: orange;
+        outline: none;
+        margin-right: 20px;
+        border-radius: 5px 0px;
+        box-shadow: 1px 1px 1px #808080;
+        ::-webkit-input-placeholder { 
+            padding: 5px;
+        }
+        
+    }
+
 `
 export const ListContainer = styled.div`
     padding: 20px;
@@ -17,18 +38,7 @@ export const ListContainer = styled.div`
     grid-template-columns: repeat(4,1fr);
     gap: 10px;
 `
-export const PlaylistContainer = styled.div`
-    cursor: pointer;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap:5px;
-    box-shadow: 2px 2px 12px black;
-    :hover{
-        box-shadow: 2px 2px 12px orange;
-     }
-`
+
 export const ScrollContainer = styled.div`
     width: 100%;
     display:flex;
@@ -37,38 +47,4 @@ export const ScrollContainer = styled.div`
     flex-flow: column nowrap;
     overflow-y: scroll;
     height:90%;
-`
-export const DeleteButton = styled.button`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: transparent;
-    border: none;
-    color: whitesmoke;
-    font-size: 1.3rem;
-    :hover{
-        color: orange;
-    }
-
-    
-`
-export const CardText = styled.div`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5px 20px;
-`
-
-export const PlaylistImg = styled.div`
-    height: 200px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content:center;
-    background-color: rgba(40, 37, 37, 0.745);
-    font-size: 2rem;
-    color: #808080;
-    border:0.3px solid rgba(40, 37, 37, 0.745);
-     
 `

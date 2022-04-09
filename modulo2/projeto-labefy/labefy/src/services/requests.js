@@ -1,6 +1,5 @@
-// import React from 'react';
 import axios from 'axios';
-import { headers, baseUrl } from '../constants/urls'
+import { baseUrl } from '../constants/urls'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 toast.configure()
@@ -8,7 +7,7 @@ toast.configure()
 // ===== REQUISIÇÕES GET =======
 
 // ======Todas as Playlists=====
-export const getAllPlaylists = (saveData) => {
+export const getAllPlaylists = (saveData,headers) => {
     axios.get(baseUrl, headers)
         .then((response) => {
             saveData(response.data.result.list)
@@ -18,19 +17,21 @@ export const getAllPlaylists = (saveData) => {
         })
 }
 // ======Todas as músicas de uma Playlists=====
-export const getPlaylistTracks = (id,saveData) => {
+export const getPlaylistTracks = (id,saveData,headers) => {
     axios.get(`${baseUrl}/${id}/tracks`,headers)
     .then((response)=>{
         saveData(response.data.result.tracks)
 
     })
     .catch((e)=>{
-        console.log(e)
-        // toast.error(e.response.data.message)
+        console.log(e.response)
+        toast.error(e.response.data.message)
     })
 }
 // ======Busca playlists por nome=====
-export const searchPlaylist = (name,saveData) => {
+
+// ======Retorna o id de uma playlist=====
+export const searchPlaylistId = (name,saveData,headers) => {
     axios.get(`${baseUrl}/search?name=${name}`, headers)
     .then((response)=>{
         const list = [...response.data.result.playlist];
@@ -41,21 +42,38 @@ export const searchPlaylist = (name,saveData) => {
         console.log(e.response.data.message)
     })
 }
+// ======Retorna um array com as playlists filtradas=====
+export const searchPlaylist = (name,saveData,headers) => {
+    if (name){
+        axios.get(`${baseUrl}/search?name=${name}`, headers)
+        .then((response)=>{
+            saveData(response.data.result.playlist)
+        })
+        .catch((e)=>{
+            console.log(e.response.data.message)
+        })
+    }
+}
 // ================================
 // ===== REQUISIÇÕES DELETE =======
-export const deletePlaylist = (id,saveData) => {
+
+// ===== Excluir uma playlist =======
+export const deletePlaylist = (id,saveData,headers) => {
     axios.delete(`${baseUrl}/${id}`, headers)
     .then(()=>{
-        getAllPlaylists(saveData)
+        getAllPlaylists(saveData, headers)
+        toast.success("Playlist excluída!")
     })
     .catch((e)=>{
         toast.error(e.response.data.message)
     })
 }
-export const deleteTrackFromPlaylist = (playlistId,trackId,saveData) => {
+// ===== Excluir música de uma playlist =======
+export const deleteTrackFromPlaylist = (playlistId,trackId,saveData,headers) => {
     axios.delete(`${baseUrl}/${playlistId}/tracks/${trackId}`, headers)
     .then(()=>{
-        getPlaylistTracks(playlistId,saveData)
+        getPlaylistTracks(playlistId,saveData, headers)
+        toast.success("Música excluída!")
     })
     .catch((e)=>{
         toast.error(e.response.data.message)
@@ -64,20 +82,20 @@ export const deleteTrackFromPlaylist = (playlistId,trackId,saveData) => {
 
 // ================================
 // ===== REQUISIÇÕES POST =======
-export const createPlaylist = (name,saveData,saveDataId) => {
+export const createPlaylist = (name,saveData,saveDataId,headers) => {
     const body = {
         'name': name
     }
     axios.post(baseUrl, body, headers)
         .then(() => {
-            searchPlaylist(name,saveDataId)
+            searchPlaylistId(name,saveDataId, headers)
             saveData('')
         })
         .catch((e) => {
             toast.error(e.response.data)
         })
 }
-export const addTrackToPlaylist = (name,artist,url,id,saveData,saveDataTracks) =>{
+export const addTrackToPlaylist = (name,artist,url,id,saveData,saveDataTracks,headers) =>{
 
     const body = {
         "name": name,
@@ -88,7 +106,7 @@ export const addTrackToPlaylist = (name,artist,url,id,saveData,saveDataTracks) =
     axios.post(`${baseUrl}/${id}/tracks`,body, headers)
     .then(()=>{
         saveData('','','')
-        getPlaylistTracks(id,saveDataTracks)
+        getPlaylistTracks(id,saveDataTracks,headers)
         toast.success('Música adicionada')
     })
     .catch((e)=>{
