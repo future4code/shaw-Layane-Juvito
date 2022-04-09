@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# 📄 Labefy: Projeto streaming de música
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Objetivo do projeto
+A ideia central deste projeto é realizar uma integração com a API Labefy, que permite o gerenciamento básico de playlists de músicas. Nesse projeto foram aplicados os conteúdos estudados durante a sétima semana do bootcamp, tais como: Conceitos de Networking (front end, back end, APIs, protocolos, REST), protocolos HTTP e HTTPS, Postman, axios, assincronicidade e promises, .then e .catch, async e await e integrações com APIs públicas.
 
-## Available Scripts
+#### Os requisitos do projeto são:
+- O usuário deve ser capaz de criar uma playlist de músicas. .
+- Deve haver a possibilidade do usuário visualizar todas as suas playlists, em uma lista específica. Nesta lista, o usuário também pode deletar alguma playlist.
+- O usuário deve ser capaz de visualizar os detalhes de uma playlist.
+- Para adicionar músicas à playlist, o usuário deve informar: o nome, os artistas relacionados (que pode ser só um cantor ou uma banda) e um link com o arquivo de áudio correspondente a esta música
 
-In the project directory, you can run:
+## ✔️ O que funciona
+- criação de playlists
+- visualização de todas as playlists do usuário
+- botão de deletar playlist
+- ao clicar na playlist o usuário é redirecionado para a página de detalhes
+- adicionar músicas a uma playlist
+- remover músicas da playlist
 
-### `npm start`
+## ❌ O que não funciona
+- barra de pesquisa (ainda será feita)
+- consumir a api do spotify
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## :fire: Funcionalidade Extra
+- deixar o header editável, pra poder acessar a playlist de outros usuários
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🔗 Link Surge 
+  [Visite a página do Labefy](https://knotty-education.surge.sh/)
+  
+##  :computer: DevaDiva
 
-### `npm test`
+|[Layane Bastos](https://github.com/LayaneB) |
+| :---: |
+## 📷 Imagens
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### DESKTOP
+![image](https://user-images.githubusercontent.com/50851374/162560275-c04672e0-e963-4017-8a92-a480698e1921.png)
+![image](https://user-images.githubusercontent.com/50851374/162560253-642304c3-c686-4036-b6c9-e0a0d009b3be.png)
+![image](https://user-images.githubusercontent.com/50851374/162560234-e0dcb746-9d8c-4b59-a1c3-47cba5db0f9f.png)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
