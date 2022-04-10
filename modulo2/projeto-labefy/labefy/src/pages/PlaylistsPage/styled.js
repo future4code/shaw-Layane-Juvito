@@ -16,21 +16,29 @@ export const Header = styled.div`
         padding: 5px 20px;
         
     }
+
+`
+export const InputContainer = styled.div`
+    color:orange;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    border-radius: 5px 0px;
+    box-shadow: 1px 1px 4px #808080;
+    padding: 5px;
+    width: 40%;
     input{
         padding: 5px 10px;
         background-color: transparent;
         border: none;
         color: orange;
         outline: none;
-        margin-right: 20px;
-        border-radius: 5px 0px;
-        box-shadow: 1px 1px 1px #808080;
+        width: 95%;
         ::-webkit-input-placeholder { 
             padding: 5px;
+            color:orange;
         }
-        
     }
-
 `
 export const ListContainer = styled.div`
     padding: 20px;

@@ -15,7 +15,7 @@ const LoadContainer = styled.div `
     justify-content: center;
     height: 100%;
     width: 100%;
-    
+   
 `
 
 

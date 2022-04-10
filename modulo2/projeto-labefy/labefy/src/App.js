@@ -6,6 +6,7 @@ import PlaylistsPage from './pages/PlaylistsPage/PlaylistsPage';
 import {HomePage} from './pages/HomePage/HomePage';
 import { MainContainer, GlobalStyle } from './styled';
 
+
 export default class App extends React.Component {
   state = {
     currentPage: 'home',

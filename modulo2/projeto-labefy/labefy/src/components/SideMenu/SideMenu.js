@@ -15,13 +15,9 @@ export default class SideMenu extends React.Component{
                     <span> <FaHome /></span>
                     Inicio
                 </MenuItems>
-                <MenuItems onClick = {this.props.goToDetailPage}>
-                    <span><FaSearch /></span>
-                    Buscar
-                </MenuItems>
                 <MenuItems onClick = {this.props.goToPlaylistsPage}>
                     <span><MdOutlineLibraryMusic /></span>
-                    Sua Biblioteca
+                    Suas playlists
                 </MenuItems>
                 <MenuItems onClick = {this.props.goToCreatePage}>
                     <span><FaPlusSquare /></span>

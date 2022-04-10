@@ -42,6 +42,6 @@ export const HeaderContainer = styled.div`
         text-align: center;
         font-size: 4rem;
         cursor: pointer;
-        text-shadow: 8px 8px 8px orange;
+        text-shadow: 2px 2px 2px orange;
     }
 `

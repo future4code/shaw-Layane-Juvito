@@ -1,14 +1,16 @@
 import React from 'react';
 import { getAllPlaylists, deletePlaylist, searchPlaylist } from '../../services/requests';
-import { MainContainer, ScrollContainer, ListContainer, Header } from './styled';
+import { MainContainer, ScrollContainer, ListContainer, Header,InputContainer} from './styled';
 import CardPlaylist from '../../components/CardPlaylist/CardPlaylist';
 import {BiSearchAlt} from 'react-icons/bi'
+import Loader from '../../components/Loader/Loader';
 
 export default class PlaylistsPage extends React.Component {
     state = {
         playlists: [],
         inputSearch: '',
-        filteredPlaylist: []
+        filteredPlaylist: [],
+        loading: true,
     }
     componentDidMount() {
         getAllPlaylists(this.saveAllPlaylists, this.props.headers)
@@ -20,7 +22,7 @@ export default class PlaylistsPage extends React.Component {
         }
     };
     saveAllPlaylists = (data) => {
-        this.setState({ playlists: data })
+        this.setState({ playlists: data,loading: false })
     }
     saveDeletePlaylist = (id) => {
         deletePlaylist(id, this.saveAllPlaylists, this.props.headers)
@@ -36,6 +38,7 @@ export default class PlaylistsPage extends React.Component {
         let renderPlaylists = this.state.playlists.map((playlist) => {
             return (
                 <CardPlaylist
+                    key ={playlist.id}
                     playlist={playlist}
                     goToDetailPage={this.props.goToDetailPage}
                     saveDeletePlaylist={this.saveDeletePlaylist}
@@ -58,16 +61,21 @@ export default class PlaylistsPage extends React.Component {
             <MainContainer>
                 <Header>
                     <h1>Playlists</h1>
-                    <div>
+                    <InputContainer>
                         <input placeholder={"Buscar playlist"} onChange={this.onChangeSearch} value={this.state.inputSearch} />
                         <span><BiSearchAlt /></span>
-                    </div>
+                    </InputContainer>
                 </Header>
-                <ScrollContainer>
-                    <ListContainer>
-                        {renderPlaylists}
-                    </ListContainer>
-                </ScrollContainer>
+                {
+                    this.state.loading ?
+                    <Loader />
+                    :
+                    <ScrollContainer>
+                        <ListContainer>
+                            {renderPlaylists}
+                        </ListContainer>
+                    </ScrollContainer>
+                }
             </MainContainer>
         );
     }

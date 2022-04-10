@@ -7,6 +7,7 @@ export const PlaylistContainer = styled.div`
     flex-direction: column;
     align-items: center;
     gap:5px;
+    border-radius:15px;
     box-shadow: 2px 2px 12px black;
     :hover{
         box-shadow: 2px 2px 12px orange;
@@ -29,7 +30,7 @@ export const PlaylistImg = styled.div`
     font-size: 2rem;
     color: #808080;
     border:0.3px solid rgba(40, 37, 37, 0.745);
-     
+    border-radius:15px 15px 0px 0px;
 `
 export const DeleteButton = styled.button`
     display: flex;
