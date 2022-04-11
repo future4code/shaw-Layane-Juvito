@@ -12,10 +12,6 @@ export default class DetailPlaylistPage extends React.Component {
     componentDidMount = () => {
         this.setState({ trackList: <TrackList id={this.props.id} /> })
     }
-    renderTrackList = () => {
-        this.setState({ trackList: <TrackList id={this.props.id} /> })
-        console.log('entrou')
-    }
 
     render() {
 
