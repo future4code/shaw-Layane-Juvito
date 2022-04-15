@@ -3,6 +3,7 @@ import { MainContainer } from './styled';
 import TrackList from '../../components/TrackList/TrackList';
 import {PlaylistImg,HeaderContainer } from './styled';
 import { FaMusic } from 'react-icons/fa';
+import { GlobalStyle } from '../../styled';
 
 export default class DetailPlaylistPage extends React.Component {
     state = {
