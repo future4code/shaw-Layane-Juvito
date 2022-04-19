@@ -1,8 +1,8 @@
-import { baseUrl, headers } from "../constants/api";
+import { baseUrl, aluna } from "../constants/api";
 import axios from "axios";
 
 export const getProfileToChoose = (saveData) => {
-    axios.get(`${baseUrl}layane/person`)
+    axios.get(`${baseUrl}${aluna}/person`)
     .then((res)=>{
        saveData(res.data.profile)
     })
@@ -12,7 +12,7 @@ export const getProfileToChoose = (saveData) => {
 }
 
 export const getMatches = (saveData) => {
-    axios.get(`${baseUrl}layane/matches`)
+    axios.get(`${baseUrl}${aluna}/matches`)
     .then((res)=>{
         saveData(res.data.matches)
     })
@@ -26,7 +26,7 @@ export const choosePerson = (id) => {
         id: id,
         choice: true
     }
-    axios.post(`${baseUrl}layane/choose-person`,body)
+    axios.post(`${baseUrl}${aluna}/choose-person`,body)
     .then(()=>{
         // console.log(res.data)
     })
@@ -36,7 +36,7 @@ export const choosePerson = (id) => {
 }
 export const clear = () => {
 
-    axios.put(`${baseUrl}/layane/clear`)
+    axios.put(`${baseUrl}/${aluna}/clear`)
     .then((res)=>{
         console.log(res.data)
     })

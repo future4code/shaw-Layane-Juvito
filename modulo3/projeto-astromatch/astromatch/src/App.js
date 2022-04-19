@@ -3,7 +3,7 @@ import ChatPage from "./pages/ChatPage/ChatPage";
 import InitialPage from "./pages/InitialPage/InitialPage";
 import MatchPage from "./pages/MatchePage/MatchPage";
 
-
+import { ContainerApp, GlobalStyle } from "./appStyle";
 function App() {
   const [page, setPage] = useState('initialPage')
   const [info, setInfo]=useState({})
@@ -27,14 +27,15 @@ function App() {
       case 'matchPage':
         return <MatchPage goToInitialPage = {goToInitialPage} goToChatPage ={goToChatPage}/>
       case 'chatPage':
-        return <ChatPage goToMatchPage = {goToMatchPage} infoMatch = {info}/>
+        return <ChatPage goToMatchPage = {goToMatchPage} infoMatch = {info} goToInitialPage = {goToInitialPage}/>
     }
   }
   
   return (
-    <div>
+    <ContainerApp>
+      <GlobalStyle />
       {renderPage()}
-    </div>
+    </ContainerApp>
   );
 }
 
