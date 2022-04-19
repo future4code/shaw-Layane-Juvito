@@ -6,7 +6,7 @@ import PokeCard from "./components/PokeCard";
 const App = () => {
 
   const [pokeList, setPokeList] = useState([])
-  const [pokeName, setPokeName] = useState([])
+  const [pokeName, setPokeName] = useState('')
 
 
   // método que roda após a montagem do componente
