@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const ContainerCP = styled.div`
   height: 85%;
-  width:30rem;
+  width:25rem;
   border:6px solid orange;
   background-color:rgba(34, 33, 33, 0.986);
   color:white;
@@ -15,8 +15,7 @@ export const ContainerCP = styled.div`
     min-width:90% ;
   }
   @media screen and (min-device-width : 481px) and (max-device-width : 800px) {
-    max-width:70% ;
-    min-width:60% ;
+
   }
 `
 export const HeaderContainer = styled.div`
@@ -29,7 +28,7 @@ export const LogoIcon = styled.span`
     font-size: 1.5rem;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 70%;
     color: #00e1ff;
     p{
         font-size: 2rem;
@@ -81,8 +80,9 @@ export const InputConatainer = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 2.5rem;
+        font-size: 1.8rem;
         color:orange;
+        
     }
     input{
         background-color: transparent;
@@ -90,7 +90,16 @@ export const InputConatainer = styled.div`
         border:none;
         padding:0% 5%;
         color:#00e1ff;
+        font-size: 1.2rem;
+        
+    }
+    @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+      input{
+        font-size: 1rem;
+      }
+      span{
         font-size: 1.4rem;
+      }
     }
 `
 export const ContainerMensagens = styled.div`

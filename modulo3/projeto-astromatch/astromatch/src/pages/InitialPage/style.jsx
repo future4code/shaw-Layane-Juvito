@@ -1,8 +1,8 @@
 import styled from "styled-components"
 
 export const ContainerIP = styled.div`
-  height: 85%;
-  width:30rem;
+  height: 90%;
+  width:25rem;
   border:6px solid orange;
   background-color:rgba(34, 33, 33, 0.986);
   border-radius:10px;
@@ -14,8 +14,7 @@ export const ContainerIP = styled.div`
     min-width:90% ;
   }
   @media screen and (min-device-width : 481px) and (max-device-width : 800px) {
-    max-width:70% ;
-    min-width:60% ;
+ 
   }
 `
 export const HeaderContainer = styled.div`
@@ -28,7 +27,7 @@ export const LogoIcon = styled.span`
     font-size: 1.5rem;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 85%;
     color: #00e1ff;
     p{
         font-size: 2rem;
@@ -39,6 +38,7 @@ export const LogoIcon = styled.span`
         color: #eec06a;
         font-size: 2rem;
     }
+    
 `
 export const MatchIcon = styled.span`
     cursor: pointer;

@@ -5,7 +5,7 @@ export const GlobalStyle = createGlobalStyle`
     width: 4px;
   }
   *::-webkit-scrollbar-thumb {
-      background-color: #00e1ff;
+      background-color: #00e1ff57;
       opacity:40%;
       border-radius: 2px;
   }

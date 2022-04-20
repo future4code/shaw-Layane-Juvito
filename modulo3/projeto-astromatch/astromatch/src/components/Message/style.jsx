@@ -4,14 +4,17 @@ export const MyMessage = styled.div`
 display:flex ;
 justify-content:right;
 color:darkgray;
-font-size:16px;
+
 padding-right:0px;
 p{
   padding: 5px;
+  font-size:1.1rem
 }
 
 @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
-  font-size: 12px;
+  p{
+    font-size: 0.9rem;
+  }
 }
 `
 export const Chat = styled.div`
@@ -42,7 +45,7 @@ export const MatchMessage = styled.div`
 display:flex ;
 justify-content:left;
 color:darkgray;
-font-size:16px;
+font-size:1.1rem;
 p{
   display:flex;
   flex-direction:column;
@@ -57,13 +60,16 @@ span{
   color:orange ;
   opacity:60% ;
   font-weight:500;
-  font-size:14px ;
+  font-size:1rem ;
   
 }
 @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
   p{
-    font-size: 12px;
+    font-size: 0.9rem;
     max-width: 150px;
+  }
+  span{
+    font-size: 0.8rem;
   }
 }
 `

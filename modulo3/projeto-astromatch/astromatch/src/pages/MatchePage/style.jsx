@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const ContainerMP = styled.div`
   height: 85%;
-  width:30rem;
+  width:25rem;
   border:6px solid orange;
   background-color:rgba(34, 33, 33, 0.986);
   border-radius:10px;
@@ -14,8 +14,7 @@ export const ContainerMP = styled.div`
     min-width:90% ;
   }
   @media screen and (min-device-width : 481px) and (max-device-width : 800px) {
-    max-width:70% ;
-    min-width:60% ;
+  
   }
 `
 export const HeaderContainer = styled.div`
@@ -28,8 +27,9 @@ export const LogoIcon = styled.span`
     font-size: 1.5rem;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 70%;
     color: #00e1ff;
+    
     p{
         font-size: 2rem;
         text-align: center;
@@ -46,6 +46,22 @@ export const BackIcon = styled.span`
     display: flex;
     align-items: center;
     padding-right: 5%;
+    width: 15%;
+    color: orange;
+    span{
+      display: flex;
+      align-items: center;
+      :hover{
+        font-size: 1.7rem;
+      }
+    }
+`
+export const ReloadkIcon = styled.span`
+    cursor: pointer;
+    font-size: 1.9rem;
+    display: flex;
+    align-items: center;
+    padding-left: 5%;
     color: orange;
     width: 15%;
     span{

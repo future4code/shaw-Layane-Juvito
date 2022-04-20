@@ -10,35 +10,36 @@ const ChatPage = (props) => {
     const [messages, setMessages] = useState([])
     const [send, setSend] = useState(false)
 
-    useEffect(()=>{
-        sendRandomText()
-    },[send])
+    useEffect(
+        () => {
+            sendRandomText()
+        }, [send]
+    )
 
-    const onChaneInputMessage = (event) =>{
+    const onChaneInputMessage = (event) => {
         setInputMessage(event.target.value)
     }
     const sendTextMessage = () => {
-        const addMessage = [{name:'eu', text:inputMessage},...messages ]
+        const addMessage = [{ name: 'eu', text: inputMessage }, ...messages]
         setMessages(addMessage)
         setInputMessage('')
         setSend(!send)
-        
     }
     const sendRandomText = () => {
-        const randomIndex = Math.floor(Math.random() * 10);
+        const randomIndex = Math.floor(Math.random() * 1.2*10);
         const matchText = randomText[randomIndex];
-        const addMessage = [{name:props.infoMatch.name, text:matchText},...messages]
+        const addMessage = [{ name: props.infoMatch.name, text: matchText }, ...messages]
         setMessages(addMessage)
     }
     let renderizarMensagens
     console.log(messages)
     renderizarMensagens = messages.map((message, index) => {
         return <Messages
-          key={index}
-          id={index}
-          message={message}
+            key={index}
+            id={index}
+            message={message}
         />
-      })
+    })
     return (
         <ContainerCP>
             <HeaderContainer>
@@ -56,7 +57,7 @@ const ChatPage = (props) => {
             </ContainerMensagens>
 
             <InputConatainer>
-                <input placeholder={'Mensagem'} value = {inputMessage} onChange = {onChaneInputMessage} />
+                <input placeholder={'Mensagem'} value={inputMessage} onChange={onChaneInputMessage} />
                 <span onClick={sendTextMessage}>
                     <RiSendPlaneFill />
                 </span>

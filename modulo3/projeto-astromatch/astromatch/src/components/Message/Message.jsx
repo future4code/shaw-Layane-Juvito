@@ -1,6 +1,5 @@
 import React from "react";
-import { MatchMessage, MyMessage, Chat, DoubleCheck } from "./style";
-import {BiCheckDouble} from 'react-icons/bi'
+import { MatchMessage, MyMessage, Chat} from "./style";
 
 const Messages = (props) => {
   

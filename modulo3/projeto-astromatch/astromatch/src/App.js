@@ -28,6 +28,8 @@ function App() {
         return <MatchPage goToInitialPage = {goToInitialPage} goToChatPage ={goToChatPage}/>
       case 'chatPage':
         return <ChatPage goToMatchPage = {goToMatchPage} infoMatch = {info} goToInitialPage = {goToInitialPage}/>
+      default:
+        return <InitialPage  goToMatchPage = {goToMatchPage}/>
     }
   }
   

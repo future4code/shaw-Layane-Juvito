@@ -10,5 +10,7 @@ export const randomText = [
     'Olá!',
     'Não curti muito isso',
     'Brilha, brilha estrelinha. Quero ver você brilhar!',
-    'Passada, chocada!!'
+    'Passada, chocada!!',
+    'Isso é escola do crime!',
+    'Come mingau de aveia, bem, faz cocô bonito!'
 ]
