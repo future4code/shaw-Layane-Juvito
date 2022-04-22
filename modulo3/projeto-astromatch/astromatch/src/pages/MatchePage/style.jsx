@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const ContainerMP = styled.div`
-  height: 85%;
+  height: 90%;
   width:25rem;
   border:6px solid orange;
   background-color:rgba(34, 33, 33, 0.986);
@@ -12,9 +12,6 @@ export const ContainerMP = styled.div`
   @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
     max-width:95% ;
     min-width:90% ;
-  }
-  @media screen and (min-device-width : 481px) and (max-device-width : 800px) {
-  
   }
 `
 export const HeaderContainer = styled.div`

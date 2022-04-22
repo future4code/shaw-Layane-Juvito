@@ -32,7 +32,6 @@ const ChatPage = (props) => {
         setMessages(addMessage)
     }
     let renderizarMensagens
-    console.log(messages)
     renderizarMensagens = messages.map((message, index) => {
         return <Messages
             key={index}

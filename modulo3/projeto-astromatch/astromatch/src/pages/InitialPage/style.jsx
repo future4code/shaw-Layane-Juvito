@@ -13,9 +13,6 @@ export const ContainerIP = styled.div`
     max-width:95% ;
     min-width:90% ;
   }
-  @media screen and (min-device-width : 481px) and (max-device-width : 800px) {
- 
-  }
 `
 export const HeaderContainer = styled.div`
     display: flex;

@@ -38,7 +38,6 @@ export const Img = styled.img`
     top:0px;
     max-height: 100%;
     max-width: 100%;
-    
 `
 export const ProfileContainer = styled.div`
     height: 100%;

@@ -2,10 +2,12 @@ import { Container, Img, ImgContainer, ProfileContainer, PulseLike, Pulse, Butto
 import { FaHeart } from 'react-icons/fa'
 import { ImCross } from 'react-icons/im'
 import Loader from "../Loader/Loader"
+import { useEffect, useState } from "react"
 
 
 const Profile = (props) => {
-    
+   
+
     return (
         <Container>
             {    
@@ -39,10 +41,10 @@ const Profile = (props) => {
             }
            
             <ButtonsContainer>
-                <Pulse onClick={props.deslike}>
+                <Pulse onClick={ props.deslike}>
                     <ImCross />
                 </Pulse>
-                <PulseLike onClick={() => props.like(props.profile.id)}>
+                <PulseLike onClick={() => props.like(props.profile)}>
                     <FaHeart />
                 </PulseLike>
             </ButtonsContainer>

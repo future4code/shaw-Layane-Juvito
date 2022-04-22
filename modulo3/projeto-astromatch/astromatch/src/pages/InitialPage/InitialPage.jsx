@@ -36,9 +36,9 @@ const InitialPage = (props) => {
             setLoading(false)
         }
     }
-    const like = (id) => {
+    const like = (profile) => {
         getProfileToChoose(saveData,setLoading)
-        choosePerson (id)
+        choosePerson (profile)
     }
     const deslike = () => {
         getProfileToChoose(saveData, setLoading)
@@ -50,7 +50,6 @@ const InitialPage = (props) => {
         <ContainerIP>
                 <HeaderContainer>
                     <LogoIcon><FaUserAstronaut /><p>stro</p><span>Match</span></LogoIcon>
-                    
                     <MatchIcon onClick={props.goToMatchPage}
                     ><span><RiUserHeartFill /> </span></MatchIcon>
                 </HeaderContainer>

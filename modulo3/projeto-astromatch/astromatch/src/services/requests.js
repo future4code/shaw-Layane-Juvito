@@ -1,5 +1,8 @@
 import { baseUrl, aluna } from "../constants/api";
 import axios from "axios";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
 
 export const getProfileToChoose = (saveData,setLoading) => {
     setLoading(true)
@@ -23,14 +26,14 @@ export const getMatches = (saveData, setLoading) => {
     })
 }
 
-export const choosePerson = (id) => {
+export const choosePerson = (profile) => {
     const body = {
-        id: id,
+        id: profile.id,
         choice: true
     }
     axios.post(`${baseUrl}${aluna}/choose-person`,body)
-    .then(()=>{
-        // console.log(res.data)
+    .then((res)=>{
+        res.data.isMatch && toast.success(`Você deu match com ${profile.name}!`)
     })
     .catch((err)=>{
         console.log(err.response.data)
@@ -40,7 +43,6 @@ export const clear = () => {
 
     axios.put(`${baseUrl}${aluna}/clear`)
     .then((res)=>{
-        console.log(res.data)
     })
     .catch((err)=>{
         console.log(err.response.data)

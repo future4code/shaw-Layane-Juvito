@@ -25,7 +25,7 @@ const MatchPage = (props) => {
     }
     const clearAll = () => {
         clear()
-        getMatches(saveData, setLoading)
+        setMatchList([])
     }
     return(
         
