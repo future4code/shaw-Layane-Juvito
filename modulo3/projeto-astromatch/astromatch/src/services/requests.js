@@ -39,10 +39,11 @@ export const choosePerson = (profile) => {
         console.log(err.response.data)
     })
 }
-export const clear = () => {
+export const clear = (setReset) => {
 
     axios.put(`${baseUrl}${aluna}/clear`)
     .then((res)=>{
+        setReset(false)
     })
     .catch((err)=>{
         console.log(err.response.data)

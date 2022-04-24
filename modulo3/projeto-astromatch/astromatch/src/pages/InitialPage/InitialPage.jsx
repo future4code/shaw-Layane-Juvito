@@ -21,8 +21,7 @@ const InitialPage = (props) => {
     )
 
     const clearAll = () => {
-        clear()
-        setReset(false)
+        clear(setReset)
         getProfileToChoose(saveData,setLoading)
     }
 
@@ -30,7 +29,7 @@ const InitialPage = (props) => {
         
         if(data===null){
             setReset(true)
-            console.log(data)
+            setLoading(false)
         }else{
             setProfileToChoose(data)
             setLoading(false)

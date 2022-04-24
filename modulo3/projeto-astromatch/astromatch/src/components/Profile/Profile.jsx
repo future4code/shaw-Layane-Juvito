@@ -2,7 +2,6 @@ import { Container, Img, ImgContainer, ProfileContainer, PulseLike, Pulse, Butto
 import { FaHeart } from 'react-icons/fa'
 import { ImCross } from 'react-icons/im'
 import Loader from "../Loader/Loader"
-import { useEffect, useState } from "react"
 
 
 const Profile = (props) => {
