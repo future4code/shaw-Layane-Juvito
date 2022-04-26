@@ -1,8 +1,11 @@
+import { GlobalStyled } from "./styledGlobal";
+import HomePage from "./pages/HomePage/HomePage";
 
 const App = () => {
   return (
     <div>
-     Oi
+      <GlobalStyled />
+      <HomePage />
     </div>
   );
 }
