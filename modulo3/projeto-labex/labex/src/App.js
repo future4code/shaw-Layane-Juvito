@@ -1,11 +1,12 @@
 import { GlobalStyled } from "./styledGlobal";
-import HomePage from "./pages/HomePage/HomePage";
+import { Router } from "./routes/Router";
+
 
 const App = () => {
   return (
     <div>
       <GlobalStyled />
-      <HomePage />
+      <Router />
     </div>
   );
 }

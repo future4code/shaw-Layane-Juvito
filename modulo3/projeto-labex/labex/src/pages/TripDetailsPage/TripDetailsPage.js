@@ -1,7 +1,9 @@
 const TripDetailsPage = () => {
     return (
       <div>
+
        TripDetailsPage
+       {/* <Footer /> */}
       </div>
     );
   }
