@@ -1,0 +1,9 @@
+.rhap_container{
+    background-color: rgba(11, 11, 11, 0.597);
+    display: flex;
+    justify-items: center;
+    border-radius: 15px;
+}
+.rhap_time{
+    color:white;
+}
