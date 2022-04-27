@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useState } from 'react'
 import { AppFormPageContainer, FormContainer, Input, Select } from './styled'
-import useGet from '../../services/hooks/useGet';
-import { baseUrl } from '../../constants/api';
+import useGet from '../../services/hooks/useGet'
 
 const ApplicationFormPage = () => {
   const [trip, setTrip] = useState('')
@@ -12,7 +11,7 @@ const ApplicationFormPage = () => {
   const [photo, setPhoto] = useState('')
   const [country, setCountry] = useState('')
 
-  const trips = useGet(`${baseUrl}trips`)
+  const trips = useGet(`trips`)
 
   const onChangeTrip = (event) => {
     setTrip(event.target.value)

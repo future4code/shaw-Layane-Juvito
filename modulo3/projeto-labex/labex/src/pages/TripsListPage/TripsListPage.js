@@ -1,20 +1,18 @@
-import { TripsListPageContainer, CardTest, CardContainer, ImageContainer, InfoText, CardInfo, Button } from './styled';
-import Header from '../../components/Header/Header';
-import { baseUrl } from '../../constants/api'
-import useGet from '../../services/hooks/useGet';
-import { navigateHome, navigateApplication } from '../../routes/coordinator'
-import { useNavigate, Link,useLocation } from 'react-router-dom';
-import Footer from '../../components/Footer/Footer';
-import { useState } from 'react';
-import ApplicationFormPage from '../ApplicationFormPage/ApplicationFormPage';
+import { TripsListPageContainer, CardTest, CardContainer, ImageContainer, InfoText, CardInfo, Button } from './styled'
+import Header from '../../components/Header/Header'
+import useGet from '../../services/hooks/useGet'
+import { navigateHome } from '../../routes/coordinator'
+import { Link } from 'react-router-dom'
+import Footer from '../../components/Footer/Footer'
+// import { useState } from 'react';
 
 const TripsListPage = () => {
-  const [show, setShow] = useState(false)
-  const navigate = useNavigate()
-  let location = useLocation();
+  // const [show, setShow] = useState(false)
+  // const navigate = useNavigate()
+  // let location = useLocation();
   // let state = location.state as { backgroundLocation: Location };
 
-  const trips = useGet(`${baseUrl}trips`)
+  const trips = useGet(`trips`)
 
   const tripsList = trips.trips && trips.trips.map((item) => {
     const data = item.name.split(',')
@@ -28,7 +26,7 @@ const TripsListPage = () => {
             <p><span>Nome: </span>{data[0]}</p>
             <p><span>Planeta: </span>{item.planet}</p>
             <p><span>Descrição: </span>{item.description}</p>
-            <p><span>Duração: </span>{item.durationInDays}</p>
+            <p><span>Duração: </span>{item.durationInDays} dias</p>
             <p><span>Data: </span>{item.date}</p>
           </InfoText>
           <Link

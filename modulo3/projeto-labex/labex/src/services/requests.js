@@ -25,20 +25,11 @@ export const decideCandidate = (tripId, candidateId) => {
     })
 }
 
-// export  const getRequest = async (url) => {
-//      try {
-//         const response = await axios.get(url);
-//         console.log('requisição arquivo externo:', response.data);
-//       } catch (error) {
-//         console.log(error);
-//       };
-//  }
-
 export const postRequest = async (url,body,headers, setData, mensagem) => {
     await axios.post(baseUrl+url, body, headers)
     .then((res)=>{
         console.log(mensagem, res.data.token)
-        setData(res.data.token)
+        setData(res.data)
     })
     .catch((error)=>{
         console.log(error.response)
