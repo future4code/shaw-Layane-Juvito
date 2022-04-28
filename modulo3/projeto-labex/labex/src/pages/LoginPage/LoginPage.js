@@ -1,5 +1,5 @@
 import Header from '../../components/Header/Header'
-import rocket from '../../assets/rocket.png'
+import rocket from '../../assets/astroRocket.png'
 import {FormContainer, LoginPageContainer} from './styled'
 import { useEffect, useState } from 'react'
 import { postRequest } from '../../services/requests'
@@ -9,17 +9,19 @@ import { useNavigate } from 'react-router-dom'
 import { navigateAdmin } from '../../routes/coordinator'
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
   const [token, setToken] = useState('')
   const [data, setData] = useState('')
+  const [form, setForm] = useState({
+    email:'',
+    password:''
+  })
+
   const navigate = useNavigate()
 
-  const onChangeEmail = (event) => {
-    setEmail(event.target.value)
-  }
-  const onChangePassword = (event) => {
-    setPassword(event.target.value)
+  
+  const onChangeInput = (event) => {
+    const {name, value} = event.target
+    setForm({...form, [name]:value})
   }
 
   useEffect (()=>{
@@ -31,22 +33,19 @@ const LoginPage = () => {
     data.success && setToken(data.token)
   }, [data])
   
-  const login = () => {
-    const body = {
-      email:email,
-      password:password
-    }
+  const login = (event) => {
+    event.preventDefault()
     const headers = {
       headers: {
         "Content-Type": "application/json"
       }
     }
-    postRequest('login', body, headers, setData, 'logado')
-    setEmail('')
-    setPassword('')
-    
+    postRequest('login', form, headers, 'logado', setData)
+    setForm({
+      email:'',
+      password:''
+    }) 
   }
-  console.log(data)
   
     return (
       <>
@@ -65,19 +64,25 @@ const LoginPage = () => {
           }
         />
         <LoginPageContainer>
-          <FormContainer>
+          <FormContainer onSubmit={login}>
             <label>Acessar área Administrativa</label>
             <input 
               placeholder={'e-mail'} 
-              onChange = {onChangeEmail} 
-              value = {email} 
+              onChange = {onChangeInput} 
+              value = {form.email} 
+              type = {'email'}
+              name = {'email'}
+              required
             />
             <input 
               placeholder={'senha'}
-              onChange = {onChangePassword} 
-              value = {password} 
+              onChange = {onChangeInput} 
+              value = {form.password} 
+              type = {'password'}
+              name = {'password'}
+              required
             />
-            <button onClick={login}>Entrar</button>
+            <button>Entrar</button>
           </FormContainer>
 
           <img src = {rocket} alt = {'rocket'} />

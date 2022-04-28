@@ -1,19 +1,19 @@
-import { useEffect } from 'react'
 import useGet from '../../services/hooks/useGet'
-import { navigateLogin, navigateHome } from '../../routes/coordinator'
+import { navigateLogin, navigateHome, navigateUserdetail } from '../../routes/coordinator'
 import { useNavigate, useParams } from 'react-router-dom'
-import { TripDetailsPageContainer, TripImageContainer, TripContainer, InfoContainer, CandidatesContainer, ApprovedContainer, ConatinerInfos } from './styled'
+import { TripDetailsPageContainer, TripImageContainer, TripContainer, InfoContainer, CandidatesContainer, ApprovedContainer, ConatinerInfos, CandidateImage, CandidateContainer, CandidateInfo, BackButton, LoaderContainer } from './styled'
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
+import { useProtectedPage } from '../../services/hooks/useProtectedPage'
+import { TiArrowBack } from 'react-icons/ti'
+import Loader from '../../components/Loader/Loader'
 
 const TripDetailsPage = () => {
+
+  useProtectedPage()
+
   const navigate = useNavigate()
   const pathParams = useParams()
-
-  useEffect(() => {
-    const token = window.localStorage.getItem("token")
-    !token && navigateLogin(navigate)
-  }, [])
 
   const token = window.localStorage.getItem("token")
   const headers = {
@@ -22,11 +22,16 @@ const TripDetailsPage = () => {
     }
   }
   const tripDetails = useGet(`trip/${pathParams.id}`, headers)
-  console.log(tripDetails)
+
 
   const logout = () => {
     window.localStorage.clear('token')
     navigateLogin(navigate)
+  }
+
+  const goToUserDetail = (item) => {
+    window.localStorage.setItem('candidate', JSON.stringify(item))
+    navigateUserdetail(navigate,tripDetails.trip.id,item.id)
   }
 
   const tripDetail = () => {
@@ -34,9 +39,7 @@ const TripDetailsPage = () => {
       const data = tripDetails.trip.name.split(',')
       return (
         <TripContainer>
-          <TripImageContainer image={data[1]}>
-
-          </TripImageContainer>
+          <TripImageContainer image={data[1]} />
           <InfoContainer>
             <p><span>Nome: </span>{data[0]}</p>
             <p><span>Planeta: </span>{tripDetails.trip.planet}</p>
@@ -53,14 +56,18 @@ const TripDetailsPage = () => {
   const approved = () => {
     let list
     if (tripDetails.trip) {
-      tripDetails.trip.approved ?
+      !tripDetails.trip.approved.length > 0  ?
         list = <p>Nenhum aprovado</p>
         :
         list = tripDetails.trip.approved.map((item) => {
+          const data = item.name.split(',')
           return (
-            <>
-              <p><span>Nome: </span>{item.name}</p>
-            </>
+            <CandidateContainer key={item.id}>
+            <CandidateImage image={data[1]} />
+            <CandidateInfo>
+              <p>{data[0]}</p>
+            </CandidateInfo>
+          </CandidateContainer>
           )
         })
     } else { list = <></> }
@@ -69,16 +76,22 @@ const TripDetailsPage = () => {
   const candidates = () => {
     let list
     if (tripDetails.trip) {
-      tripDetails.trip.candidates ?
-        list = <p>Nenhum candidato</p>
-        :
+      tripDetails.trip.candidates.length > 0 ?
         list = tripDetails.trip.candidates.map((item) => {
+          const data = item.name.split(',')
           return (
-            <>
-              <p><span>Nome: </span>{item.name}</p>
-            </>
+            <CandidateContainer key={item.id}>
+              <CandidateImage image={data[1]}></CandidateImage>
+              <CandidateInfo>
+                <p>{data[0]}</p>
+                <button onClick={()=>goToUserDetail(item)}>ver mais</button>
+              </CandidateInfo>
+            </CandidateContainer>
           )
         })
+        :
+        list = <p>Nenhum candidato</p>
+
     } else { list = <></> }
     return list
   }
@@ -98,10 +111,14 @@ const TripDetailsPage = () => {
           }
         }
       />
-      <TripDetailsPageContainer>
-        <button onClick={() => { navigate(-1) }}>Voltar</button>
-        <div>
+      {
+        tripDetails.trip?
 
+      <TripDetailsPageContainer>
+        <BackButton>
+          <span onClick={() => { navigate(-1) }}><TiArrowBack /></span>
+        </BackButton>
+        <div>
           {tripDetail()}
         </div>
         <ConatinerInfos>
@@ -119,7 +136,11 @@ const TripDetailsPage = () => {
             </div>
           </CandidatesContainer>
         </ConatinerInfos>
-      </TripDetailsPageContainer>
+      </TripDetailsPageContainer>:
+      <LoaderContainer>
+        <Loader />
+      </LoaderContainer>
+      }
 
       <Footer />
     </>

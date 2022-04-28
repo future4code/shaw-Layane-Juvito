@@ -1,8 +1,8 @@
 import Header from '../../components/Header/Header'
-import rocket from '../../assets/rocket.png'
+import rocket from '../../assets/Home.png'
 import { HomePageContainer } from './styled'
 import { useNavigate } from 'react-router-dom'
-import { navigateTrips , navigateLogin} from '../../routes/coordinator'
+import { navigateTrips , navigateAdmin} from '../../routes/coordinator'
 import Footer from '../../components/Footer/Footer'
 
 const HomePage = () => {
@@ -18,8 +18,8 @@ const HomePage = () => {
         }
         secondButton={
           {
-            contentText: 'Entrar',
-            function: navigateLogin,
+            contentText: 'Área adminstrativa',
+            function: navigateAdmin,
           }
         }
 

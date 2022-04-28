@@ -1,7 +1,7 @@
 import axios from "axios"
-import { baseUrl, headers } from '../constants/api'
+import { baseUrl } from '../constants/api'
 
-export const deletetrip = (id) => {
+export const deletetrip = (id, headers) => {
 
     axios.delete(`${baseUrl}trips/${id}`, headers)
     .then(() => {
@@ -12,9 +12,9 @@ export const deletetrip = (id) => {
     })
 }
 
-export const decideCandidate = (tripId, candidateId) => {
+export const decideCandidate = (tripId, candidateId, headers, status) => {
     const body = {
-        "approve": true
+        "approve": status
     }
     axios.put(`${baseUrl}trips/${tripId}/candidates/${candidateId}/decide`, body, headers)
     .then( () => {
@@ -25,13 +25,23 @@ export const decideCandidate = (tripId, candidateId) => {
     })
 }
 
-export const postRequest = async (url,body,headers, setData, mensagem) => {
+export const postRequest = async (url,body,headers, mensagem, setData) => {
     await axios.post(baseUrl+url, body, headers)
     .then((res)=>{
-        console.log(mensagem, res.data.token)
-        setData(res.data)
+        console.log(mensagem)
+        setData && setData(res.data)
     })
     .catch((error)=>{
         console.log(error.response)
+    })
+}
+
+export const getRequest = async (url, setData)=>{
+    axios.get(baseUrl+url)
+    .then((res)=>{
+        setData(res.data)
+    })
+    .catch((err)=>{
+        console.log(err.response)
     })
 }

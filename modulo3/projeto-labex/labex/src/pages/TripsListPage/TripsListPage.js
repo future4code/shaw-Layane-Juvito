@@ -1,16 +1,15 @@
 import { TripsListPageContainer, CardTest, CardContainer, ImageContainer, InfoText, CardInfo, Button } from './styled'
 import Header from '../../components/Header/Header'
 import useGet from '../../services/hooks/useGet'
-import { navigateHome } from '../../routes/coordinator'
-import { Link } from 'react-router-dom'
+import { navigateHome, navigateApplication, navigateAdmin } from '../../routes/coordinator'
 import Footer from '../../components/Footer/Footer'
-// import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
+import Loader from '../../components/Loader/Loader'
+
 
 const TripsListPage = () => {
-  // const [show, setShow] = useState(false)
-  // const navigate = useNavigate()
-  // let location = useLocation();
-  // let state = location.state as { backgroundLocation: Location };
+
+  const navigate = useNavigate()
 
   const trips = useGet(`trips`)
 
@@ -29,14 +28,8 @@ const TripsListPage = () => {
             <p><span>Duração: </span>{item.durationInDays} dias</p>
             <p><span>Data: </span>{item.date}</p>
           </InfoText>
-          <Link
-            key={item.id}
-            to={`/trips/application`}
-          >
-          <Button>Inscrever-se</Button> 
-          {/* função do button: onClick={()=>navigateApplication(navigate)} */}
-          </Link>
-          
+        
+          <Button onClick={()=>navigateApplication(navigate)}>Inscrever-se</Button> 
         </CardInfo>
       </CardTest>
     )
@@ -46,13 +39,14 @@ const TripsListPage = () => {
   return (
     <>
       <Header
-        firstButton={
+       secondButton = {
           {
-            contentText: '',
-            function: '',
+            contentText: 'Área adminstrativa',
+            function: navigateAdmin,
           }
         }
-        secondButton={
+
+       firstButton = {
           {
             contentText: 'Início',
             function: navigateHome,
@@ -60,10 +54,14 @@ const TripsListPage = () => {
         }
       />
       <TripsListPageContainer>
-        <input placeholder={'Buscar Viagem'} />
-        <CardContainer>
-          {tripsList}
-        </CardContainer>
+        {/* <input placeholder={'Buscar Viagem'} /> */}
+        { trips.trips ?
+          <CardContainer>
+            {tripsList}
+          </CardContainer>
+          :
+          <Loader />
+        }
 
       </TripsListPageContainer>
       <Footer />

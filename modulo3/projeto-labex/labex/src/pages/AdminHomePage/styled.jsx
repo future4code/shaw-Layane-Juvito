@@ -7,6 +7,7 @@ export const AdiminHomePageContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px;
     
 `
 export const TripsListContainer = styled.div`
@@ -44,15 +45,18 @@ export const CardContainer = styled.div`
         text-align: center;
         padding: 5px;
     }
-    button{
+    span{
         cursor: pointer;
         height: 10%;
         border-radius: 10px;
         border:none;
-        width: 30%;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        color:white;
         align-self: end;
+        font-size: 1.3rem;
         :hover{
-            background-color: #18F2A4;
+            color: #18F2A4;
         }
     }
 

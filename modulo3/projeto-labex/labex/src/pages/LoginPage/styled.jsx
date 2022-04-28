@@ -8,7 +8,7 @@ export const LoginPageContainer = styled.div`
     align-items: center;
     justify-content: space-around;
 `
-export const FormContainer = styled.div`
+export const FormContainer = styled.form`
     height: 80%;
     display: flex;
     flex-direction: column;
