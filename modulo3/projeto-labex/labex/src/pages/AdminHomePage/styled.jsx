@@ -14,8 +14,8 @@ export const TripsListContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(4,auto);
     grid-template-rows:auto;
-    row-gap: 10px;
-    column-gap: 10px;
+    row-gap: 25px;
+    column-gap: 25px;
 `
 export const CardContainer = styled.div`
     width: 30vh;

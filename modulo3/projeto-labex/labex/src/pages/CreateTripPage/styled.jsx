@@ -60,7 +60,14 @@ export const BackButton = styled.div`
         font-size: 2rem;
         :hover{
             opacity: 60%;
-            box-shadow:1px 1px 2px black;
         }
     }
+`
+export const LoaderContainer = styled.div`
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #151414;
 `

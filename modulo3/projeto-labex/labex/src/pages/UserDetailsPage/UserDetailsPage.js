@@ -5,15 +5,17 @@ import Header from '../../components/Header/Header';
 import { useProtectedPage } from '../../services/hooks/useProtectedPage';
 import { decideCandidate } from '../../services/requests';
 import { UserDetailsPageContainer, Container, CandidateImage, Rigth, Left, ContainerInfos, ContainerButtons, LoaderContainer, BackButton } from './styled';
-import { navigateHome, navigateLogin } from '../../routes/coordinator';
+import { navigateHome, navigateTripDetail } from '../../routes/coordinator';
 import {TiArrowBack} from 'react-icons/ti'
 import Loader from '../../components/Loader/Loader';
 
 
 const UserDetailsPage = () => {
-  useProtectedPage()
+  const [logOut, setLogOut] = useState(false)
+  useProtectedPage(logOut)
   const [userInfo, setUserInfo] = useState()
   const navigate = useNavigate()
+  const [loading,setLoading] = useState(true)
 
   const pathParams = useParams()
 
@@ -22,31 +24,28 @@ const UserDetailsPage = () => {
     setUserInfo(JSON.parse(userInfo))
   }, [])
 
+  useEffect(()=>{
+    if(!loading){
+     navigateTripDetail(navigate, pathParams.tripId)
+    }
+  },[loading])
+
   const logout = () => {
     window.localStorage.clear('token')
-    navigateLogin(navigate)
+    setLogOut(true)
   }
 
-  const decide = ( candidateId ) => {
+  const decide = ( status ) => {
     const token = window.localStorage.getItem("token")
     const headers = {
       headers: {
         auth: token
       }
     }
-    decideCandidate(pathParams.tripId,pathParams.id, headers, true)
-    navigate(-1)
+    decideCandidate(pathParams.tripId,pathParams.id, headers, status, setLoading)
+    
   }
-  const deny = () => {
-    const token = window.localStorage.getItem("token")
-    const headers = {
-      headers: {
-        auth: token
-      }
-    }
-    decideCandidate(pathParams.tripId,pathParams.id, headers, false)
-    navigate(-1)
-  }
+
   const userDetail = () => {
     if(userInfo){
       const data = userInfo.name.split(',')
@@ -67,8 +66,8 @@ const UserDetailsPage = () => {
             </Rigth>
           </ContainerInfos>
           <ContainerButtons>
-            <button onClick={()=>decide(userInfo.id)} >Aprovar</button>
-            <button onClick={deny}>Reprovar</button>
+            <button onClick={()=>decide(true)} >Aprovar</button>
+            <button onClick={()=>decide(false)}>Reprovar</button>
           </ContainerButtons>
         </Container>
       )
@@ -95,7 +94,7 @@ const UserDetailsPage = () => {
 
       <UserDetailsPageContainer>
         <BackButton>
-          <span onClick={() => { navigate(-1) }}><TiArrowBack /></span>
+          <span onClick={() => { navigateTripDetail(navigate, pathParams.tripId) }}><TiArrowBack /></span>
         </BackButton>
         {userDetail()}
       </UserDetailsPageContainer>

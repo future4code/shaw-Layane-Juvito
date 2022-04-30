@@ -8,6 +8,7 @@ export const HeaderContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 5px;
+    color: white;
     img{
         cursor: pointer;
         height: 100%;

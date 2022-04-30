@@ -152,7 +152,6 @@ export const BackButton = styled.div`
         font-size: 2rem;
         :hover{
             opacity: 60%;
-            box-shadow:1px 1px 2px black;
         }
     }
 `

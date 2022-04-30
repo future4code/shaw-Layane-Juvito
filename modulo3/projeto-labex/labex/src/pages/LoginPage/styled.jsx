@@ -44,3 +44,11 @@ export const FormContainer = styled.form`
         
     }
 `
+export const LoaderContainer = styled.div`
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #151414;
+`

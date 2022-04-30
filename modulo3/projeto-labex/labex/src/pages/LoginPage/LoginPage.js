@@ -1,38 +1,40 @@
 import Header from '../../components/Header/Header'
 import rocket from '../../assets/astroRocket.png'
-import {FormContainer, LoginPageContainer} from './styled'
+import { FormContainer, LoginPageContainer, LoaderContainer } from './styled'
 import { useEffect, useState } from 'react'
 import { postRequest } from '../../services/requests'
 import { navigateHome } from '../../routes/coordinator'
 import Footer from '../../components/Footer/Footer'
 import { useNavigate } from 'react-router-dom'
 import { navigateAdmin } from '../../routes/coordinator'
+import Loader from '../../components/Loader/Loader'
 
 const LoginPage = () => {
   const [token, setToken] = useState('')
   const [data, setData] = useState('')
+  const [loading, setLoading] = useState(false)
   const [form, setForm] = useState({
-    email:'',
-    password:''
+    email: '',
+    password: ''
   })
 
   const navigate = useNavigate()
 
-  
+
   const onChangeInput = (event) => {
-    const {name, value} = event.target
-    setForm({...form, [name]:value})
+    const { name, value } = event.target
+    setForm({ ...form, [name]: value })
   }
 
-  useEffect (()=>{
+  useEffect(() => {
     window.localStorage.setItem('token', token)
     data.success && navigateAdmin(navigate)
   }, [token])
 
-  useEffect (()=>{
+  useEffect(() => {
     data.success && setToken(data.token)
   }, [data])
-  
+
   const login = (event) => {
     event.preventDefault()
     const headers = {
@@ -40,56 +42,64 @@ const LoginPage = () => {
         "Content-Type": "application/json"
       }
     }
-    postRequest('login', form, headers, 'logado', setData)
+    postRequest('login', form, headers, 'Usuário logado com sucesso!', setData, setLoading)
     setForm({
-      email:'',
-      password:''
-    }) 
+      email: '',
+      password: ''
+    })
   }
-  
-    return (
-      <>
-        <Header 
-          firstButton={
-            {
-              contentText: '',
-              function: ''
-            }
+
+  return (
+    <>
+      <Header
+        firstButton={
+          {
+            contentText: '',
+            function: ''
           }
-          secondButton={
-            {
-              contentText: 'Início',
-              function: navigateHome
-            }
+        }
+        secondButton={
+          {
+            contentText: 'Início',
+            function: navigateHome
           }
-        />
+        }
+      />
+      {loading ?
+        <LoaderContainer>
+          <Loader />
+        </LoaderContainer>
+
+        :
+
         <LoginPageContainer>
           <FormContainer onSubmit={login}>
             <label>Acessar área Administrativa</label>
-            <input 
-              placeholder={'e-mail'} 
-              onChange = {onChangeInput} 
-              value = {form.email} 
-              type = {'email'}
-              name = {'email'}
+            <input
+              placeholder={'e-mail'}
+              onChange={onChangeInput}
+              value={form.email}
+              type={'email'}
+              name={'email'}
               required
             />
-            <input 
+            <input
               placeholder={'senha'}
-              onChange = {onChangeInput} 
-              value = {form.password} 
-              type = {'password'}
-              name = {'password'}
+              onChange={onChangeInput}
+              value={form.password}
+              type={'password'}
+              name={'password'}
               required
             />
             <button>Entrar</button>
           </FormContainer>
 
-          <img src = {rocket} alt = {'rocket'} />
+          <img src={rocket} alt={'rocket'} />
         </LoginPageContainer>
-        <Footer />
-      </>
-    );
-  }
-  
-  export default LoginPage;
+      }
+      <Footer />
+    </>
+  );
+}
+
+export default LoginPage;

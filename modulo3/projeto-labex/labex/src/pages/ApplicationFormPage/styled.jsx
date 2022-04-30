@@ -70,7 +70,14 @@ export const Back = styled.div`
         margin-left: 20px;
         :hover{
             opacity: 60%;
-            box-shadow:1px 1px 2px black;
         }
     }
+`
+export const LoaderContainer = styled.div`
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #151414;
 `

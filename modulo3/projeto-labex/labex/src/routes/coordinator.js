@@ -13,8 +13,8 @@ export const navigateTripDetail = (navigate,id) => {
 export const navigateCreateTrip = (navigate) => {
     navigate(`../admin/trips/create`)
 }
-export const navigateApplication = (navigate) => {
-    navigate(`../trips/application`)
+export const navigateApplication = (navigate,id) => {
+    navigate(`../trips/application/${id}`)
 }
 export const navigateUserdetail = (navigate, tripId, userId) => {
     navigate(`../admin/trips/${tripId}/candidate/${userId}`)

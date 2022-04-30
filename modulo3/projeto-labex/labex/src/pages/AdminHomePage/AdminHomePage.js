@@ -1,6 +1,6 @@
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header'
-import { navigateHome, navigateTripDetail, navigateCreateTrip, navigateLogin } from '../../routes/coordinator';
+import { navigateHome, navigateTripDetail, navigateCreateTrip } from '../../routes/coordinator';
 import { AdiminHomePageContainer, CardContainer, TripsListContainer, CreateCardContainer } from './styled';
 import { useNavigate } from 'react-router-dom'
 import { useProtectedPage } from '../../services/hooks/useProtectedPage';
@@ -13,16 +13,19 @@ import {FaTrash} from 'react-icons/fa'
 
 const AdminHomePage = () => {
 
-  useProtectedPage()
-
-
+  
+  
   const navigate = useNavigate()
   const [trips, setTrips] = useState({})
-
+  const [logOut, setLogOut] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [del, setDel] = useState(false)
+  
+  useProtectedPage(logOut)
 
   const logout = () => {
     window.localStorage.clear('token')
-    navigateLogin(navigate)
+    setLogOut(true)
   }
 
   const deleteTrip = (id) => {
@@ -33,11 +36,12 @@ const AdminHomePage = () => {
       }
     }
 
-    deletetrip(id, headers)
+    deletetrip(id, headers, setDel)
+    
   }
   useEffect(() => {
-    getRequest(`trips`, setTrips)
-  }, [deleteTrip])
+    getRequest(`trips`, setTrips, setLoading)
+  }, [del])
 
   const tripsList = trips.trips && trips.trips.map((trip) => {
     const data = trip.name.split(',')
@@ -71,7 +75,7 @@ const AdminHomePage = () => {
         }
       />
       <AdiminHomePageContainer>
-        {trips.trips ?
+        {!loading ?
           <TripsListContainer>
             <CreateCardContainer onClick={() => navigateCreateTrip(navigate)}>
               Nova Viagem

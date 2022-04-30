@@ -11,5 +11,22 @@ export const FooterContainer = styled.div`
     color:white;
     padding-right: 20px;
     gap:20px;
-    font-size: 2rem;
+    
+    p{
+        text-align: center;
+        width:100% ;
+    }
+    div{
+        display: flex;
+        align-items: center;
+        
+        gap:20px;
+        a{
+            display: flex;
+            align-items: center;
+            text-decoration:none;
+            color:white;
+            font-size: 2rem;
+        }
+    }
 `

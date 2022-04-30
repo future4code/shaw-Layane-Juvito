@@ -29,7 +29,7 @@ const TripsListPage = () => {
             <p><span>Data: </span>{item.date}</p>
           </InfoText>
         
-          <Button onClick={()=>navigateApplication(navigate)}>Inscrever-se</Button> 
+          <Button onClick={()=>navigateApplication(navigate, item.id)}>Inscrever-se</Button> 
         </CardInfo>
       </CardTest>
     )

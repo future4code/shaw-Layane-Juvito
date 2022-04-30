@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 
-export const useProtectedPage = () => {
+export const useProtectedPage = (logout) => {
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -10,5 +10,5 @@ export const useProtectedPage = () => {
 
         !token && navigate('../login')
 
-    },[navigate])
+    },[navigate, logout])
 }

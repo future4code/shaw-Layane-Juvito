@@ -1,41 +1,40 @@
-import useGet from '../../services/hooks/useGet'
-import { navigateLogin, navigateHome, navigateUserdetail } from '../../routes/coordinator'
+import { navigateHome, navigateAdmin } from '../../routes/coordinator'
 import { useNavigate, useParams } from 'react-router-dom'
-import { TripDetailsPageContainer, TripImageContainer, TripContainer, InfoContainer, CandidatesContainer, ApprovedContainer, ConatinerInfos, CandidateImage, CandidateContainer, CandidateInfo, BackButton, LoaderContainer } from './styled'
+import { TripDetailsPageContainer, TripImageContainer, TripContainer, InfoContainer, CandidatesContainer, ApprovedContainer, ConatinerInfos, BackButton, LoaderContainer } from './styled'
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 import { useProtectedPage } from '../../services/hooks/useProtectedPage'
 import { TiArrowBack } from 'react-icons/ti'
 import Loader from '../../components/Loader/Loader'
+import { useEffect, useState } from 'react'
+import { getRequest } from '../../services/requests'
+import CardCandidate from '../../components/CardCandidate/CardCandidate'
 
 const TripDetailsPage = () => {
-
-  useProtectedPage()
-
+  const [logOut, setLogOut] = useState(false)
+  useProtectedPage(logOut)
+  const [tripDetails, setTripDetails] = useState({})
   const navigate = useNavigate()
   const pathParams = useParams()
+  const [loading, setLoading] = useState(true)
 
-  const token = window.localStorage.getItem("token")
-  const headers = {
-    headers: {
-      auth: token
+  useEffect(()=>{
+    const token = window.localStorage.getItem("token")
+    const headers = {
+      headers: {
+        auth: token
+      }
     }
-  }
-  const tripDetails = useGet(`trip/${pathParams.id}`, headers)
-
+    getRequest(`trip/${pathParams.id}`,setTripDetails, setLoading, headers)
+  },[])
 
   const logout = () => {
     window.localStorage.clear('token')
-    navigateLogin(navigate)
-  }
-
-  const goToUserDetail = (item) => {
-    window.localStorage.setItem('candidate', JSON.stringify(item))
-    navigateUserdetail(navigate,tripDetails.trip.id,item.id)
+    setLogOut(true)
   }
 
   const tripDetail = () => {
-    if (tripDetails.trip) {
+
       const data = tripDetails.trip.name.split(',')
       return (
         <TripContainer>
@@ -49,52 +48,10 @@ const TripDetailsPage = () => {
           </InfoContainer>
         </TripContainer>
       )
-    } else { return <p>carregando...</p> }
+
 
   }
-
-  const approved = () => {
-    let list
-    if (tripDetails.trip) {
-      !tripDetails.trip.approved.length > 0  ?
-        list = <p>Nenhum aprovado</p>
-        :
-        list = tripDetails.trip.approved.map((item) => {
-          const data = item.name.split(',')
-          return (
-            <CandidateContainer key={item.id}>
-            <CandidateImage image={data[1]} />
-            <CandidateInfo>
-              <p>{data[0]}</p>
-            </CandidateInfo>
-          </CandidateContainer>
-          )
-        })
-    } else { list = <></> }
-    return list
-  }
-  const candidates = () => {
-    let list
-    if (tripDetails.trip) {
-      tripDetails.trip.candidates.length > 0 ?
-        list = tripDetails.trip.candidates.map((item) => {
-          const data = item.name.split(',')
-          return (
-            <CandidateContainer key={item.id}>
-              <CandidateImage image={data[1]}></CandidateImage>
-              <CandidateInfo>
-                <p>{data[0]}</p>
-                <button onClick={()=>goToUserDetail(item)}>ver mais</button>
-              </CandidateInfo>
-            </CandidateContainer>
-          )
-        })
-        :
-        list = <p>Nenhum candidato</p>
-
-    } else { list = <></> }
-    return list
-  }
+  
   return (
     <>
       <Header
@@ -111,32 +68,36 @@ const TripDetailsPage = () => {
           }
         }
       />
+
       {
-        tripDetails.trip?
+        !loading?
 
       <TripDetailsPageContainer>
         <BackButton>
-          <span onClick={() => { navigate(-1) }}><TiArrowBack /></span>
+          <span onClick={() => { navigateAdmin(navigate) }}><TiArrowBack /></span>
         </BackButton>
         <div>
           {tripDetail()}
         </div>
         <ConatinerInfos>
           <ApprovedContainer>
-            <p>Candidatas(os) Aprovadas(os)</p>
+            <p>Candidatas(os) Aprovadas(os): {tripDetails.trip.approved.length }</p>
             <div>
-              {approved()}
+              {/* {approved()} */}
+              <CardCandidate candidates = {tripDetails.trip.approved} id = {tripDetails.trip.id} status={'approved'}/>
             </div>
           </ApprovedContainer>
+
           <CandidatesContainer>
-            <p>Candidatas(os) Pendentes</p>
+            <p>Candidatas(os) Pendentes: {tripDetails.trip.candidates.length }</p>
             <div>
-              {candidates()}
+             <CardCandidate candidates = {tripDetails.trip.candidates} id = {tripDetails.trip.id} status={'candidate'}/>
 
             </div>
           </CandidatesContainer>
         </ConatinerInfos>
-      </TripDetailsPageContainer>:
+      </TripDetailsPageContainer>
+      :
       <LoaderContainer>
         <Loader />
       </LoaderContainer>
