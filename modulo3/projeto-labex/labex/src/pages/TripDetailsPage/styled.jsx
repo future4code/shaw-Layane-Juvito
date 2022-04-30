@@ -8,8 +8,8 @@ export const TripDetailsPageContainer = styled.div`
     flex-direction: column;
     align-items: center;
     color:white;
-    padding: 20px;
-    gap:20px;
+    padding: 15px;
+    gap:10px;
 `
 
 export const TripImageContainer = styled.div`
