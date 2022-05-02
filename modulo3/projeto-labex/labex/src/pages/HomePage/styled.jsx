@@ -33,6 +33,6 @@ export const HomePageContainer = styled.div`
         }
     }
     img{
-        height: 50%;
+        height: 90%;
     }
 `
