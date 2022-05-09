@@ -2,16 +2,19 @@ import styled from 'styled-components'
 
 export const HeaderContainer = styled.div`
     display:flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: end;
     background-color: #EDEDED;
     width: 100vw;
     height: 8vh;
+    padding-right: 20px;
 ;
 
 `
 export const Logo = styled.div`
+    position: absolute;
+    top:center;
+    left:46vw;
     display: grid;
     grid-template-columns: repeat(2,auto);
     grid-template-rows: auto;

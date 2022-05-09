@@ -8,7 +8,7 @@ import FormControl from '@mui/material/FormControl'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material'
-import { LoginContainer,LogoContainer, Title, SubTitle, Hr, Logo, Orange, Gray, LightOrange, LightGray, MainContainer } from './style'
+import { LoginContainer,LogoContainer, Title, SubTitle, Hr, Logo, Orange, Gray, LightOrange, LightGray, MainContainer, LoaderContainer } from './style'
 import { GlobalContext } from '../../global/GlobalContext'
 import { useNavigate } from 'react-router-dom'
 import CircularProgress from '@mui/material/CircularProgress'
@@ -22,7 +22,7 @@ const LoginPage = () => {
     const { form, onChange } = useForm({
         password: '',
         email: '',
-      })
+    })
 
     const navigate = useNavigate()
 
@@ -77,10 +77,9 @@ const LoginPage = () => {
                             <SubTitle>O projeto de rede social da Labenu</SubTitle>
                         </LogoContainer>
                         <MainContainer>
-                            <Box component={"form"} onSubmit={handleButtonClick} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap:'10px', width:'80%'}}>
+                            <Box component={"form"} onSubmit={handleButtonClick} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap:'10px', width:'85%'}}>
                                 <TextField
                                     variant="outlined"
-                                    margin="normal"
                                     required
                                     fullWidth
                                     id="email"
@@ -123,6 +122,7 @@ const LoginPage = () => {
                                     />
                                 </FormControl>
                                 <FormControlLabel
+                                    
                                     control={
                                         <Checkbox 
                                             value={keepLogin}
@@ -162,9 +162,9 @@ const LoginPage = () => {
                         
                     </LoginContainer>
                     :
-                    <LoginContainer>
+                    <LoaderContainer>
                         <CircularProgress color="secondary" />
-                    </LoginContainer>
+                    </LoaderContainer>
             }
         </>
 

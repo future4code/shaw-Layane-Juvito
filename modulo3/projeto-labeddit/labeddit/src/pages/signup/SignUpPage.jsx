@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import OutlinedInput from '@mui/material/OutlinedInput'
@@ -8,40 +8,40 @@ import FormControl from '@mui/material/FormControl'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material'
-import { SignupContainer, TextContainer, MainContainer, TextDecoration, TextInfo } from './style'
+import { SignupContainer, TextContainer, MainContainer, TextDecoration, TextInfo, LoaderContainer } from './style'
 import { GlobalContext } from '../../global/GlobalContext'
 import { useNavigate } from 'react-router-dom'
 import CircularProgress from '@mui/material/CircularProgress'
 import Header from '../../components/header/Header'
+import { useForm } from '../../hooks/useForm'
 
 const SignUpPage = () => {
-    const [values, setValues] = React.useState({
+    const [values, setValues] = useState({
         showPassword: false,
-        postLogin: false
+        postLogin: false,
+        agree: false
     });
-    const [form, setForm] = React.useState({
+    const { form, onChange } = useForm({
+        username:'',
         password: '',
         email: '',
-    });
+      })
+
 
     const navigate = useNavigate()
 
-    const { states, setters, requests } = React.useContext(GlobalContext);
-    const { token, loading, keepLogin } = states
-    const { setToken, setkeepLogin } = setters
+    const { states, setters, requests } = useContext(GlobalContext);
+    const { token, loading} = states
+    const { setToken } = setters
     const { postRequest } = requests
 
-    React.useEffect(() => {
+    useEffect(() => {
         token && window.localStorage.setItem('token', token)
     }, [token])
 
-    React.useEffect(() => {
+    useEffect(() => {
         token && navigate('/feed')
     }, [loading])
-
-    const handleChange = (prop) => (event) => {
-        setForm({ ...form, [prop]: event.target.value });
-    };
 
     const handleClickShowPassword = () => {
         setValues({
@@ -61,17 +61,14 @@ const SignUpPage = () => {
                 "Content-Type": "application/json"
             }
         }
-        postRequest('users/login', form, headers, setToken)
-        setForm({
-            password: '',
-            email: '',
-        })
+        postRequest('users/signup', form, headers, setToken)
     }
-
-
     return (
         <>
-            <Header />
+            <Header 
+                buttonContent = {'Entrar'}
+                buttonClick = {()=>navigate('/login')}
+            />
             {
                 !loading ?
                     <SignupContainer>
@@ -81,25 +78,22 @@ const SignUpPage = () => {
 
                         <MainContainer>
 
-                            <Box component={"form"} onSubmit={handleButtonClick} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '10px', width: '80%' }}>
+                            <Box component={"form"} onSubmit={handleButtonClick} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap:'10px', width: '85%' }}>
 
                                 <TextField
                                     variant="outlined"
-                                    margin="normal"
                                     required
                                     fullWidth
-                                    id="name"
+                                    id="username"
                                     label="Nome"
-                                    name="name"
-                                    autoComplete="name"
+                                    name="username"
+                                    autoComplete="username"
                                     autoFocus
-                                    value={form.name}
-                                    onChange={handleChange('name')}
+                                    value={form.username}
+                                    onChange={onChange}
                                 />
-
                                 <TextField
                                     variant="outlined"
-                                    margin="normal"
                                     required
                                     fullWidth
                                     id="email"
@@ -108,7 +102,7 @@ const SignUpPage = () => {
                                     autoComplete="email"
                                     autoFocus
                                     value={form.email}
-                                    onChange={handleChange('email')}
+                                    onChange={onChange}
                                 />
 
 
@@ -121,8 +115,9 @@ const SignUpPage = () => {
                                     <OutlinedInput
                                         id="outlined-adornment-password"
                                         type={values.showPassword ? 'text' : 'password'}
+                                        name={'password'}
                                         value={form.password}
-                                        onChange={handleChange('password')}
+                                        onChange={onChange}
                                         endAdornment={
                                             <InputAdornment position="end">
                                                 <IconButton
@@ -145,9 +140,13 @@ const SignUpPage = () => {
                                 <FormControlLabel
                                     control={
                                         <Checkbox
-                                            value={keepLogin}
-                                            onChange={((event) => setkeepLogin(event.target.checked))}
+                                            value={values.agree}
+                                            onChange={((event) => setValues({
+                                                ...values,
+                                                agree: event.target.checked
+                                            }))}
                                             color="primary"
+                                            required
                                         />
                                     }
                                     label={
@@ -171,9 +170,9 @@ const SignUpPage = () => {
                         </MainContainer>
                     </SignupContainer>
                     :
-                    <SignupContainer>
+                    <LoaderContainer>
                         <CircularProgress color="secondary" />
-                    </SignupContainer>
+                    </LoaderContainer>
             }
         </>
     )

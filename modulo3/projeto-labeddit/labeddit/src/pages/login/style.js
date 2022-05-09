@@ -72,3 +72,10 @@ export const Hr = styled.div`
   background: linear-gradient(90deg, #FF6489 0%, #F9B24E 100%);
   height: 1px;
 `
+export const LoaderContainer = styled.div`
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 92vh;
+`

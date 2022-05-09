@@ -1,7 +1,8 @@
-import { Gray, LightGray, LightOrange, Orange, HeaderContainer, Logo } from "./style"
+import { Button } from '@mui/material'
+import { Gray, LightGray, LightOrange, Orange, HeaderContainer, Logo } from './style'
 
 
-const Header = () => {
+const Header = ({buttonContent, buttonClick}) => {
 
     return (
         <HeaderContainer>
@@ -12,6 +13,10 @@ const Header = () => {
                 <LightGray></LightGray>
 
             </Logo>
+
+            <Button onClick={buttonClick}>
+                {buttonContent}
+            </Button>
 
         </HeaderContainer>
     )
