@@ -7,10 +7,10 @@ import InputAdornment from '@mui/material/InputAdornment'
 import FormControl from '@mui/material/FormControl'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
-import { Button, Checkbox, FormControlLabel, Grid, TextField } from '@mui/material'
-import { LoginContainer } from './style'
+import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material'
+import { LoginContainer,LogoContainer, Title, SubTitle, Hr, Logo, Orange, Gray, LightOrange, LightGray } from './style'
 import { GlobalContext } from '../../global/GlobalContext'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import CircularProgress from '@mui/material/CircularProgress'
 
 const LoginPage = () => {
@@ -73,15 +73,24 @@ const LoginPage = () => {
             {
                 !loading ?
                     <LoginContainer>
-                        <h1>LabEddit</h1>
-                        <Box component={"form"} onSubmit={handleButtonClick} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap:'10px'}}>
+                        <LogoContainer>
+                            <Logo>
+                                <Orange></Orange>
+                                <Gray></Gray>
+                                <LightOrange></LightOrange>
+                                <LightGray></LightGray>
+                            </Logo>
+                            <Title>LabEddit</Title>
+                            <SubTitle>O projeto de rede social da Labenu</SubTitle>
+                        </LogoContainer>
+                        <Box component={"form"} onSubmit={handleButtonClick} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap:'10px', width:'80%'}}>
                             <TextField
                                 variant="outlined"
                                 margin="normal"
                                 required
                                 fullWidth
                                 id="email"
-                                label="Email Address"
+                                label="E-mail"
                                 name="email"
                                 autoComplete="email"
                                 autoFocus
@@ -93,14 +102,14 @@ const LoginPage = () => {
                             <FormControl 
                                 variant="outlined" 
                                 required
+                                fullWidth
                             >
-                                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                                <InputLabel htmlFor="outlined-adornment-password">Senha</InputLabel>
                                 <OutlinedInput
                                     id="outlined-adornment-password"
                                     type={values.showPassword ? 'text' : 'password'}
                                     value={form.password}
                                     onChange={handleChange('password')}
-
                                     endAdornment={
                                         <InputAdornment position="end">
                                             <IconButton
@@ -119,24 +128,36 @@ const LoginPage = () => {
                                 />
                             </FormControl>
                             <FormControlLabel
-                                control={<Checkbox value={keepLogin}
-                                onChange={((event)=>setkeepLogin(event.target.checked))} 
-                                color="primary" />}
+                                control={
+                                    <Checkbox 
+                                        value={keepLogin}
+                                        onChange={((event)=>setkeepLogin(event.target.checked))} 
+                                        color="primary" 
+                                    />
+                                }
                                 label="Remember me"
+                                
                             />
                             <Button
                                 type="submit"
+                                variant={'primary'}
                                 fullWidth
-                                variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
+                                sx={{ mb: 1}}
                             >
-                                Sign In
+                                Continuar
                             </Button>
-                            <Grid>
-                                <Link to="/signup" variant="body2">
-                                    {"Don't have an account? Sign up!"}
-                                </Link>
-                            </Grid>
+
+                            <Hr />
+
+                            <Button
+                                variant={'secondary'}
+                                fullWidth
+                                sx={{ mt: 1}}
+                                onClick = {() => navigate('/feed')}
+                            >
+                                Criar uma conta!
+                            </Button>
+                           
                         </Box>
                         
                     </LoginContainer>
