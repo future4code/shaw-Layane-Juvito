@@ -2,20 +2,25 @@ import styled from 'styled-components'
 
 export const LoginContainer = styled.div`
 
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display:grid;
+    justify-content: center; 
+    grid-template-rows: 42% 58%;
+    grid-template-columns: 100%;
     height: 100vh;
     width: 100vw;
-    gap:10%;
-
 `
 export const LogoContainer = styled.div`
     display:flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+`
+export const MainContainer = styled.div`
+    display:flex;
+    align-items: start;
+    justify-content: center;
+    width: 100%;
 
 `
 export const Logo = styled.div`

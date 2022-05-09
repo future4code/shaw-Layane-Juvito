@@ -8,20 +8,21 @@ import FormControl from '@mui/material/FormControl'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material'
-import { LoginContainer,LogoContainer, Title, SubTitle, Hr, Logo, Orange, Gray, LightOrange, LightGray } from './style'
+import { LoginContainer,LogoContainer, Title, SubTitle, Hr, Logo, Orange, Gray, LightOrange, LightGray, MainContainer } from './style'
 import { GlobalContext } from '../../global/GlobalContext'
 import { useNavigate } from 'react-router-dom'
 import CircularProgress from '@mui/material/CircularProgress'
+import { useForm } from '../../hooks/useForm'
 
 const LoginPage = () => {
     const [values, setValues] = React.useState({
-        showPassword: false,
-        postLogin: false
+        showPassword: false
     });
-    const [form, setForm] = React.useState({
+
+    const { form, onChange } = useForm({
         password: '',
         email: '',
-    });
+      })
 
     const navigate = useNavigate()
 
@@ -37,10 +38,6 @@ const LoginPage = () => {
     React.useEffect(() => {
         token && navigate('/feed')
     }, [loading])
-
-    const handleChange = (prop) => (event) => {
-        setForm({ ...form, [prop]: event.target.value });
-    };
 
     const handleClickShowPassword = () => {
         setValues({
@@ -61,10 +58,6 @@ const LoginPage = () => {
             }
         }
         postRequest('users/login', form, headers, setToken)
-        setForm({
-            password: '',
-            email: '',
-        })
     }
 
 
@@ -83,82 +76,89 @@ const LoginPage = () => {
                             <Title>LabEddit</Title>
                             <SubTitle>O projeto de rede social da Labenu</SubTitle>
                         </LogoContainer>
-                        <Box component={"form"} onSubmit={handleButtonClick} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap:'10px', width:'80%'}}>
-                            <TextField
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="email"
-                                label="E-mail"
-                                name="email"
-                                autoComplete="email"
-                                autoFocus
-                                value={form.email}
-                                onChange={handleChange('email')}
+                        <MainContainer>
+                            <Box component={"form"} onSubmit={handleButtonClick} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap:'10px', width:'80%'}}>
+                                <TextField
+                                    variant="outlined"
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    id="email"
+                                    label="E-mail"
+                                    name="email"
+                                    autoComplete="email"
+                                    autoFocus
+                                    value={form.email}
+                                    onChange={onChange}
 
-                            />
-
-                            <FormControl 
-                                variant="outlined" 
-                                required
-                                fullWidth
-                            >
-                                <InputLabel htmlFor="outlined-adornment-password">Senha</InputLabel>
-                                <OutlinedInput
-                                    id="outlined-adornment-password"
-                                    type={values.showPassword ? 'text' : 'password'}
-                                    value={form.password}
-                                    onChange={handleChange('password')}
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                onMouseDown={handleMouseDownPassword}
-                                                edge="end"
-                                            >
-                                                {values.showPassword
-                                                    ? <VisibilityOff />
-                                                    : <Visibility />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    }
-                                    label="Password"
                                 />
-                            </FormControl>
-                            <FormControlLabel
-                                control={
-                                    <Checkbox 
-                                        value={keepLogin}
-                                        onChange={((event)=>setkeepLogin(event.target.checked))} 
-                                        color="primary" 
+
+                                <FormControl 
+                                    variant="outlined" 
+                                    required
+                                    fullWidth
+                                >
+                                    <InputLabel htmlFor="outlined-adornment-password">Senha</InputLabel>
+                                    <OutlinedInput
+                                        id="outlined-adornment-password"
+                                        type={values.showPassword ? 'text' : 'password'}
+                                        value={form.password}
+                                        name="password"
+                                        onChange={onChange}
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}
+                                                    edge="end"
+                                                >
+                                                    {values.showPassword
+                                                        ? <VisibilityOff />
+                                                        : <Visibility />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                        label="Password"
                                     />
-                                }
-                                label="Remember me"
-                                
-                            />
-                            <Button
-                                type="submit"
-                                variant={'primary'}
-                                fullWidth
-                                sx={{ mb: 1}}
-                            >
-                                Continuar
-                            </Button>
+                                </FormControl>
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox 
+                                            value={keepLogin}
+                                            onChange={((event)=>setkeepLogin(event.target.checked))} 
+                                            color="primary" 
+                                        />
+                                    }
+                                    label={
+                                        <Box component="div" fontSize={14}>
+                                            Lembrar-me
+                                        </Box>
+                                    }
+                                    
+                                />
+                                <Button
+                                    type="submit"
+                                    variant={'primary'}
+                                    fullWidth
+                                    sx={{ mb: 1}}
+                                >
+                                    Continuar
+                                </Button>
 
-                            <Hr />
+                                <Hr />
 
-                            <Button
-                                variant={'secondary'}
-                                fullWidth
-                                sx={{ mt: 1}}
-                                onClick = {() => navigate('/feed')}
-                            >
-                                Criar uma conta!
-                            </Button>
-                           
-                        </Box>
+                                <Button
+                                    variant={'secondary'}
+                                    fullWidth
+                                    sx={{ mt: 1}}
+                                    onClick = {() => navigate('/signup')}
+                                >
+                                    Criar uma conta!
+                                </Button>
+                            
+                            </Box>
+                        </MainContainer>
                         
                     </LoginContainer>
                     :

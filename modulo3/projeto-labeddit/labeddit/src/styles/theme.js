@@ -37,7 +37,7 @@ const theme = createTheme({
           // aqui sobrescreve o default geral
           styleOverrides: {
             root: {
-              borderRadius: '27px',
+              borderRadius: '12px',
               padding:'8px'
             },
           },
