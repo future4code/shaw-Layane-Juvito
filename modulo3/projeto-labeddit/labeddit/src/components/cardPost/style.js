@@ -17,11 +17,17 @@ export const SendBy = styled.span`
     line-height: 16px;
 
 `
-export const BodyContainer = styled.p`
+export const BodyContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap:10px;
     padding: 18px 0px;
     font-weight: 400;
     font-size: 18px;
     line-height: 23px;
+`
+export const BodyText = styled.p`
+    font-size: 16px;
 `
 export const PostStatusContainer = styled.div`
     display:flex;
@@ -55,8 +61,9 @@ export const CommentsContainer = styled.div`
     
 `
 export const VoteUp = styled.span`
-
+    color: ${props => props.color === 1 ? 'green' : '#6F6F6F'};
+    /* color:green */
 `
 export const VoteDown = styled.span`
-
+color: ${props => props.color === -1 ? 'red' : '#6F6F6F'};
 `

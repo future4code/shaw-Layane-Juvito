@@ -1,7 +1,6 @@
 import { Button, CircularProgress, TextField } from '@mui/material'
 import { Box } from '@mui/system'
 import { useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import CardPost from '../../components/cardPost/CardPost'
 import Header from '../../components/header/Header'
 import { GlobalContext } from '../../global/GlobalContext'
@@ -18,21 +17,37 @@ const FeedPage = () => {
         body: ''
     })
     const [allPosts, setAllPosts] = useState([])
+    const [changeColor, setChangeColor] = useState(0)
     const { states, requests } = useContext(GlobalContext)
-    const { postRequest, getRequest } = requests
+    const { postRequest, getRequest, putRequest } = requests
     const { loading } = states
-
+    console.log(allPosts)
     useEffect(() => {
         getRequest('posts', setAllPosts)
-    }, [reload])
+    }, [reload, changeColor])
 
     useProtectedPage(logout)
 
+    const votePostUp = (id) => {
+        const body = {
+            direction: 1
+        }
+        postRequest(`posts/${id}/votes`, body, null, null, getRequest('posts', setAllPosts))
+    }
+    const votePostDown = (id) => {
+        const body = {
+            direction: -1
+        }
+        putRequest(`posts/${id}/votes`, body, null, null, getRequest('posts', setAllPosts))
+    }
+
+
     const createPost = (event) => {
         event.preventDefault()
-        postRequest('posts', form, null)
-        
+        postRequest('posts', form, null, setReload)
+        setReload(!reload)
     }
+
 
     const userLogout = () => {
         window.localStorage.clear('token')
@@ -58,7 +73,6 @@ const FeedPage = () => {
                             height: '80%',
 
                         }}
-                        autoComplete="off"
                         onSubmit={createPost}
                     >
                         <TextField
@@ -68,11 +82,10 @@ const FeedPage = () => {
                                 width: '100%',
                                 background: '#EDEDED',
                             }}
-                            // required
+                            required
                             fullWidth
                             id="title"
                             name="title"
-                            autoComplete="title"
                             autoFocus
                             value={form.title}
                             onChange={onChange}
@@ -80,7 +93,7 @@ const FeedPage = () => {
                         <TextField
                             label="Escreva seu post..."
                             multiline
-                            // required
+                            required
                             sx={{
                                 width: '100%',
                                 background: '#EDEDED',
@@ -113,7 +126,13 @@ const FeedPage = () => {
                         <CardsContainer>
                             {
                                 allPosts.map((item) => {
-                                    return <CardPost post={item} key={item.id} />
+                                    return <CardPost
+                                        key={item.id}
+                                        post={item}
+                                        voteUp={votePostUp}
+                                        voteDown={votePostDown}
+                                        showComments
+                                        showTitle />
                                 })
                             }
                         </CardsContainer>

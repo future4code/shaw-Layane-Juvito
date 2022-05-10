@@ -1,25 +1,52 @@
 import KeyboardDoubleArrowUpOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowUpOutlined'
 import KeyboardDoubleArrowDownOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowDownOutlined'
 import ChatBubbleOutlineSharpIcon from '@mui/icons-material/ChatBubbleOutlineSharp';
-import { BodyContainer, CardContainer, CommentsContainer, PostStatusContainer, SendBy, VoteDown, VotesContainer, VoteUp } from './style';
+import { BodyContainer, CardContainer, CommentsContainer, PostStatusContainer, SendBy, VoteDown, VotesContainer, VoteUp, BodyText } from './style';
+import { useState } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const CardPost = ({post}) => {
-    return(
+const CardPost = ({ post, voteUp, voteDown, showTitle, showBody, showComments }) => {
+
+    const navigate = useNavigate()
+
+    const goToPost = () => {
+        window.localStorage.setItem('post', JSON.stringify(post))
+        navigate(`/post/${post.id}`)
+    }
+    return (
         <CardContainer>
             <SendBy> Enviado por: {post.username} </SendBy>
-            <BodyContainer>{post.title}</BodyContainer>
+            <BodyContainer onClick={goToPost}>
+                {showTitle && <p>{post.title}</p>}
+                {showBody && <BodyText> {post.body} </BodyText>}
+            </BodyContainer>
+
             <PostStatusContainer>
                 <VotesContainer>
 
-                    <VoteUp><KeyboardDoubleArrowUpOutlinedIcon /></VoteUp>
+                    <VoteUp
+                        onClick={() => voteUp(post.id)} 
+                        color={post.userVote}
+                    >
+                        <KeyboardDoubleArrowUpOutlinedIcon />
+                    </VoteUp>
                     <span>{post.voteSum}</span>
-                    <VoteDown><KeyboardDoubleArrowDownOutlinedIcon /></VoteDown>
+                    <VoteDown
+                        onClick={() => voteDown(post.id)}
+                        color={post.userVote}
+                    >
+                        <KeyboardDoubleArrowDownOutlinedIcon />
+                    </VoteDown>
                 </VotesContainer>
-                <CommentsContainer>
-                    <span><ChatBubbleOutlineSharpIcon /></span>
-                    <span>{post.commentCount}</span>
+                {
+                    showComments && <CommentsContainer>
+                        <span onClick={goToPost}><ChatBubbleOutlineSharpIcon /></span>
+                        <span>{post.commentCount}</span>
 
-                </CommentsContainer>
+                    </CommentsContainer>
+                }
+
             </PostStatusContainer>
 
         </CardContainer>
