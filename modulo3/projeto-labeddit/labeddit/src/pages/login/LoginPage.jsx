@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import OutlinedInput from '@mui/material/OutlinedInput'
@@ -15,7 +15,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import { useForm } from '../../hooks/useForm'
 
 const LoginPage = () => {
-    const [values, setValues] = React.useState({
+    const [values, setValues] = useState({
         showPassword: false
     });
 
@@ -26,16 +26,16 @@ const LoginPage = () => {
 
     const navigate = useNavigate()
 
-    const { states, setters, requests } = React.useContext(GlobalContext);
+    const { states, setters, requests } = useContext(GlobalContext);
     const { token, loading, keepLogin } = states
     const { setToken, setkeepLogin } = setters
     const { postRequest } = requests
 
-    React.useEffect(() => {
+    useEffect(() => {
         token && window.localStorage.setItem('token', token)
     }, [token])
 
-    React.useEffect(() => {
+    useEffect(() => {
         token && navigate('/feed')
     }, [loading])
 

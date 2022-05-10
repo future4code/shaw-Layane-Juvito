@@ -3,7 +3,6 @@ import { Gray, LightGray, LightOrange, Orange, HeaderContainer, Logo } from './s
 
 
 const Header = ({buttonContent, buttonClick}) => {
-
     return (
         <HeaderContainer>
             <Logo>
