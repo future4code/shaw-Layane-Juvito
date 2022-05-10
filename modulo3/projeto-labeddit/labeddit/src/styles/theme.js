@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material/styles'
+import { fontWeight } from '@mui/system';
 
 const theme = createTheme({
     palette: {
@@ -32,7 +33,9 @@ const theme = createTheme({
           styleOverrides: {
             root: {
               borderRadius: '12px',
-              padding:'8px'
+              padding:'8px',
+              textTransform:'capitalize',
+              fontWeight:'700'
             },
           },
         }

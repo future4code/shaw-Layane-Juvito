@@ -15,11 +15,39 @@ export default function GlobalState(props) {
         getToken && setToken(getToken)
     }, [])
 
-    const postRequest = (endpoint,body, headers, setData) => {
+    const postRequest = (endpoint,body, header, setData) => {
+        let headers
+        const token =window.localStorage.getItem("token")
+
+        header ? headers = header : headers = {
+            headers: {
+                Authorization: token
+            }
+        }
         setLoading(true)
         axios.post(`${baseURL}/${endpoint}`, body, headers)
         .then((response)=>{
-            setData(response.data.token)
+            setData && setData(response.data.token)
+            setLoading(false)
+            console.log(response.data)
+        })
+        .catch((err)=>{
+            setLoading(false)
+            console.log(err.response.data)
+        })
+    }
+
+    const getRequest = (endpoint, setData) => {
+        const token =window.localStorage.getItem("token")
+        const headers = {
+            headers: {
+                Authorization: token
+            }
+        }
+        setLoading(true)
+        axios.get(`${baseURL}/${endpoint}`, headers)
+        .then((response)=>{
+            setData(response.data)
             setLoading(false)
         })
         .catch((err)=>{
@@ -30,7 +58,7 @@ export default function GlobalState(props) {
 
     const states = { token, loading, keepLogin }
     const setters = { setToken, setLoading, setkeepLogin }
-    const requests = {postRequest}
+    const requests = {postRequest, getRequest}
     return (
         <GlobalContext.Provider value={{ states, setters, requests }}>
             {props.children}
