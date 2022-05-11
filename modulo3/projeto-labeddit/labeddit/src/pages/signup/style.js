@@ -25,6 +25,14 @@ export const MainContainer = styled.div`
     align-items: start;
     justify-content: center;
     width: 100%;
+    @media screen and (min-device-width : 800px) and (max-device-width : 1024px) {
+        width: 70%;
+        margin:auto
+    }
+    @media screen and (min-device-width : 1025px){
+        width: 50%;
+        margin:auto
+    }
 
 `
 
