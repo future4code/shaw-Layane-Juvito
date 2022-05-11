@@ -1,4 +1,4 @@
-import { Button, CircularProgress, TextField } from '@mui/material'
+import { Button, CircularProgress, Pagination, TextField } from '@mui/material'
 import { Box } from '@mui/system'
 import { useContext, useEffect, useState } from 'react'
 import CardPost from '../../components/cardPost/CardPost'
@@ -17,34 +17,38 @@ const FeedPage = () => {
         body: ''
     })
     const [allPosts, setAllPosts] = useState([])
-    const [changeColor, setChangeColor] = useState(0)
     const { states, requests } = useContext(GlobalContext)
     const { getRequest, postRequest, putRequest, deleteRequest } = requests
     const { loading } = states
-    console.log(allPosts)
+    const [currentPage, setCurrentPage] = useState(1);
+
     useEffect(() => {
-        getRequest('posts', setAllPosts)
-    }, [reload, changeColor])
+        getRequest(`posts?page=${currentPage}`, setAllPosts)
+    }, [reload, currentPage])
 
     useProtectedPage(logout)
+
+    const handleChangePage = (event, value) => {
+        setCurrentPage(value);
+    };
 
     const votePostUp = (id, userVote) => {
         const body = {
             direction: 1
         }
         userVote ?
-        deleteRequest(`posts/${id}/votes`, body, null, null, getRequest('posts', setAllPosts))
-        :
-        postRequest(`posts/${id}/votes`, body, null, null, getRequest('posts', setAllPosts))
+            deleteRequest(`posts/${id}/votes`, body, null, null, getRequest('posts', setAllPosts))
+            :
+            postRequest(`posts/${id}/votes`, body, null, null, getRequest('posts', setAllPosts))
     }
     const votePostDown = (id, userVote) => {
         const body = {
             direction: -1
         }
         userVote ?
-        deleteRequest(`posts/${id}/votes`, body, null, null, getRequest('posts', setAllPosts))
-        :
-        postRequest(`posts/${id}/votes`, body, null, null, getRequest('posts', setAllPosts))
+            deleteRequest(`posts/${id}/votes`, body, null, null, getRequest('posts', setAllPosts))
+            :
+            postRequest(`posts/${id}/votes`, body, null, null, getRequest('posts', setAllPosts))
     }
 
 
@@ -121,6 +125,11 @@ const FeedPage = () => {
                         <Hr />
                     </Box>
                 </CreatePostArea>
+                <Pagination
+                    count={50}
+                    onChange={handleChangePage}
+                    page={currentPage}
+                />
                 {
                     loading ?
 

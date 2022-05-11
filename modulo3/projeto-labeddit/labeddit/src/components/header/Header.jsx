@@ -8,7 +8,7 @@ const Header = ({buttonContent, buttonClick, page}) => {
     const navigate = useNavigate()
     return (
         <HeaderContainer page={page}>
-            {page && <Button onClick={()=>navigate('/feed')}>
+            {page && <Button onClick={()=>navigate(-1)}>
                 <CloseSharpIcon />
             </Button>
             }
