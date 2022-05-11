@@ -8,6 +8,7 @@ export const MainContainer = styled.div`
     justify-content: center;
     align-items: center;
     gap:15px;
+    padding: 0 10px;
 `
 export const ErrorMessage = styled.p`
     text-align: center;

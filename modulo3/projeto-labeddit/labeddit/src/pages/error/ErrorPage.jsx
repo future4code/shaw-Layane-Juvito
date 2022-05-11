@@ -17,7 +17,7 @@ const ErrorPage = () => {
 
                 
                 <h4>Esta Página não está disponível</h4>
-                <ErrorMessage>O link pode não estar funcionando ou a Página pode ter <br/>  sido removida. Verifique se o link que você está tentando <br/> abrir está correto.</ErrorMessage>
+                <ErrorMessage>O link pode não estar funcionando ou <br/> a Página pode ter  sido removida. Verifique <br /> se o link que você está tentando <br/> abrir está correto.</ErrorMessage>
                 <Button onClick={()=>navigate(-1)}>
                     Voltar 
                 </Button>
