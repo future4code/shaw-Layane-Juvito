@@ -29,6 +29,9 @@ export const BodyContainer = styled.div`
 export const BodyText = styled.p`
     font-size: 16px;
 `
+export const TitleText = styled.p`
+    cursor: pointer;
+`
 export const PostStatusContainer = styled.div`
     width: 100%;
     display:flex;

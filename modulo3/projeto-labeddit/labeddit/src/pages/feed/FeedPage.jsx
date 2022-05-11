@@ -48,7 +48,7 @@ const FeedPage = () => {
         userVote ?
             deleteRequest(`posts/${id}/votes`, body, null, null, getRequest('posts', setAllPosts))
             :
-            postRequest(`posts/${id}/votes`, body, null, null, getRequest('posts', setAllPosts))
+            putRequest(`posts/${id}/votes`, body, null, null, getRequest('posts', setAllPosts))
     }
 
 

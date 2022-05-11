@@ -1,4 +1,4 @@
-import { Button, CircularProgress, TextField } from '@mui/material'
+import { Button, CircularProgress, Pagination, TextField } from '@mui/material'
 import { Box } from '@mui/system'
 import { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -22,17 +22,26 @@ const PostPage = () => {
     const { states, requests } = useContext(GlobalContext)
     const { getRequest, postRequest, putRequest, deleteRequest } = requests
     const { loading } = states
+    const [currentPage, setCurrentPage] = useState(1);
+    const [count, setCount] = useState(1)
 
     useEffect(() => {
-        getRequest(`posts/${params.id}/comments`, setAllComments)
-    }, [reload])
+        getRequest(`posts/${params.id}/comments?page=${currentPage}`, setAllComments)
+    }, [reload, currentPage])
 
-    useEffect(()=>{
-        const post = window.localStorage.getItem('post')
-        setCurrentPost(JSON.parse(post))
+    useEffect(() => {
+        let post = window.localStorage.getItem('post')
+        post = JSON.parse(post)
+        const count = Math.round(post.commentCount / 10);
+        setCount(count)
+        setCurrentPost(post)
     }, [])
 
     useProtectedPage(logout)
+
+    const handleChangePage = (event, value) => {
+        setCurrentPage(value);
+    };
 
     const voteCommentUp = (id, userVote) => {
         console.log(id)
@@ -40,21 +49,21 @@ const PostPage = () => {
             direction: 1
         }
         userVote ?
-        deleteRequest(`comments/${id}/votes`, body)
-        :
-        postRequest(`comments/${id}/votes`, body)
+            deleteRequest(`comments/${id}/votes`, body)
+            :
+            postRequest(`comments/${id}/votes`, body)
     }
     const voteCommentDown = (id, userVote) => {
         const body = {
             direction: -1
         }
         userVote ?
-        deleteRequest(`comments/${id}/votes`, body)
-        :
-        postRequest(`comments/${id}/votes`, body)
+            deleteRequest(`comments/${id}/votes`, body)
+            :
+            putRequest(`comments/${id}/votes`, body)
     }
 
-    const votePost = ( id, number) => {
+    const votePost = (id, number) => {
         const body = {
             direction: number
         }
@@ -72,7 +81,6 @@ const PostPage = () => {
         setLogout(true)
     }
 
-    // /posts
     return (
         <>
             <Header
@@ -90,20 +98,20 @@ const PostPage = () => {
                             gap: '10px',
                             width: '85%',
                             height: '80%',
-                            
+
                         }}
                         onSubmit={createComment}
-                        >
-                            {currentPost && <CardPost
-                                 key={2}
-                                 post={currentPost}
-                                 voteUp={votePost}
-                                 showBody = {true}
-                                 showTitle
-                                 showComments
+                    >
+                        {currentPost && <CardPost
+                            key={2}
+                            post={currentPost}
+                            voteUp={votePost}
+                            showBody={true}
+                            showTitle
+                            showComments
 
-                             />}
-                      
+                        />}
+
                         <TextField
                             label="Escreva seu comentário..."
                             multiline
@@ -129,6 +137,12 @@ const PostPage = () => {
                         <Hr />
                     </Box>
                 </CreatePostArea>
+
+                { count > 1 && <Pagination
+                    count={count}
+                    onChange={handleChangePage}
+                    page={currentPage}
+                />}
                 {
                     loading ?
 
