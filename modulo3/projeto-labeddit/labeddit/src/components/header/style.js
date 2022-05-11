@@ -3,11 +3,11 @@ import styled from 'styled-components'
 export const HeaderContainer = styled.div`
     display:flex;
     align-items: center;
-    justify-content: end;
+    justify-content: ${props => props.page ? 'space-between':'flex-end'};
     background-color: #EDEDED;
     width: 100vw;
     height: 8vh;
-    padding-right: 20px;
+    padding:0 20px;
 ;
 
 `
