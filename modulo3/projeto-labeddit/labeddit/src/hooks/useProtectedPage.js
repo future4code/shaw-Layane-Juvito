@@ -9,7 +9,7 @@ export const useProtectedPage = (logout) => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        const tokenNow = window.localStorage.getItem('token')
+        const tokenNow = window.sessionStorage.getItem('token')
         setToken(tokenNow)
         !tokenNow && navigate('/login')
 

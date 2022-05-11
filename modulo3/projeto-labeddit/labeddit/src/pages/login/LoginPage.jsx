@@ -27,12 +27,12 @@ const LoginPage = () => {
     const navigate = useNavigate()
 
     const { states, setters, requests } = useContext(GlobalContext);
-    const { token, loading, keepLogin } = states
-    const { setToken, setkeepLogin } = setters
+    const { token, loading } = states
+    const { setToken } = setters
     const { postRequest } = requests
 
-    useEffect(() => {
-        token && window.localStorage.setItem('token', token)
+    useEffect(() => {        
+        token && window.sessionStorage.setItem('token', token)
     }, [token])
 
     useEffect(() => {
@@ -58,6 +58,7 @@ const LoginPage = () => {
             }
         }
         postRequest('users/login', form, headers, setToken)
+        
     }
 
 
@@ -121,27 +122,12 @@ const LoginPage = () => {
                                         label="Password"
                                     />
                                 </FormControl>
-                                <FormControlLabel
-                                    
-                                    control={
-                                        <Checkbox 
-                                            value={keepLogin}
-                                            onChange={((event)=>setkeepLogin(event.target.checked))} 
-                                            color="primary" 
-                                        />
-                                    }
-                                    label={
-                                        <Box component="div" fontSize={14}>
-                                            Lembrar-me
-                                        </Box>
-                                    }
-                                    
-                                />
+                             
                                 <Button
                                     type="submit"
                                     variant={'primary'}
                                     fullWidth
-                                    sx={{ mb: 1}}
+                                    sx={{ mb: 1, mt: 1}}
                                 >
                                     Continuar
                                 </Button>

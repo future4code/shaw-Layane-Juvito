@@ -57,7 +57,7 @@ const FeedPage = () => {
 
 
     const userLogout = () => {
-        window.localStorage.clear('token')
+        window.sessionStorage.clear('token')
         setLogout(true)
     }
 

@@ -9,12 +9,13 @@ export default function GlobalState(props) {
     const [loading, setLoading] = useState(false)
     const [reloadData, setReloadData] = useState(false)
     const [token, setToken] = useState('')
-    const [keepLogin, setkeepLogin] = useState(false)
     const [currentPage, setCurrentPage] = useState(1);
     
+
     useEffect(() => {
-        const getToken = window.localStorage.getItem("token")
+        const getToken = window.sessionStorage.getItem("token")
         getToken && setToken(getToken)
+    
     }, [])
 
     useEffect(() => {
@@ -23,7 +24,7 @@ export default function GlobalState(props) {
 
     const postRequest = async (endpoint,body, header, setData) => {
         let headers
-        const token =window.localStorage.getItem("token")
+        const token =window.sessionStorage.getItem("token")
 
         header ? headers = header : headers = {
             headers: {
@@ -44,7 +45,7 @@ export default function GlobalState(props) {
     }
     const putRequest = async (endpoint,body, header, setData) => {
         let headers
-        const token =window.localStorage.getItem("token")
+        const token =window.sessionStorage.getItem("token")
 
         header ? headers = header : headers = {
             headers: {
@@ -65,7 +66,7 @@ export default function GlobalState(props) {
     }
 
     const getRequest = (endpoint, setData) => {
-        const token =window.localStorage.getItem("token")
+        const token =window.sessionStorage.getItem("token")
         const headers = {
             headers: {
                 Authorization: token
@@ -84,7 +85,7 @@ export default function GlobalState(props) {
     }
 
     const deleteRequest = async (endpoint, setData) => {
-        const token =window.localStorage.getItem("token")
+        const token =window.sessionStorage.getItem("token")
         const headers = {
             headers: {
                 Authorization: token
@@ -100,8 +101,8 @@ export default function GlobalState(props) {
         })
     }
 
-    const states = { allPosts, token, loading, reloadData, keepLogin, currentPage }
-    const setters = { setAllPosts, setToken, setLoading, setReloadData, setkeepLogin, setCurrentPage }
+    const states = { allPosts, token, loading, reloadData, currentPage }
+    const setters = { setAllPosts, setToken, setLoading, setReloadData, setCurrentPage }
     const requests = { getRequest, postRequest, putRequest, deleteRequest}
     return (
         <GlobalContext.Provider value={{ states, setters, requests }}>
