@@ -19,7 +19,7 @@ const FeedPage = () => {
     const [allPosts, setAllPosts] = useState([])
     const [changeColor, setChangeColor] = useState(0)
     const { states, requests } = useContext(GlobalContext)
-    const { postRequest, getRequest, putRequest } = requests
+    const { getRequest, postRequest, putRequest, deleteRequest } = requests
     const { loading } = states
     console.log(allPosts)
     useEffect(() => {
@@ -28,17 +28,23 @@ const FeedPage = () => {
 
     useProtectedPage(logout)
 
-    const votePostUp = (id) => {
+    const votePostUp = (id, userVote) => {
         const body = {
             direction: 1
         }
+        userVote ?
+        deleteRequest(`posts/${id}/votes`, body, null, null, getRequest('posts', setAllPosts))
+        :
         postRequest(`posts/${id}/votes`, body, null, null, getRequest('posts', setAllPosts))
     }
-    const votePostDown = (id) => {
+    const votePostDown = (id, userVote) => {
         const body = {
             direction: -1
         }
-        putRequest(`posts/${id}/votes`, body, null, null, getRequest('posts', setAllPosts))
+        userVote ?
+        deleteRequest(`posts/${id}/votes`, body, null, null, getRequest('posts', setAllPosts))
+        :
+        postRequest(`posts/${id}/votes`, body, null, null, getRequest('posts', setAllPosts))
     }
 
 

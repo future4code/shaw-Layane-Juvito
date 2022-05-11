@@ -79,9 +79,27 @@ export default function GlobalState(props) {
         })
     }
 
+    const deleteRequest = (endpoint, setData) => {
+        const token =window.localStorage.getItem("token")
+        const headers = {
+            headers: {
+                Authorization: token
+            }
+        }
+        setLoading(true)
+        axios.delete(`${baseURL}/${endpoint}`, headers)
+        .then((response)=>{
+            setLoading(false)
+        })
+        .catch((err)=>{
+            setLoading(false)
+            console.log(err.response.data)
+        })
+    }
+
     const states = { token, loading, keepLogin }
     const setters = { setToken, setLoading, setkeepLogin }
-    const requests = { getRequest, postRequest, putRequest}
+    const requests = { getRequest, postRequest, putRequest, deleteRequest}
     return (
         <GlobalContext.Provider value={{ states, setters, requests }}>
             {props.children}

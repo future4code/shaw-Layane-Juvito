@@ -19,14 +19,13 @@ const PostPage = () => {
     })
     const [currentPost, setCurrentPost] = useState({})
     const [allComments, setAllComments] = useState([])
-    const [changeColor, setChangeColor] = useState(0)
     const { states, requests } = useContext(GlobalContext)
-    const { postRequest, getRequest, putRequest } = requests
+    const { getRequest, postRequest, putRequest, deleteRequest } = requests
     const { loading } = states
 
     useEffect(() => {
         getRequest(`posts/${params.id}/comments`, setAllComments)
-    }, [reload, changeColor])
+    }, [reload])
 
     useEffect(()=>{
         const post = window.localStorage.getItem('post')
@@ -35,17 +34,24 @@ const PostPage = () => {
 
     useProtectedPage(logout)
 
-    const voteCommentUp = (id) => {
+    const voteCommentUp = (id, userVote) => {
+        console.log(id)
         const body = {
             direction: 1
         }
-        postRequest(`posts/${id}/votes`, body, null, null, getRequest(`posts/${params.id}/comments`, setAllComments))
+        userVote ?
+        deleteRequest(`comments/${id}/votes`, body)
+        :
+        postRequest(`comments/${id}/votes`, body)
     }
-    const voteCommentDown = (id) => {
+    const voteCommentDown = (id, userVote) => {
         const body = {
             direction: -1
         }
-        putRequest(`posts/${id}/votes`, body, null, null, getRequest(`posts/${params.id}/comments`, setAllComments))
+        userVote ?
+        deleteRequest(`comments/${id}/votes`, body)
+        :
+        postRequest(`comments/${id}/votes`, body)
     }
 
     const votePost = ( id, number) => {
@@ -72,6 +78,7 @@ const PostPage = () => {
             <Header
                 buttonContent={'Sair'}
                 buttonClick={() => userLogout()}
+                page={'post'}
             />
             <MainContainer>
                 <CreatePostArea>
@@ -90,7 +97,7 @@ const PostPage = () => {
                             {currentPost && <CardPost
                                  key={2}
                                  post={currentPost}
-                                 votePost={votePost}
+                                 voteUp={votePost}
                                  showBody = {true}
                                  showTitle
                                  showComments

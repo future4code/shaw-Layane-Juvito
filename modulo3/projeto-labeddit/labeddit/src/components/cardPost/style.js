@@ -30,9 +30,12 @@ export const BodyText = styled.p`
     font-size: 16px;
 `
 export const PostStatusContainer = styled.div`
+    width: 100%;
     display:flex;
-    gap:11px
+    align-items: center;
+    gap:11px;
 `
+
 export const VotesContainer = styled.div`
     min-width:98px;
     display: flex;
@@ -60,10 +63,18 @@ export const CommentsContainer = styled.div`
     color:#6F6F6F;
     
 `
-export const VoteUp = styled.span`
-    color: ${props => props.color === 1 ? 'green' : '#6F6F6F'};
-    /* color:green */
+export const CommentButton = styled.span`
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
+export const VoteUp = styled.span`
+    cursor: pointer;
+    color: ${props => props.color === 1 ? 'green' : '#6F6F6F'};
+`
+
 export const VoteDown = styled.span`
-color: ${props => props.color === -1 ? 'red' : '#6F6F6F'};
+    cursor: pointer;
+    color: ${props => props.color === -1 ? 'red' : '#6F6F6F'};
 `
