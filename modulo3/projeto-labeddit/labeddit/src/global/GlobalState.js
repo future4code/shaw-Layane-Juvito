@@ -15,14 +15,8 @@ export default function GlobalState(props) {
 
     useEffect(() => {
         const getToken = window.sessionStorage.getItem("token")
-        getToken && setToken(getToken)
-    
-    }, [])
-
-    useEffect(() => {
-        getRequest(`posts?page=${currentPage}`, setAllPosts)
+        getToken && getRequest(`posts?page=${currentPage}`, setAllPosts)
     }, [currentPage, reloadData])
-
   
     const postRequest = async (endpoint,body, header, setData, setError) => {
         let headers
@@ -46,11 +40,12 @@ export default function GlobalState(props) {
             setError &&  setError.setMessageError(err.response.data)
         })
     }
-    const putRequest = async (endpoint,body, header) => {
-        let headers
+
+    const putRequest = async (endpoint,body) => {
+       
         const token =window.sessionStorage.getItem("token")
 
-        header ? headers = header : headers = {
+        let headers = {
             headers: {
                 Authorization: token
             }
@@ -105,6 +100,7 @@ export default function GlobalState(props) {
     const states = { allPosts, token, loading, reloadData, currentPage }
     const setters = { setAllPosts, setToken, setLoading, setReloadData, setCurrentPage }
     const requests = { getRequest, postRequest, putRequest, deleteRequest}
+    
     return (
         <GlobalContext.Provider value={{ states, setters, requests }}>
             {props.children}

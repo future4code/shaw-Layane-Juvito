@@ -7,7 +7,7 @@ import InputAdornment from '@mui/material/InputAdornment'
 import FormControl from '@mui/material/FormControl'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
-import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material'
+import { Alert, Button, Checkbox, FormControlLabel, Snackbar, TextField } from '@mui/material'
 import { SignupContainer, TextContainer, MainContainer, TextDecoration, TextInfo, LoaderContainer } from './style'
 import { GlobalContext } from '../../global/GlobalContext'
 import { useNavigate } from 'react-router-dom'
@@ -27,6 +27,14 @@ const SignUpPage = () => {
         email: '',
       })
 
+      const [open, setOpen] = useState(false)
+      const [messageError, setMessageError] = useState('')
+      const handleClose = (event, reason) => {
+          if (reason === 'clickaway') {
+              return;
+          }
+          setOpen(false);
+      };
 
     const navigate = useNavigate()
 
@@ -36,7 +44,7 @@ const SignUpPage = () => {
     const { postRequest } = requests
 
     useEffect(() => {
-        token && window.localStorage.setItem('token', token)
+        token && window.sessionStorage.setItem('token', token)
     }, [token])
 
     useEffect(() => {
@@ -61,7 +69,7 @@ const SignUpPage = () => {
                 "Content-Type": "application/json"
             }
         }
-        postRequest('users/signup', form, headers, setToken)
+        postRequest('users/signup', form, headers, setToken, {setOpen,setMessageError})
     }
     return (
         <>
@@ -168,7 +176,17 @@ const SignUpPage = () => {
                                 </Button>
 
                             </Box>
-
+                            <Snackbar 
+                                open={open} 
+                                autoHideDuration={6000} 
+                                onClose={handleClose}
+                                anchorOrigin={{ vertical:'top', horizontal:'center' }}
+                                key={'top' + 'center'}
+                            >
+                                <Alert onClose={handleClose} severity="warning" sx={{ width: '50%' }}>
+                                    {messageError}
+                                </Alert>
+                            </Snackbar>
                         </MainContainer>
                     </SignupContainer>
                     :
