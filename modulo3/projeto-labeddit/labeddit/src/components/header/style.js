@@ -5,7 +5,7 @@ export const HeaderContainer = styled.div`
     align-items: center;
     justify-content: ${props => props.page ? 'space-between':'flex-end'};
     background-color: #EDEDED;
-    width: 100vw;
+    max-width: 100vw;
     height: 8vh;
     padding:0 20px;
 ;
@@ -18,6 +18,12 @@ export const Logo = styled.div`
     display: grid;
     grid-template-columns: repeat(2,auto);
     grid-template-rows: auto;
+    @media screen and (min-device-width : 800px) and (max-device-width : 1024px) {
+        left:47vw;
+    }
+    @media screen and (min-device-width : 1025px){
+        left:48vw;
+    }
 
 `
 export const Orange = styled.div`

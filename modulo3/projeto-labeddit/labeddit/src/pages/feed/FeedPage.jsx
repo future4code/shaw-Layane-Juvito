@@ -1,6 +1,6 @@
 import { Button, CircularProgress, Pagination, TextField } from '@mui/material'
 import { Box } from '@mui/system'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import CardPost from '../../components/cardPost/CardPost'
 import Header from '../../components/header/Header'
 import { GlobalContext } from '../../global/GlobalContext'
@@ -20,8 +20,6 @@ const FeedPage = () => {
     const { postRequest, putRequest, deleteRequest } = requests
     const { allPosts, loading, currentPage } = states
     const { setCurrentPage } = setters
-
-    
 
     useProtectedPage(logout)
 

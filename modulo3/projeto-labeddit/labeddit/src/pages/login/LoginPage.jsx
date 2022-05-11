@@ -7,8 +7,8 @@ import InputAdornment from '@mui/material/InputAdornment'
 import FormControl from '@mui/material/FormControl'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
-import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material'
-import { LoginContainer,LogoContainer, Title, SubTitle, Hr, Logo, Orange, Gray, LightOrange, LightGray, MainContainer, LoaderContainer } from './style'
+import { Alert, Button, Snackbar, TextField } from '@mui/material'
+import { LoginContainer, LogoContainer, Title, SubTitle, Hr, Logo, Orange, Gray, LightOrange, LightGray, MainContainer, LoaderContainer } from './style'
 import { GlobalContext } from '../../global/GlobalContext'
 import { useNavigate } from 'react-router-dom'
 import CircularProgress from '@mui/material/CircularProgress'
@@ -23,15 +23,23 @@ const LoginPage = () => {
         password: '',
         email: '',
     })
+    const [open, setOpen] = useState(false)
+    const [messageError, setMessageError] = useState('')
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
 
     const navigate = useNavigate()
 
-    const { states, setters, requests } = useContext(GlobalContext);
+    const { states, setters, requests } = useContext(GlobalContext)
     const { token, loading } = states
     const { setToken } = setters
     const { postRequest } = requests
 
-    useEffect(() => {        
+    useEffect(() => {
         token && window.sessionStorage.setItem('token', token)
     }, [token])
 
@@ -57,8 +65,8 @@ const LoginPage = () => {
                 "Content-Type": "application/json"
             }
         }
-        postRequest('users/login', form, headers, setToken)
-        
+        postRequest('users/login', form, headers, setToken, {setOpen, setMessageError})
+
     }
 
 
@@ -78,7 +86,7 @@ const LoginPage = () => {
                             <SubTitle>O projeto de rede social da Labenu</SubTitle>
                         </LogoContainer>
                         <MainContainer>
-                            <Box component={"form"} onSubmit={handleButtonClick} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap:'10px', width:'85%'}}>
+                            <Box component={"form"} onSubmit={handleButtonClick} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '10px', width: '85%' }}>
                                 <TextField
                                     variant="outlined"
                                     required
@@ -86,6 +94,7 @@ const LoginPage = () => {
                                     id="email"
                                     label="E-mail"
                                     name="email"
+                                    type='email'
                                     autoComplete="email"
                                     autoFocus
                                     value={form.email}
@@ -93,8 +102,8 @@ const LoginPage = () => {
 
                                 />
 
-                                <FormControl 
-                                    variant="outlined" 
+                                <FormControl
+                                    variant="outlined"
                                     required
                                     fullWidth
                                 >
@@ -104,6 +113,7 @@ const LoginPage = () => {
                                         type={values.showPassword ? 'text' : 'password'}
                                         value={form.password}
                                         name="password"
+                                        inputProps={{ pattern: "^[a-zA-Z0-9\u00C0-\u00FF\.#@$%*& ]{8,30}$", title: "A senha deve ter entre 8 e 30 caracteres" }}
                                         onChange={onChange}
                                         endAdornment={
                                             <InputAdornment position="end">
@@ -122,12 +132,12 @@ const LoginPage = () => {
                                         label="Password"
                                     />
                                 </FormControl>
-                             
+
                                 <Button
                                     type="submit"
                                     variant={'primary'}
                                     fullWidth
-                                    sx={{ mb: 1, mt: 1}}
+                                    sx={{ mb: 1, mt: 1 }}
                                 >
                                     Continuar
                                 </Button>
@@ -137,15 +147,26 @@ const LoginPage = () => {
                                 <Button
                                     variant={'secondary'}
                                     fullWidth
-                                    sx={{ mt: 1}}
-                                    onClick = {() => navigate('/signup')}
+                                    sx={{ mt: 1 }}
+                                    onClick={() => navigate('/signup')}
                                 >
                                     Criar uma conta!
                                 </Button>
-                            
+
                             </Box>
+                            <Snackbar 
+                                open={open} 
+                                autoHideDuration={6000} 
+                                onClose={handleClose}
+                                anchorOrigin={{ vertical:'top', horizontal:'center' }}
+                                key={'top' + 'center'}
+                            >
+                                <Alert onClose={handleClose} severity="warning" sx={{ width: '50%' }}>
+                                    {messageError}
+                                </Alert>
+                            </Snackbar>
                         </MainContainer>
-                        
+
                     </LoginContainer>
                     :
                     <LoaderContainer>

@@ -1,13 +1,5 @@
 import styled from 'styled-components'
 
-export const LoginContainer = styled.div`
-    display:grid;
-    justify-content: center; 
-    grid-template-rows: 42% 58%;
-    grid-template-columns: 100%;
-    height: 100vh;
-    width: 100vw;
-`
 export const MainContainer = styled.div`
     display:flex;
     flex-direction: column;
@@ -15,7 +7,7 @@ export const MainContainer = styled.div`
     gap:36px;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    max-width: 100vw;
     @media screen and (min-device-width : 800px) and (max-device-width : 1024px) {
         width: 70%;
         margin:auto

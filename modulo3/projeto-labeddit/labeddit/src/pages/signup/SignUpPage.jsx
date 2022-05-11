@@ -98,6 +98,7 @@ const SignUpPage = () => {
                                     fullWidth
                                     id="email"
                                     label="E-mail"
+                                    type="email"
                                     name="email"
                                     autoComplete="email"
                                     autoFocus
@@ -110,6 +111,7 @@ const SignUpPage = () => {
                                     variant="outlined"
                                     required
                                     fullWidth
+                                    
                                 >
                                     <InputLabel htmlFor="outlined-adornment-password">Senha</InputLabel>
                                     <OutlinedInput
@@ -118,6 +120,7 @@ const SignUpPage = () => {
                                         name={'password'}
                                         value={form.password}
                                         onChange={onChange}
+                                        inputProps={{ pattern: "^[a-zA-Z0-9\u00C0-\u00FF\.#@$%*& ]{8,}$", title:"A senha deve ter ter entre 8 e 30 caracteres" }}
                                         endAdornment={
                                             <InputAdornment position="end">
                                                 <IconButton
@@ -146,7 +149,6 @@ const SignUpPage = () => {
                                                 agree: event.target.checked
                                             }))}
                                             color="primary"
-                                            required
                                         />
                                     }
                                     label={

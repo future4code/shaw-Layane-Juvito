@@ -4,6 +4,7 @@ import { GlobalContext } from './GlobalContext'
 import {baseURL} from '../constants/api'
 
 export default function GlobalState(props) {
+
     
     const [allPosts, setAllPosts] = useState([])
     const [loading, setLoading] = useState(false)
@@ -22,7 +23,8 @@ export default function GlobalState(props) {
         getRequest(`posts?page=${currentPage}`, setAllPosts)
     }, [currentPage, reloadData])
 
-    const postRequest = async (endpoint,body, header, setData) => {
+  
+    const postRequest = async (endpoint,body, header, setData, setError) => {
         let headers
         const token =window.sessionStorage.getItem("token")
 
@@ -40,10 +42,11 @@ export default function GlobalState(props) {
         })
         .catch((err)=>{
             setLoading(false)
-            console.log(err.response.data)
+            setError && setError.setOpen(true)
+            setError &&  setError.setMessageError(err.response.data)
         })
     }
-    const putRequest = async (endpoint,body, header, setData) => {
+    const putRequest = async (endpoint,body, header) => {
         let headers
         const token =window.sessionStorage.getItem("token")
 
@@ -55,7 +58,6 @@ export default function GlobalState(props) {
         setLoading(true)
         await axios.post(`${baseURL}/${endpoint}`, body, headers)
         .then((response)=>{
-            setData && setData(response.data.token)
             setLoading(false)
             setReloadData(!reloadData)
         })
@@ -78,13 +80,12 @@ export default function GlobalState(props) {
             setData(response.data)
             setLoading(false)
         })
-        .catch((err)=>{
+        .catch(()=>{
             setLoading(false)
-            console.log(err.response.data)
         })
     }
 
-    const deleteRequest = async (endpoint, setData) => {
+    const deleteRequest = async (endpoint) => {
         const token =window.sessionStorage.getItem("token")
         const headers = {
             headers: {

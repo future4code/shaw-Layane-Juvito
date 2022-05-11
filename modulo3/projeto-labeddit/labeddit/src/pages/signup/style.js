@@ -6,8 +6,8 @@ export const SignupContainer = styled.div`
     justify-content: center; 
     grid-template-rows: 34% 58%;
     grid-template-columns: 100%;
-    height: 100vh;
-    width: 100vw;
+    height: 92vh;
+    max-width: 100vw;
 
 `
 export const TextContainer = styled.div`
