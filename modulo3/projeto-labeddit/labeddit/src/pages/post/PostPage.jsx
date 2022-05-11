@@ -19,28 +19,37 @@ const PostPage = () => {
     })
     const [currentPost, setCurrentPost] = useState({})
     const [allComments, setAllComments] = useState([])
-    const { states, requests } = useContext(GlobalContext)
+    const { states, setters, requests } = useContext(GlobalContext)
     const { getRequest, postRequest, putRequest, deleteRequest } = requests
-    const { loading } = states
-    const [currentPage, setCurrentPage] = useState(1);
+    const { allPosts, loading, reloadData, currentPage } = states
+    const { setAllPosts } = setters
+    const [currentPageComments, setCurrentPageComments] = useState(1);
     const [count, setCount] = useState(1)
 
     useEffect(() => {
-        getRequest(`posts/${params.id}/comments?page=${currentPage}`, setAllComments)
-    }, [reload, currentPage])
-
-    useEffect(() => {
-        let post = window.localStorage.getItem('post')
-        post = JSON.parse(post)
-        const count = Math.round(post.commentCount / 10);
-        setCount(count)
-        setCurrentPost(post)
+       allPosts.length === 0 && getRequest(`posts?page=${currentPage}`, setAllPosts)
     }, [])
+    useEffect(() => {
+        getRequest(`posts/${params.id}/comments?page=${currentPageComments}`, setAllComments)
+    }, [reload, currentPageComments, reloadData])
+    
+    useEffect(() => {
+        let curPost
+        allPosts.forEach((post) => {
+            if (post.id === params.id) {
+                curPost = post
+            }
+        })
+        let count
+        allPosts.length > 0 ?  count = Math.round(curPost.commentCount / 10) : count = 1 ;
+        setCount(count)
+        setCurrentPost(curPost)
+    }, [allPosts])
 
     useProtectedPage(logout)
 
     const handleChangePage = (event, value) => {
-        setCurrentPage(value);
+        setCurrentPageComments(value);
     };
 
     const voteCommentUp = (id, userVote) => {
@@ -48,8 +57,8 @@ const PostPage = () => {
         const body = {
             direction: 1
         }
-        userVote ?
-            deleteRequest(`comments/${id}/votes`, body)
+        userVote===1 ?
+            deleteRequest(`comments/${id}/votes`)
             :
             postRequest(`comments/${id}/votes`, body)
     }
@@ -57,17 +66,30 @@ const PostPage = () => {
         const body = {
             direction: -1
         }
-        userVote ?
-            deleteRequest(`comments/${id}/votes`, body)
+        userVote=== -1 ?
+            deleteRequest(`comments/${id}/votes`)
             :
             putRequest(`comments/${id}/votes`, body)
     }
 
-    const votePost = (id, number) => {
+    const votePostUp = (id, userVote) => {
         const body = {
-            direction: number
+            direction: 1
         }
-        postRequest(`posts/${id}/votes`, body)
+        userVote===1 ?
+            deleteRequest(`posts/${id}/votes`)
+
+            :
+            postRequest(`posts/${id}/votes`, body)
+    }
+    const votePostDown = (id, userVote) => {
+        const body = {
+            direction: -1
+        }
+        userVote=== -1 ?
+            deleteRequest(`posts/${id}/votes`)
+            :
+            putRequest(`posts/${id}/votes`, body)
     }
 
     const createComment = (event) => {
@@ -105,7 +127,8 @@ const PostPage = () => {
                         {currentPost && <CardPost
                             key={2}
                             post={currentPost}
-                            voteUp={votePost}
+                            voteUp={votePostUp}
+                            voteDown={votePostDown}
                             showBody={true}
                             showTitle
                             showComments
@@ -138,10 +161,10 @@ const PostPage = () => {
                     </Box>
                 </CreatePostArea>
 
-                { count > 1 && <Pagination
+                {count > 1 && <Pagination
                     count={count}
                     onChange={handleChangePage}
-                    page={currentPage}
+                    page={currentPageComments}
                 />}
                 {
                     loading ?

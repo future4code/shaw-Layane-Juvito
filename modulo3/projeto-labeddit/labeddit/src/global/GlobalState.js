@@ -5,17 +5,23 @@ import {baseURL} from '../constants/api'
 
 export default function GlobalState(props) {
     
-    
+    const [allPosts, setAllPosts] = useState([])
     const [loading, setLoading] = useState(false)
+    const [reloadData, setReloadData] = useState(false)
     const [token, setToken] = useState('')
     const [keepLogin, setkeepLogin] = useState(false)
+    const [currentPage, setCurrentPage] = useState(1);
     
     useEffect(() => {
         const getToken = window.localStorage.getItem("token")
         getToken && setToken(getToken)
     }, [])
 
-    const postRequest = (endpoint,body, header, setData, functionOptional) => {
+    useEffect(() => {
+        getRequest(`posts?page=${currentPage}`, setAllPosts)
+    }, [currentPage, reloadData])
+
+    const postRequest = async (endpoint,body, header, setData) => {
         let headers
         const token =window.localStorage.getItem("token")
 
@@ -25,19 +31,18 @@ export default function GlobalState(props) {
             }
         }
         setLoading(true)
-        axios.post(`${baseURL}/${endpoint}`, body, headers)
+        await axios.post(`${baseURL}/${endpoint}`, body, headers)
         .then((response)=>{
             setData && setData(response.data.token)
-            functionOptional && functionOptional()
             setLoading(false)
-            console.log(response.data)
+            setReloadData(!reloadData)
         })
         .catch((err)=>{
             setLoading(false)
             console.log(err.response.data)
         })
     }
-    const putRequest = (endpoint,body, header, setData, functionOptional) => {
+    const putRequest = async (endpoint,body, header, setData) => {
         let headers
         const token =window.localStorage.getItem("token")
 
@@ -47,12 +52,11 @@ export default function GlobalState(props) {
             }
         }
         setLoading(true)
-        axios.post(`${baseURL}/${endpoint}`, body, headers)
+        await axios.post(`${baseURL}/${endpoint}`, body, headers)
         .then((response)=>{
             setData && setData(response.data.token)
-            functionOptional && functionOptional()
             setLoading(false)
-            console.log(response.data)
+            setReloadData(!reloadData)
         })
         .catch((err)=>{
             setLoading(false)
@@ -79,17 +83,16 @@ export default function GlobalState(props) {
         })
     }
 
-    const deleteRequest = (endpoint, setData) => {
+    const deleteRequest = async (endpoint, setData) => {
         const token =window.localStorage.getItem("token")
         const headers = {
             headers: {
                 Authorization: token
             }
         }
-        setLoading(true)
-        axios.delete(`${baseURL}/${endpoint}`, headers)
+        await axios.delete(`${baseURL}/${endpoint}`, headers)
         .then((response)=>{
-            setLoading(false)
+            setReloadData(!reloadData)
         })
         .catch((err)=>{
             setLoading(false)
@@ -97,8 +100,8 @@ export default function GlobalState(props) {
         })
     }
 
-    const states = { token, loading, keepLogin }
-    const setters = { setToken, setLoading, setkeepLogin }
+    const states = { allPosts, token, loading, reloadData, keepLogin, currentPage }
+    const setters = { setAllPosts, setToken, setLoading, setReloadData, setkeepLogin, setCurrentPage }
     const requests = { getRequest, postRequest, putRequest, deleteRequest}
     return (
         <GlobalContext.Provider value={{ states, setters, requests }}>

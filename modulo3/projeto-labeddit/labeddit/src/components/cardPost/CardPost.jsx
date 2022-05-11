@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom'
 
 const CardPost = ({ post, voteUp, voteDown, showTitle, showBody, showComments }) => {
     const navigate = useNavigate()
-
     const goToPost = () => {
         window.localStorage.setItem('post', JSON.stringify(post))
         navigate(`/post/${post.id}`)

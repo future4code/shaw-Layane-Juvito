@@ -25,12 +25,17 @@ export const BodyContainer = styled.div`
     font-weight: 400;
     font-size: 18px;
     line-height: 23px;
+    width: 100%;
 `
 export const BodyText = styled.p`
     font-size: 16px;
 `
 export const TitleText = styled.p`
     cursor: pointer;
+    width: 100%;
+    :hover{
+        color:#6F6F6F;
+    }
 `
 export const PostStatusContainer = styled.div`
     width: 100%;

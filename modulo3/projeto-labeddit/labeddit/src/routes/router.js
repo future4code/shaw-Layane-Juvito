@@ -10,6 +10,7 @@ const Router = () => {
     return(
         <BrowserRouter>
             <Routes>
+                <Route index element={<LoginPage />} />
                 <Route path='/login' element={<LoginPage />} />
                 <Route path='/signup' element={<SignUpPage />} />
                 <Route path='/feed' element={<FeedPage />} />

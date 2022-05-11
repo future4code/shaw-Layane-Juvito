@@ -11,20 +11,17 @@ import { CreatePostArea, Hr, MainContainer, CardsContainer, LoaderContainer } fr
 
 const FeedPage = () => {
     const [logout, setLogout] = useState(false)
-    const [reload, setReload] = useState(false)
     const { form, onChange } = useForm({
         title: '',
         body: ''
     })
-    const [allPosts, setAllPosts] = useState([])
-    const { states, requests } = useContext(GlobalContext)
-    const { getRequest, postRequest, putRequest, deleteRequest } = requests
-    const { loading } = states
-    const [currentPage, setCurrentPage] = useState(1);
 
-    useEffect(() => {
-        getRequest(`posts?page=${currentPage}`, setAllPosts)
-    }, [reload, currentPage])
+    const { states, setters,  requests } = useContext(GlobalContext)
+    const { postRequest, putRequest, deleteRequest } = requests
+    const { allPosts, loading, currentPage } = states
+    const { setCurrentPage } = setters
+
+    
 
     useProtectedPage(logout)
 
@@ -36,26 +33,26 @@ const FeedPage = () => {
         const body = {
             direction: 1
         }
-        userVote ?
-            deleteRequest(`posts/${id}/votes`, body, null, null, getRequest('posts', setAllPosts))
+        userVote === 1 ?
+            deleteRequest(`posts/${id}/votes`)
+           
             :
-            postRequest(`posts/${id}/votes`, body, null, null, getRequest('posts', setAllPosts))
+            postRequest(`posts/${id}/votes`, body)
     }
     const votePostDown = (id, userVote) => {
         const body = {
             direction: -1
         }
-        userVote ?
-            deleteRequest(`posts/${id}/votes`, body, null, null, getRequest('posts', setAllPosts))
-            :
-            putRequest(`posts/${id}/votes`, body, null, null, getRequest('posts', setAllPosts))
+        userVote === -1 ?
+            deleteRequest(`posts/${id}/votes`)
+        :
+            putRequest(`posts/${id}/votes`, body)
     }
 
 
     const createPost = (event) => {
         event.preventDefault()
-        postRequest('posts', form, null, setReload)
-        setReload(!reload)
+        postRequest('posts', form)
     }
 
 
@@ -64,7 +61,7 @@ const FeedPage = () => {
         setLogout(true)
     }
 
-    // /posts
+
     return (
         <>
             <Header
