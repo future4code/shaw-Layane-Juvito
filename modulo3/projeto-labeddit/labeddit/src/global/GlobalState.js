@@ -97,12 +97,19 @@ export default function GlobalState(props) {
         })
     }
 
+    const handleVote = (url, userVote, value) =>{
+        userVote === null && postRequest(url, { direction: value})
+        userVote === value && deleteRequest(url)
+        userVote !== value && putRequest(url,{ direction: value})
+    }
+
     const states = { allPosts, token, loading, reloadData, currentPage }
     const setters = { setAllPosts, setToken, setLoading, setReloadData, setCurrentPage }
     const requests = { getRequest, postRequest, putRequest, deleteRequest}
-    
+    const functions = {handleVote}
+
     return (
-        <GlobalContext.Provider value={{ states, setters, requests }}>
+        <GlobalContext.Provider value={{ states, setters, requests, functions }}>
             {props.children}
         </GlobalContext.Provider>
     )

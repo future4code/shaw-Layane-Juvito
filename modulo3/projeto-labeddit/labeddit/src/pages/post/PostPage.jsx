@@ -19,10 +19,12 @@ const PostPage = () => {
     })
     const [currentPost, setCurrentPost] = useState({})
     const [allComments, setAllComments] = useState([])
-    const { states, setters, requests } = useContext(GlobalContext)
-    const { getRequest, postRequest, putRequest, deleteRequest } = requests
+    const { states, setters, requests, functions } = useContext(GlobalContext)
+    const { getRequest, postRequest} = requests
     const { allPosts, loading, reloadData, currentPage } = states
     const { setAllPosts } = setters
+    const { handleVote } = functions
+
     const [currentPageComments, setCurrentPageComments] = useState(1);
     const [count, setCount] = useState(1)
 
@@ -51,46 +53,6 @@ const PostPage = () => {
     const handleChangePage = (event, value) => {
         setCurrentPageComments(value);
     };
-
-    const voteCommentUp = (id, userVote) => {
-        console.log(id)
-        const body = {
-            direction: 1
-        }
-        userVote===1 ?
-            deleteRequest(`comments/${id}/votes`)
-            :
-            postRequest(`comments/${id}/votes`, body)
-    }
-    const voteCommentDown = (id, userVote) => {
-        const body = {
-            direction: -1
-        }
-        userVote=== -1 ?
-            deleteRequest(`comments/${id}/votes`)
-            :
-            putRequest(`comments/${id}/votes`, body)
-    }
-
-    const votePostUp = (id, userVote) => {
-        const body = {
-            direction: 1
-        }
-        userVote===1 ?
-            deleteRequest(`posts/${id}/votes`)
-
-            :
-            postRequest(`posts/${id}/votes`, body)
-    }
-    const votePostDown = (id, userVote) => {
-        const body = {
-            direction: -1
-        }
-        userVote=== -1 ?
-            deleteRequest(`posts/${id}/votes`)
-            :
-            putRequest(`posts/${id}/votes`, body)
-    }
 
     const createComment = (event) => {
         event.preventDefault()
@@ -127,8 +89,8 @@ const PostPage = () => {
                         {currentPost && <CardPost
                             key={2}
                             post={currentPost}
-                            voteUp={votePostUp}
-                            voteDown={votePostDown}
+                            voteUp={() => handleVote(`posts/${currentPost.id}/votes`, currentPost.userVote, 1)}
+                            voteDown={() => handleVote(`posts/${currentPost.id}/votes`, currentPost.userVote, -1)}
                             showBody={true}
                             showTitle
                             showComments
@@ -180,8 +142,8 @@ const PostPage = () => {
                                     return <CardPost
                                         key={item.id}
                                         post={item}
-                                        voteUp={voteCommentUp}
-                                        voteDown={voteCommentDown}
+                                        voteUp={() => handleVote(`comments/${item.id}/votes`, item.userVote, 1)}
+                                        voteDown={() => handleVote(`comments/${item.id}/votes`, item.userVote, -1)}
                                         showBody
                                     />
                                 })

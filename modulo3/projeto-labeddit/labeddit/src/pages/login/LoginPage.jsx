@@ -99,7 +99,10 @@ const LoginPage = () => {
                                     autoFocus
                                     value={form.email}
                                     onChange={onChange}
-
+                                    inputProps={{ 
+                                        pattern: "[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$", 
+                                        title: "formato de e-mail inválido: nome@email.com" 
+                                    }}
                                 />
 
                                 <FormControl

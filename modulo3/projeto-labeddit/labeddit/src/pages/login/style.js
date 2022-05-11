@@ -42,7 +42,6 @@ export const Orange = styled.div`
     border-radius: 100% 0 0 0;
     height: 42px;
     width: 42px;
-
 `
 export const Gray = styled.div`
     background-color: #45525B;

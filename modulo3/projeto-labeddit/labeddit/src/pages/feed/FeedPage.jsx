@@ -16,10 +16,11 @@ const FeedPage = () => {
         body: ''
     })
 
-    const { states, setters,  requests } = useContext(GlobalContext)
-    const { postRequest, putRequest, deleteRequest } = requests
+    const { states, setters,  requests, functions } = useContext(GlobalContext)
+    const { postRequest } = requests
     const { allPosts, loading, currentPage } = states
     const { setCurrentPage } = setters
+    const { handleVote } = functions
 
     useProtectedPage(logout)
 
@@ -27,38 +28,15 @@ const FeedPage = () => {
         setCurrentPage(value);
     };
 
-    const votePostUp = (id, userVote) => {
-        const body = {
-            direction: 1
-        }
-        userVote === 1 ?
-            deleteRequest(`posts/${id}/votes`)
-           
-            :
-            postRequest(`posts/${id}/votes`, body)
-    }
-    const votePostDown = (id, userVote) => {
-        const body = {
-            direction: -1
-        }
-        userVote === -1 ?
-            deleteRequest(`posts/${id}/votes`)
-        :
-            putRequest(`posts/${id}/votes`, body)
-    }
-
-
     const createPost = (event) => {
         event.preventDefault()
         postRequest('posts', form)
     }
 
-
     const userLogout = () => {
         window.sessionStorage.clear('token')
         setLogout(true)
     }
-
 
     return (
         <>
@@ -139,8 +117,8 @@ const FeedPage = () => {
                                     return <CardPost
                                         key={item.id}
                                         post={item}
-                                        voteUp={votePostUp}
-                                        voteDown={votePostDown}
+                                        voteUp={() => handleVote(`posts/${item.id}/votes`, item.userVote, 1)}
+                                        voteDown={() => handleVote(`posts/${item.id}/votes`, item.userVote, -1)}
                                         showComments
                                         showTitle />
                                 })
