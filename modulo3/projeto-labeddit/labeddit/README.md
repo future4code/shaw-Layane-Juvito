@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+# 📄 LabEddit : Social bookmarks baseado no reedit
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### :dart: Objetivo do projeto
+Último projeto individual da trilha front-end do bootcamp de desenvolvimento web fullstack da Labenu.  Seu intuito é rever todos os conteúdos do curso de maneira prática e fazer uma aplicação completa. É importante destacar que esse é uma aplicação do tipo Mobile First.
 
-## Available Scripts
+### :small_blue_diamond: Os requisitos do projeto são:
+- **Login** 
+    * Ao efetuar o login, o usuário deve ser redirecionado para a página de feed
+    * Também devera ter um botão que leva a página de cadastro
+    *  O token deve ser salvo no LocalStorage
 
-In the project directory, you can run:
+- **Cadastro**
+    * Após cadastrar, o usuário deverá ser redirecionado para a página de feed
+    *  O token deve ser salvo no LocalStorage
 
-### `npm start`
+- **Feed**
+    *  Deve mostrar todos os posts
+    *  Deve permitir a criação de um novo post
+    *  Só pode ser acessada por usuários logados
+    *  Quando o usuário clicar em um post, ele deverá ser redirecionado para a página do respectivo post. 
+    * Quando um usuário clicar em votar (positiva ou negativamente), uma requisição deverá ser feita indicando a "direção" do voto. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Post**
+    *  Mostra as informações do post que foi clicado
+    *  Deve permitir a criação de comentários
+    *  Só pode ser acessada por usuários logados
+    *  Deve mostrar todos os comentários do post
+    *  Cada comentário também deverá ter a lógica dos votos
+   
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ✔️ Funcionalidades
+- Navegação entre as páginas utilizando o react-router-dom
+- Autenticação e Proteção das páginas privadas
+- Usuários não logados são redirecionados para a página de login
+- Pessoas autenticadas (logadas) conseguem acessar as páginas de feed e post
+- Loadings nas telas que fazem as requisições
+- Formulários com validações
+- A lógica dos votos nos post e comentários
+-  Realizar a votação ou a criação de um novo post ou comentário a lista com todos são atualizadas
+-  Paginação no feed e nos comentários
+- Botão de logout
+- Responsividade
 
-### `npm test`
+## :books: Bibliotecas utilizadas
+- [styled-components](https://styled-components.com/)
+- [axios](https://github.com/axios/axios)
+- [react-router-dom](https://v5.reactrouter.com/)
+- [material ui](https://mui.com/pt/)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🔗 Link Surge 
+[Acesse a página do LabEddit](https://labeddit-layaneb-shaw.surge.sh/)
 
-### `npm run build`
+##  :computer: DevaDiva
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+|[Layane Bastos](https://github.com/LayaneB) |
+| :---: |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 📷 Imagens
+#### MOBILE (Usando como modelo o iphone 12 Pro)
+![image](https://user-images.githubusercontent.com/50851374/167972947-1915e75a-78b5-42b6-9894-9a5e7b90a61c.png)
+![image](https://user-images.githubusercontent.com/50851374/167973002-cb92651c-fba4-4d96-83eb-5b9a1c808e8c.png)
+![image](https://user-images.githubusercontent.com/50851374/167974101-0df0359f-d3cd-468c-a470-3d786467516b.png)
+![image](https://user-images.githubusercontent.com/50851374/167974585-e23e73d7-334c-441a-bbeb-6b10df2946f5.png)
+![image](https://user-images.githubusercontent.com/50851374/167975206-b119c22f-7811-40c7-869f-9704b8278e29.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### DESKTOP
+![image](https://user-images.githubusercontent.com/50851374/167975059-68f26499-bf8d-4376-b9aa-522c9191a51b.png)
+![image](https://user-images.githubusercontent.com/50851374/167975100-5dbab007-1282-4be1-b00d-b04f415dc1eb.png)
+![image](https://user-images.githubusercontent.com/50851374/167975003-17d2cd81-4bbe-4631-836f-744848df5b70.png)
+![image](https://user-images.githubusercontent.com/50851374/167974946-58fea8d2-87b1-4f53-8583-65bf1f42599b.png)
+![image](https://user-images.githubusercontent.com/50851374/167975156-08993200-d493-4807-bb6b-4975abd52891.png)
