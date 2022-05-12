@@ -8,6 +8,7 @@ export const MainContainer = styled.div`
     justify-content: center;
     align-items: center;
     max-width: 100vw;
+    padding-bottom: 30px;
     @media screen and (min-device-width : 800px) and (max-device-width : 1024px) {
         width: 70%;
         margin:auto

@@ -43,7 +43,7 @@ const PostPage = () => {
             }
         })
         let count
-        allPosts.length > 0 ?  count = Math.round(curPost.commentCount / 10) : count = 1 ;
+        allPosts.length > 0 ?  count = Math.ceil(curPost.commentCount / 10) : count = 1 ;
         setCount(count)
         setCurrentPost(curPost)
     }, [allPosts])
