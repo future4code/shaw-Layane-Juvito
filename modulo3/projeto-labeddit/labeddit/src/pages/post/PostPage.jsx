@@ -13,8 +13,7 @@ import { CreatePostArea, Hr, MainContainer, CardsContainer, LoaderContainer } fr
 const PostPage = () => {
     const params = useParams()
     const [logout, setLogout] = useState(false)
-    const [reload, setReload] = useState(false)
-    const { form, onChange } = useForm({
+    const { form, onChange, cleanFields } = useForm({
         body: ''
     })
     const [currentPost, setCurrentPost] = useState({})
@@ -31,9 +30,10 @@ const PostPage = () => {
     useEffect(() => {
        allPosts.length === 0 && getRequest(`posts?page=${currentPage}`, setAllPosts)
     }, [])
+    
     useEffect(() => {
         getRequest(`posts/${params.id}/comments?page=${currentPageComments}`, setAllComments)
-    }, [reload, currentPageComments, reloadData])
+    }, [currentPageComments, reloadData])
     
     useEffect(() => {
         let curPost
@@ -56,8 +56,8 @@ const PostPage = () => {
 
     const createComment = (event) => {
         event.preventDefault()
-        postRequest(`posts/${params.id}/comments`, form, null, setReload)
-        setReload(!reload)
+        postRequest(`posts/${params.id}/comments`, form)
+        cleanFields()
     }
 
     const userLogout = () => {
@@ -73,7 +73,9 @@ const PostPage = () => {
                 page={'post'}
             />
             <MainContainer>
+
                 <CreatePostArea>
+
                     <Box
                         component="form"
                         sx={{
@@ -121,6 +123,7 @@ const PostPage = () => {
                         </Button>
                         <Hr />
                     </Box>
+
                 </CreatePostArea>
 
                 {count > 1 && <Pagination
@@ -128,6 +131,7 @@ const PostPage = () => {
                     onChange={handleChangePage}
                     page={currentPageComments}
                 />}
+
                 {
                     loading ?
 
@@ -150,6 +154,7 @@ const PostPage = () => {
                             }
                         </CardsContainer>
                 }
+
             </MainContainer>
         </>
     )

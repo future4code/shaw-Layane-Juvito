@@ -7,6 +7,7 @@ import SignUpPage from '../pages/signup/SignUpPage'
 
 
 const Router = () => {
+    
     return(
         <BrowserRouter>
             <Routes>

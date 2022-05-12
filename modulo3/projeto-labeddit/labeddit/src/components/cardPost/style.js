@@ -10,6 +10,7 @@ export const CardContainer = styled.div`
     border-radius: 12px;
     width: 100%;
 `
+
 export const SendBy = styled.span`
     color:#6F6F6F;
     font-weight: 400;
@@ -17,6 +18,7 @@ export const SendBy = styled.span`
     line-height: 16px;
 
 `
+
 export const BodyContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -27,9 +29,11 @@ export const BodyContainer = styled.div`
     line-height: 23px;
     width: 100%;
 `
+
 export const BodyText = styled.p`
     font-size: 16px;
 `
+
 export const TitleText = styled.p`
     cursor: pointer;
     width: 100%;
@@ -37,6 +41,7 @@ export const TitleText = styled.p`
         color:#6F6F6F;
     }
 `
+
 export const PostStatusContainer = styled.div`
     width: 100%;
     display:flex;
@@ -57,8 +62,8 @@ export const VotesContainer = styled.div`
     font-size: 9.56098px;
     font-weight: bold;
     color:#6F6F6F;
-
 `
+
 export const CommentsContainer = styled.div`
     min-width:65px;
     display: flex;
@@ -68,15 +73,16 @@ export const CommentsContainer = styled.div`
     border-radius: 28px;
     padding: 5px 10px;
     font-size: 9.56098px;
-    color:#6F6F6F;
-    
+    color:#6F6F6F; 
 `
+
 export const CommentButton = styled.span`
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
 `
+
 export const VoteUp = styled.span`
     cursor: pointer;
     color: ${props => props.color === 1 ? 'green' : '#6F6F6F'};

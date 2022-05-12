@@ -4,7 +4,6 @@ import { GlobalContext } from './GlobalContext'
 import {baseURL} from '../constants/api'
 
 export default function GlobalState(props) {
-
     
     const [allPosts, setAllPosts] = useState([])
     const [loading, setLoading] = useState(false)

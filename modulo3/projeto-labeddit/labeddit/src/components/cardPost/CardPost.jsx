@@ -7,19 +7,25 @@ import { useNavigate } from 'react-router-dom'
 
 
 const CardPost = ({ post, voteUp, voteDown, showTitle, showBody, showComments }) => {
+
     const navigate = useNavigate()
     const goToPost = () => {
         navigate(`/post/${post.id}`)
     }
+
     return (
+
         <CardContainer>
+
             <SendBy> Enviado por: {post.username} </SendBy>
+
             <BodyContainer >
                 {showTitle && <TitleText onClick={goToPost}>{post.title}</TitleText>}
                 {showBody && <BodyText> {post.body} </BodyText>}
             </BodyContainer>
 
             <PostStatusContainer>
+
                 <VotesContainer>
 
                     <VoteUp
@@ -28,22 +34,29 @@ const CardPost = ({ post, voteUp, voteDown, showTitle, showBody, showComments })
                     >
                         <KeyboardDoubleArrowUpOutlinedIcon />
                     </VoteUp>
+
                     <span>{post.voteSum}</span>
+
                     <VoteDown
                         onClick={() => voteDown(post.id, post.userVote)}
                         color={post.userVote}
                     >
                         <KeyboardDoubleArrowDownOutlinedIcon />
                     </VoteDown>
+
                 </VotesContainer>
+
                 {
                     showComments && <CommentsContainer>
-                        <CommentButton onClick={goToPost}><ChatBubbleOutlineSharpIcon /></CommentButton>
+
+                        <CommentButton onClick={goToPost}>
+                            <ChatBubbleOutlineSharpIcon />
+                        </CommentButton>
+
                         <span>{post.commentCount}</span>
 
                     </CommentsContainer>
                 }
-
 
             </PostStatusContainer>
 

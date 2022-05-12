@@ -75,6 +75,7 @@ const LoginPage = () => {
             {
                 !loading ?
                     <LoginContainer>
+
                         <LogoContainer>
                             <Logo>
                                 <Orange></Orange>
@@ -85,7 +86,9 @@ const LoginPage = () => {
                             <Title>LabEddit</Title>
                             <SubTitle>O projeto de rede social da Labenu</SubTitle>
                         </LogoContainer>
+
                         <MainContainer>
+
                             <Box component={"form"} onSubmit={handleButtonClick} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '10px', width: '85%' }}>
                                 <TextField
                                     variant="outlined"
@@ -116,7 +119,7 @@ const LoginPage = () => {
                                         type={values.showPassword ? 'text' : 'password'}
                                         value={form.password}
                                         name="password"
-                                        inputProps={{ pattern: "^[a-zA-Z0-9\u00C0-\u00FF\.#@$%*& ]{8,30}$", title: "A senha deve ter entre 8 e 30 caracteres" }}
+                                        inputProps={{ pattern: "^[a-zA-Z0-9\u00C0-\u00FF#@$%*& ]{8,30}$", title: "A senha deve ter entre 8 e 30 caracteres" }}
                                         onChange={onChange}
                                         endAdornment={
                                             <InputAdornment position="end">
@@ -157,6 +160,7 @@ const LoginPage = () => {
                                 </Button>
 
                             </Box>
+
                             <Snackbar 
                                 open={open} 
                                 autoHideDuration={6000} 
@@ -168,6 +172,7 @@ const LoginPage = () => {
                                     {messageError}
                                 </Alert>
                             </Snackbar>
+                            
                         </MainContainer>
 
                     </LoginContainer>

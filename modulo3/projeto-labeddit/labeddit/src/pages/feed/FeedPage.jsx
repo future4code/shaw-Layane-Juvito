@@ -10,8 +10,9 @@ import { CreatePostArea, Hr, MainContainer, CardsContainer, LoaderContainer } fr
 
 
 const FeedPage = () => {
+
     const [logout, setLogout] = useState(false)
-    const { form, onChange } = useForm({
+    const { form, onChange, cleanFields } = useForm({
         title: '',
         body: ''
     })
@@ -31,6 +32,7 @@ const FeedPage = () => {
     const createPost = (event) => {
         event.preventDefault()
         postRequest('posts', form)
+        cleanFields()
     }
 
     const userLogout = () => {
@@ -44,8 +46,11 @@ const FeedPage = () => {
                 buttonContent={'Sair'}
                 buttonClick={() => userLogout()}
             />
+
             <MainContainer>
+
                 <CreatePostArea>
+
                     <Box
                         component="form"
                         sx={{
@@ -58,6 +63,7 @@ const FeedPage = () => {
                         }}
                         onSubmit={createPost}
                     >
+
                         <TextField
                             size="small"
                             label="Título do seu post"
@@ -85,7 +91,6 @@ const FeedPage = () => {
                             maxRows={4}
                             value={form.body}
                             onChange={onChange}
-
                         />
                         <Button
                             type="submit"
@@ -95,14 +100,18 @@ const FeedPage = () => {
                         >
                             Postar
                         </Button>
+
                         <Hr />
+
                     </Box>
+
                 </CreatePostArea>
                 <Pagination
                     count={50}
                     onChange={handleChangePage}
                     page={currentPage}
                 />
+
                 {
                     loading ?
 
@@ -125,6 +134,7 @@ const FeedPage = () => {
                             }
                         </CardsContainer>
                 }
+                
             </MainContainer>
         </>
     )

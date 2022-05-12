@@ -5,9 +5,13 @@ import { useNavigate } from 'react-router-dom'
 
 
 const Header = ({buttonContent, buttonClick, page}) => {
+
     const navigate = useNavigate()
+
     return (
+
         <HeaderContainer page={page}>
+
             {page && <Button onClick={()=>navigate('/feed')}>
                 <CloseSharpIcon />
             </Button>
@@ -18,7 +22,6 @@ const Header = ({buttonContent, buttonClick, page}) => {
                 <Gray></Gray>
                 <LightOrange></LightOrange>
                 <LightGray></LightGray>
-
             </Logo>
 
             <Button onClick={buttonClick}>

@@ -17,6 +17,7 @@ export const MainContainer = styled.div`
         margin:auto
     }
 `
+
 export const CreatePostArea = styled.div`
     display:flex;
     flex-direction: column;
@@ -25,10 +26,12 @@ export const CreatePostArea = styled.div`
     width: 100%;
     margin-top: 20px;
 `
+
 export const Hr = styled.div`
   background: linear-gradient(90deg, #FF6489 0%, #F9B24E 100%);
   height: 1px;
 `
+
 export const CardsContainer = styled.div`
     width: 85%;
     display:flex;

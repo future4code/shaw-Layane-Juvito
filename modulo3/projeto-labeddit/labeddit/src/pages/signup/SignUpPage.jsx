@@ -80,6 +80,7 @@ const SignUpPage = () => {
             {
                 !loading ?
                     <SignupContainer>
+                        
                         <TextContainer>
                             <p>Olá, boas vindas ao LabEddit ;)</p>
                         </TextContainer>
@@ -180,6 +181,7 @@ const SignUpPage = () => {
                                 </Button>
 
                             </Box>
+
                             <Snackbar 
                                 open={open} 
                                 autoHideDuration={6000} 
@@ -191,7 +193,9 @@ const SignUpPage = () => {
                                     {messageError}
                                 </Alert>
                             </Snackbar>
+
                         </MainContainer>
+
                     </SignupContainer>
                     :
                     <LoaderContainer>
