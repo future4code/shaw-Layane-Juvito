@@ -1,5 +1,7 @@
 import KeyboardDoubleArrowUpOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowUpOutlined'
 import KeyboardDoubleArrowDownOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowDownOutlined'
+import ThumbUpAltSharpIcon from '@mui/icons-material/ThumbUpAltSharp'
+import ThumbDownAltSharpIcon from '@mui/icons-material/ThumbDownAltSharp';
 import { BodyContainer, CardContainer, CommentsContainer, PostStatusContainer, SendBy, VoteDown, VotesContainer, VoteUp, CommentButton, BodyText, TitleText } from './style'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -32,16 +34,16 @@ const CardPost = ({ post, voteUp, voteDown, showTitle, showBody, showComments })
                         onClick={voteUp}
                         color={post.userVote}
                     >
-                        <KeyboardDoubleArrowUpOutlinedIcon />
+                        <ThumbUpAltSharpIcon />
                     </VoteUp>
 
-                    <span>{post.voteSum}</span>
+                    <span>{post.voteSum ? post.voteSum : 0}</span>
 
                     <VoteDown
                         onClick={voteDown}
                         color={post.userVote}
                     >
-                        <KeyboardDoubleArrowDownOutlinedIcon />
+                        <ThumbDownAltSharpIcon />
                     </VoteDown>
 
                 </VotesContainer>
@@ -53,7 +55,7 @@ const CardPost = ({ post, voteUp, voteDown, showTitle, showBody, showComments })
                             <ForumSharpIcon />
                         </CommentButton>
 
-                        <span>{post.commentCount}</span>
+                        <span>{post.commentCount ? post.commentCount : 0}</span>
 
                     </CommentsContainer>
                 }

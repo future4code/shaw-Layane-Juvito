@@ -9,6 +9,13 @@ export const CardContainer = styled.div`
     border: 1px solid #E0E0E0;
     border-radius: 12px;
     width: 100%;
+    @media screen and (min-device-width : 800px) and (max-device-width : 1024px) {
+        width: 70%;
+    }
+    @media screen and (min-device-width : 1025px){
+        width: 55%;
+        margin:auto
+    }
 `
 
 export const SendBy = styled.span`
@@ -46,7 +53,7 @@ export const PostStatusContainer = styled.div`
     width: 100%;
     display:flex;
     align-items: center;
-    gap:11px;
+    justify-content: space-between;
 `
 
 export const VotesContainer = styled.div`
@@ -74,6 +81,7 @@ export const CommentsContainer = styled.div`
     padding: 5px 10px;
     font-size: 9.56098px;
     color:#6F6F6F; 
+   
 `
 
 export const CommentButton = styled.span`
@@ -81,14 +89,23 @@ export const CommentButton = styled.span`
     display: flex;
     justify-content: center;
     align-items: center;
+    :hover{
+        opacity:80%;
+    }
 `
 
 export const VoteUp = styled.span`
     cursor: pointer;
-    color: ${props => props.color === 1 ? 'green' : '#6F6F6F'};
+    color: ${props => props.color === 1 ? '#1ED157' : '#6F6F6F'};
+    :hover{
+        opacity:80%;
+    }
 `
 
 export const VoteDown = styled.span`
     cursor: pointer;
-    color: ${props => props.color === -1 ? 'red' : '#6F6F6F'};
+    color: ${props => props.color === -1 ? '#EC2E2E' : '#6F6F6F'};
+    :hover{
+        opacity:90%;
+    }
 `
