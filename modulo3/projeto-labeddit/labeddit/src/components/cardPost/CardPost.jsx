@@ -1,6 +1,5 @@
 import KeyboardDoubleArrowUpOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowUpOutlined'
 import KeyboardDoubleArrowDownOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowDownOutlined'
-import ChatBubbleOutlineSharpIcon from '@mui/icons-material/ChatBubbleOutlineSharp'
 import { BodyContainer, CardContainer, CommentsContainer, PostStatusContainer, SendBy, VoteDown, VotesContainer, VoteUp, CommentButton, BodyText, TitleText } from './style'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -30,7 +29,7 @@ const CardPost = ({ post, voteUp, voteDown, showTitle, showBody, showComments })
                 <VotesContainer>
 
                     <VoteUp
-                        onClick={() => voteUp(post.id, post.userVote)}
+                        onClick={voteUp}
                         color={post.userVote}
                     >
                         <KeyboardDoubleArrowUpOutlinedIcon />
@@ -39,7 +38,7 @@ const CardPost = ({ post, voteUp, voteDown, showTitle, showBody, showComments })
                     <span>{post.voteSum}</span>
 
                     <VoteDown
-                        onClick={() => voteDown(post.id, post.userVote)}
+                        onClick={voteDown}
                         color={post.userVote}
                     >
                         <KeyboardDoubleArrowDownOutlinedIcon />
