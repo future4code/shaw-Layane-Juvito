@@ -119,7 +119,7 @@ const LoginPage = () => {
                                         type={values.showPassword ? 'text' : 'password'}
                                         value={form.password}
                                         name="password"
-                                        inputProps={{ pattern: "^[a-zA-Z0-9\u00C0-\u00FF#@$%*&.,-+ ]{8,30}$", title: "A senha deve ter entre 8 e 30 caracteres" }}
+                                        inputProps={{ pattern: "[a-zA-Z0-9\u00C0-\u00FF#@$%*&. ]{8,30}$", title: "A senha deve ter entre 8 e 30 caracteres" }}
                                         onChange={onChange}
                                         endAdornment={
                                             <InputAdornment position="end">
