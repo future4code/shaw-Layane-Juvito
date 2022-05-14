@@ -14,7 +14,7 @@ export const MainContainer = styled.div`
         margin:auto
     }
     @media screen and (min-device-width : 1025px){
-        width: 50%;
+        width: 40%;
         margin:auto
     }
 `

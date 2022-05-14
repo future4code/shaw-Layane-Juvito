@@ -9,13 +9,6 @@ export const CardContainer = styled.div`
     border: 1px solid #E0E0E0;
     border-radius: 12px;
     width: 100%;
-    @media screen and (min-device-width : 800px) and (max-device-width : 1024px) {
-        width: 70%;
-    }
-    @media screen and (min-device-width : 1025px){
-        width: 55%;
-        margin:auto
-    }
 `
 
 export const SendBy = styled.span`
