@@ -1,7 +1,4 @@
-function checaRenovacaoRG():boolean{
-    const anoAtual:number = Number(prompt("Digite o ano atual"))
-    const anoNascimento:number = Number(prompt("Digite o ano de nascimento"))
-    const anoEmissao:number = Number(prompt("Digite o ano de emissão do documento"))
+function checaRenovacaoRG(anoAtual:number,anoNascimento:number,anoEmissao:number):boolean{
  
     const idade:number = anoAtual - anoNascimento
     const tempoCarteira:number = anoAtual - anoEmissao
@@ -12,4 +9,6 @@ function checaRenovacaoRG():boolean{
  
     return (cond1 || cond2 || cond3)
 }
+
+console.log(checaRenovacaoRG(2022,1995,2006))
  
