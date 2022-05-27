@@ -25,6 +25,7 @@
 //     }
 // ]
 
+//-------------------------------------------------------------------------
 // a) Copie o código acima para um arquivo .ts depois:
 // - crie um *type* para representar um post;
 // - Utilize esse mesmo tipo criado acima para fazer a tipagem do array posts.
@@ -57,6 +58,7 @@ const posts:Array<Post> = [
     }
 ]
 
+//-------------------------------------------------------------------------
 // b) Observe abaixo a função buscarPostsPorAutor(), escrita em JavasScript:
 // function buscarPostsPorAutor(posts, autorInformado) {
 //     return posts.filter(

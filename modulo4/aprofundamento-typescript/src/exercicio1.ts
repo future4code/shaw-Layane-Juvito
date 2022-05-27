@@ -14,6 +14,7 @@ let minhaString: string = "sou uma string"
 let meuNumero:number |string = '3'
 meuNumero = 3
 
+//-------------------------------------------------------------------------
 // c) Agora crie um novo objeto. Este objeto é uma pessoa, e deve possuir três propriedades:
 
 // `nome`, que é uma string;
@@ -45,6 +46,7 @@ const obj3:Pessoa = {
     corFavorita:"verde"
 }
 
+//-------------------------------------------------------------------------
 // d) Modifique a propriedade corFavorita para que apenas seja possível escolher entre as cores do arco-íris. Utilize um enum para isso.
 
 enum CoresArcoIris {
