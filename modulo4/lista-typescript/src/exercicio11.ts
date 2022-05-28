@@ -15,11 +15,11 @@
 const converterParaRomanos = (numero: number): string => {
 
     let numeroStr: string[] = numero.toString().split('')
-    let tamanho = numeroStr.length
+    let tamanho:number = numeroStr.length
     let numeroRomano: string[] = []
 
     const addAlgorismo = (check: number, algoritmo: string) => {
-        for (let i = 0; i < check; i++) {
+        for (let i:number = 0; i < check; i++) {
             numeroRomano.push(algoritmo)
         }
     }
