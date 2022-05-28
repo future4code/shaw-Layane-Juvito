@@ -14,6 +14,7 @@ type Estoque = {
     quantidade: number, 
     valorUnitario: number | string
 }
+
 const estoque:Estoque[] = [
 	{ nome: "MacMugffin", quantidade: 37, valorUnitario: 51.040},
 	{ nome: "Vassoura voadora", quantidade: 56, valorUnitario: 210.0},

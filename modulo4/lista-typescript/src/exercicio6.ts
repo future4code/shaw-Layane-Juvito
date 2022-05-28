@@ -44,14 +44,22 @@ const clientes: Cliente[]=[
 ]
 
 const atualizaSaldo = (clientes:Cliente[]):Cliente[] => {
+
     return clientes.map((cliente:Cliente):Cliente=>{
+
         const debitoSoma:number = cliente.debitos.length>0 ? cliente.debitos.reduce((acc:number,cur:number)=>acc+cur) : 0
         const attSaldo:number = cliente.saldoTotal-debitoSoma
 
-        return {...cliente, saldoTotal:attSaldo,debitos:[]}
+        return {
+            ...cliente,
+            saldoTotal:attSaldo,
+            debitos:[]
+        }
+
     }).filter((clienteMap:Cliente):boolean=>{
+
         return clienteMap.saldoTotal < 0
     })
 }
 
-console.log(atualizaSaldo(clientes))
+console.table(atualizaSaldo(clientes))
