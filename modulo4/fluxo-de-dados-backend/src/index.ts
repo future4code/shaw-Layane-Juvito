@@ -40,24 +40,25 @@ type Product = {
 // Exercício 3 e 7
 
 app.post('/products', (req: Request, res: Response) => {
+
+    const { name, price } = req.body
+
     try {
-        const { name, price } = req.body
-        console.log(name, price)
         // Valida se as informações foram passadas no body
-        if (!name || !price) {
+        if (!name || !price && price !== 0) {
             throw new Error("Campos 'name' e 'price' são obrigatórios.")
         }
 
         if (typeof name !== 'string') {
-            throw new Error("Campo 'name' deve ser do tipo 'string'")
+            throw new Error("Campo 'name' deve ser do tipo 'string'.")
         }
 
         if (typeof price !== 'number') {
-            throw new Error("Campo 'price' deve ser do tipo 'number'")
+            throw new Error("Campo 'price' deve ser do tipo 'number'.")
         }
 
         if (price <= 0) {
-            throw new Error("Campo 'price' deve ter valor maior que 0")
+            throw new Error("Campo 'price' deve ter valor maior que 0.")
         }
 
         const checkProduct: number = products.findIndex(product => product.name === name)
@@ -85,24 +86,24 @@ app.post('/products', (req: Request, res: Response) => {
 
     } catch (error: any) {
         switch (error.message) {
-            case "Campos 'name' e 'price' são obrigatórios":
+            case "Campos 'name' e 'price' são obrigatórios.":
                 res.status(422) // unprocessable entity
                 break
-            case "Campo 'name' deve ser do tipo 'string'":
+            case "Campo 'name' deve ser do tipo 'string'.":
                 res.status(422) // unprocessable entity
                 break
-            case "Campo 'price' deve ser do tipo 'number'":
+            case "Campo 'price' deve ser do tipo 'number'.":
                 res.status(422) // unprocessable entity
                 break
-            case "Campo 'price' deve ter valor maior que 0":
+            case "Campo 'price' deve ter valor maior que 0.":
                 res.status(422) // unprocessable entity
                 break
-            case "Produto já cadastrado!":
+            case "Produto já cadastrado.":
                 res.status(409) // conflict
                 break
             default:
                 res.status(500) // intern server error
-                error.message("Erro inesperado de servidor.")
+                error.message = "Erro inesperado de servidor."
                 break
         }
         res.send(error.message)
@@ -112,8 +113,9 @@ app.post('/products', (req: Request, res: Response) => {
 // Exercício 4 e 10
 
 app.get('/products', (req: Request, res: Response) => {
+    const search = req.query.search
+    console.log(req.query)
     try {
-        const search = req.query.search
         if (!search) {
             res.status(201).send({
                 response: {
@@ -122,9 +124,6 @@ app.get('/products', (req: Request, res: Response) => {
                 }
             })
         } else {
-            if(search !== "search"){
-                throw new Error("Query params inválida.")
-            }
 
             const productsFilter: Product[] = products.filter(product => product.name.includes(search as string))
 
@@ -145,12 +144,9 @@ app.get('/products', (req: Request, res: Response) => {
             case "Nenhum produto encontrado.":
                 res.status(404) // not found
                 break
-            case "Query params inválida.":
-                res.status(400) // bad request
-                break
             default:
                 res.status(500) // intern server error
-                error.message("Erro inesperado de servidor.")
+                error.message = "Erro inesperado de servidor."
                 break
         }
         res.send(error.message)
@@ -166,14 +162,14 @@ app.put('/products/:productId', (req: Request, res: Response) => {
         const { name, price } = req.body
         const productId = req.params.productId
 
-        if (!price && !name) {
+        if (!price && !name && price!=0) {
             throw new Error("É obrigatório enviar pelo menos um dos campos: 'name' ou 'price'.")
         }
 
         if (name && typeof name !== 'string') {
             throw new Error("Campo 'name' deve ser do tipo 'string'")
         }
-
+        
         if (price && typeof price !== 'number') {
             throw new Error("Campo 'price' deve ser do tipo 'number'")
         }
@@ -213,7 +209,7 @@ app.put('/products/:productId', (req: Request, res: Response) => {
 
     } catch (error: any) {
         switch (error.message) {
-            case "Pelo menos um dos campos 'name' ou 'price' são obrigatórios.":
+            case "É obrigatório enviar pelo menos um dos campos: 'name' ou 'price'.":
                 res.status(422) // unprocessable entity
                 break
             case "Campo 'name' deve ser do tipo 'string'":
@@ -230,7 +226,7 @@ app.put('/products/:productId', (req: Request, res: Response) => {
                 break
             default:
                 res.status(500) // intern server error
-                error.message("Erro inesperado de servidor.")
+                error.message = "Erro inesperado de servidor."
                 break
         }
         res.send(error.message)
@@ -261,7 +257,7 @@ app.delete('/products/:productId', (req: Request, res: Response) => {
             }
         })
 
-    } catch (error: any) {
+    } catch (error:any) {
         switch (error.message) {
 
             case "Produto não encontrado.":
@@ -269,7 +265,7 @@ app.delete('/products/:productId', (req: Request, res: Response) => {
                 break
             default:
                 res.status(500) // intern server error
-                error.message("Erro inesperado de servidor.")
+                error.message = "Erro inesperado de servidor."
                 break
         }
         res.send(error.message)
