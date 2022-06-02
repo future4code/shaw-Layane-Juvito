@@ -87,31 +87,33 @@ app.get("/users", (req: Request, res: Response) => {
           users: users
         }
       })
-    } else {
+    } 
 
-      if(type && type !== Type.ADMIN && type !== Type.NORMAL){
-        errorCode = 422
-        throw new Error("Só são aceitos os tipos 'ADMIN' ou 'NORMAL'.")
-      }
-      let userFilter:User[] =[]
-
-      type && search ? 
-      userFilter = users.filter((user:User):boolean => user.type === type).filter((user:User):boolean => user.name.toLowerCase().includes((search as string).toLowerCase())) 
-      : type && !search ?
-      userFilter = users.filter((user:User):boolean => user.type === type)
-      : userFilter = users.filter((user:User):boolean => user.name.toLowerCase().includes((search as string).toLowerCase()))
-     
-      if (userFilter.length===0){
-        errorCode = 404
-        throw new Error("Usuário não encontrado.")
-      }
-      res.send({
-        response: {
-          quantity: userFilter.length,
-          users: userFilter
-        }
-      })
+    if(type && type !== Type.ADMIN && type !== Type.NORMAL){
+      errorCode = 422
+      throw new Error("Só são aceitos os tipos 'ADMIN' ou 'NORMAL'.")
     }
+
+    let userFilter:User[] =[]
+
+    type && search ? 
+    userFilter = users.filter((user:User):boolean => user.type === type).filter((user:User):boolean => user.name.toLowerCase().includes((search as string).toLowerCase())) 
+    : type && !search ?
+    userFilter = users.filter((user:User):boolean => user.type === type)
+    : userFilter = users.filter((user:User):boolean => user.name.toLowerCase().includes((search as string).toLowerCase()))
+    
+    if (userFilter.length===0){
+      errorCode = 404
+      throw new Error("Usuário não encontrado.")
+    }
+    
+    res.send({
+      response: {
+        quantity: userFilter.length,
+        users: userFilter
+      }
+    })
+    
 
   } catch (error:any) {
       res.status(errorCode).send(error.message)
