@@ -3,7 +3,6 @@ import cors from 'cors'
 import { AddressInfo } from 'net'
 import * as fs from 'fs'
 import { Client, Statement } from './types'
-import { isDataView, isDate } from 'util/types'
 
 const app = express()
 app.use(express.json())
@@ -20,13 +19,13 @@ const server = app.listen(process.env.PORT || 3003, () => {
 
 let clients: Client[] = []
 
+// Ler o arquivo .txt que armazena os dados
 fs.readFile('./src/data/clients.txt', 'utf8', (err: any, data: any) => {
   if (err) throw err;
   clients = JSON.parse(data)
 });
 
-// fs.writeFile('./src/data/clients.txt', JSON.stringify(clients), { flag: 'w+' }, (err:any) => {});
-
+// pega a data atual no formato sesejado
 const dateNow = () => {
   let date = new Date(),
       day = date.getDate().toString().padStart(2, '0'),
@@ -35,6 +34,8 @@ const dateNow = () => {
 
   return {day, month, year}
 }
+
+// faz as verificações envolvendo datas
 const checkDate = (birthday: string, checkType:string): boolean => {
   const {day, month, year} = dateNow()
   let response:boolean = false
@@ -43,6 +44,7 @@ const checkDate = (birthday: string, checkType:string): boolean => {
   const checkYear = year - Number(yearClient)
   const checkMonth = Number(month) - Number(monthClient)
   const checkDay = Number(day) - Number(dayClient)
+// Math.floor((Date.now() - newDate.getTime()) / (365.25 * 24 * 60 * 60 * 1000))
 
   switch(checkType){
     case 'age':
@@ -65,10 +67,12 @@ const checkDate = (birthday: string, checkType:string): boolean => {
   return response
 }
 
+// retorna todos os clientes
 app.get("/users", (req: Request, res: Response) => {
   res.status(200).send(clients)
 })
 
+// retorna o saldo de um cliente
 app.get("/users/:name", (req: Request, res: Response) => {
   let errorCode = 400
   const cpf = req.headers.authorization
@@ -88,7 +92,7 @@ app.get("/users/:name", (req: Request, res: Response) => {
     }
     res.send({
       response:{
-        accountBalance: `R$ ${clients[indexClient].accountBalance.toFixed(2).replace('.',',')}`
+        accountBalance: clients[indexClient].accountBalance
       }
     })
   } catch (error:any) {
@@ -97,28 +101,12 @@ app.get("/users/:name", (req: Request, res: Response) => {
     })
   }
 
-}) //mudar o metodo provavelmente
+}) 
 
+// cadastra cliente
 app.post("/users", (req: Request, res: Response) => {
   let errorCode = 400
   const { name, cpf, birthday } = req.body
-
-  // const checkAge = (birthday: string): boolean => {
-  //   const {day, month, year} = dateNow()
-
-  //   const [dayClient, monthClient, yearClient] = birthday.split('/')
-  //   const checkYear = year - Number(yearClient)
-  //   const checkMonth = Number(month) - Number(monthClient)
-  //   const checkDay = Number(day) - Number(dayClient)
-
-  //   if ((checkYear === 18 && checkMonth < 0) || checkYear < 18 || (checkYear === 18 && checkMonth === 0 && checkDay < 0)) {
-  //     return false
-  //   }
-
-  //   return true
-  // }
-
-  
 
   try {
     if (!name || !cpf || !birthday) {
@@ -144,7 +132,6 @@ app.post("/users", (req: Request, res: Response) => {
       throw new Error("Verifique se está passando o formato de data correto (DD/MM/AAAA) ou se a mesma possui um valor válido.")
     }
 
-    // if (!checkAge(birthday)) {
     if (!checkDate(birthday, 'age')) {
       errorCode = 403
       throw new Error("Nossos clientes devem ser maiores de idade.")
@@ -164,7 +151,10 @@ app.post("/users", (req: Request, res: Response) => {
       accountBalance: 0,
       accountStatement: []
     }
+
     clients.push(newClient)
+
+    // atualiza o arquivo de dados
     fs.writeFile('./src/data/clients.txt', JSON.stringify(clients), { flag: 'w+' }, (err: any) => { });
 
     res.status(201).send({
@@ -180,6 +170,7 @@ app.post("/users", (req: Request, res: Response) => {
 
 })
 
+// adiciona saldo
 app.put("/users/:name", (req:Request, res: Response) => {
   const {value} = req.body
   const cpf = req.headers.authorization
@@ -206,27 +197,31 @@ app.put("/users/:name", (req:Request, res: Response) => {
     }
     const client:Client = {...clients[index]}
     const {day, month, year} = dateNow()
+
+    // atualiza o extrato
     const accountStatement:Statement = {
       value: value,
       date:`${day}/${month}/${year}`,
-      description: `${name} adicionou R$ ${value.toFixed(2).replace('.',',')} a própria conta.`
+      description: `Depósito de R$ ${value.toFixed(2).replace('.',',')}.`
     }
+
     client.accountStatement.push(accountStatement)
 
+    // atualiza o saldo
     const newAccountBalance = client.accountBalance + value
 
     clients[index]={
       ... client,
       accountBalance: newAccountBalance  
     }
-    
+
+    // atualiza o arquivo de dados
     fs.writeFile('./src/data/clients.txt', JSON.stringify(clients), { flag: 'w+' }, (err:any) => {});
 
     res.send({
       response:{
         message: "Saldo adicionado com sucesso.",
-        accountBalance: `R$ ${newAccountBalance.toFixed(2).replace('.',',')}`,
-        accountBalanceValue: newAccountBalance
+        accountBalance: newAccountBalance
       }
     })
 
@@ -237,12 +232,14 @@ app.put("/users/:name", (req:Request, res: Response) => {
   }
 })
 
-app.put("/users/:name/payment", (req:Request, res: Response) => {
+// realiza um pagamento
+app.post("/users/:name/payment", (req:Request, res: Response) => {
   const {value, description, paymentDate} = req.body
   const cpf = req.headers.authorization
   const {name} = req.params
   let message:string = `Pagamento agendado para o dia ${paymentDate}.`
   let errorCode:number = 400
+
   try {
     if(!cpf){
       errorCode = 401
@@ -296,6 +293,7 @@ app.put("/users/:name/payment", (req:Request, res: Response) => {
     }
     client.accountStatement.push(accountStatement)
 
+    // se o pagamento for para hj ele ja atualiza o saldo
     if(paymentDate && paymentDate === `${day}/${month}/${year}`){
       const newAccountBalance = client.accountBalance - value
       clients[index]={
@@ -321,6 +319,106 @@ app.put("/users/:name/payment", (req:Request, res: Response) => {
     })
   }
 })
+
+// realiza tranfêrencia entre clientes do banco
+app.post("/users/:name/transfer", (req:Request, res: Response) => {
+  const {value, receiverName, receiverCpf} = req.body
+  const cpf = req.headers.authorization
+  const {name} = req.params
+  
+  let errorCode:number = 400
+
+  try {
+    if(!cpf){
+      errorCode = 401
+      throw new Error("Credenciais ausentes.")
+    }
+    if(!value || !receiverName || !receiverCpf){
+      errorCode = 422
+      throw new Error("\todos os campos são obrigatório.")
+    }
+    if (typeof value !== "number") {
+      errorCode = 422
+      throw new Error("Certifique-se que o campo 'value' é do tipo number.")
+    }
+    if (typeof receiverName !== "string") {
+      errorCode = 422
+      throw new Error("Certifique-se que o campo 'receiverName' é do tipo string.")
+    }
+    if(typeof receiverCpf !== "string") {
+      errorCode = 422
+      throw new Error("Certifique-se que o campo 'receiverCpf' é do tipo string.")
+    }
+
+    const receiverIndex:number = clients.findIndex((client:Client):boolean => client.cpf===receiverCpf && client.name === receiverName)
+
+    if(receiverIndex<0){
+      errorCode = 404
+      throw new Error("O destinatário não possui cadastro no nosso sistema.")
+    }
+    
+    const index:number = clients.findIndex((client:Client):boolean => client.cpf===cpf && client.name === name)
+
+    if(index < 0){
+      errorCode = 404
+      throw new Error("Não existe um usuário cadastrado com essas credenciais.")
+    }
+    const client:Client = {...clients[index]}
+
+    if(value > client.accountBalance){
+      errorCode = 422
+      throw new Error("Saldo insuficiente.")
+    }
+    const receiver:Client = {...clients[receiverIndex]}
+
+    const {day, month, year} = dateNow()
+
+    // definir a descrição de acordo com o usuário que está recebendo ou realizando a tranferência e assim atualizar o extrato
+    const accountStatement = (user:string):Statement => {
+      let description:string = ''
+      user === "client" ?
+      description = `${name} tranferiu R$ ${value.toFixed(2).replace('.',',')} para ${receiverName}`
+      :
+      description = `${receiverName} recebeu R$ ${value.toFixed(2).replace('.',',')} de ${name}`
+
+      return {
+        value,
+        date: `${day}/${month}/${year}`,
+        description:description
+      }
+    }
+
+    client.accountStatement.push(accountStatement("client"))
+    receiver.accountStatement.push(accountStatement("receiver"))
+
+    // atualiza o saldo do usuário que reaiza a tranferência
+    clients[index] = {...client,
+      accountBalance: client.accountBalance - value
+    }
+
+    // atualiza o saldo do usuário que recebe a transferÊncia
+    clients[receiverIndex] = {...receiver,
+      accountBalance: receiver.accountBalance + value
+    }
+
+    // atualiza o arquivo de dados
+    fs.writeFile('./src/data/clients.txt', JSON.stringify(clients), { flag: 'w+' }, (err:any) => {});
+
+    res.send({
+      response:{
+        message: "Transferência realizada com sucesso.",
+        accountBalance: clients[index].accountBalance
+      }
+    })
+
+  } catch (error:any) {
+    res.status(errorCode).send({
+      message:error.message
+    })
+  }
+})
+
+// PRECISA FAZER A REQUESIÇÃO DE ATUALIZAR SALDO 
 
 
 
