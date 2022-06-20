@@ -1,0 +1,8 @@
+
+POST http://localhost:3003/address 
+Content-Type: application/json
+
+{
+    "zipCode": "58590000",
+    "number": "70e2"
+}
