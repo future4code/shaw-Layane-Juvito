@@ -1,0 +1,10 @@
+### Cadastrar usuário
+POST http://localhost:3003/user
+Content-Type: application/json
+
+{
+    "name": "Lay",
+    "email": "lay@shaw.com",
+    "password": "onepiece"
+}
+
