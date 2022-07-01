@@ -21,4 +21,12 @@ export default class UserDB extends BaseDB {
 
        return result
     }
+
+    public async getUserById (id: string) {
+        const result = await BaseDB.connection("cook_user")
+       .select("*")
+       .where({id})
+
+       return result
+    }
 }

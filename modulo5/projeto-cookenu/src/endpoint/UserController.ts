@@ -53,8 +53,10 @@ export class UserController {
 
             res.status(201).send({ access_token: token })
 
-        } catch (error:any) {
-            res.send(error.message)
+        } catch (error: any) {
+            res.send({
+                message: error.slqMessage || error.message
+            })
         }
     }
 
@@ -83,13 +85,13 @@ export class UserController {
             }
 
             const userDB = new UserDB
-            const checkEmailDB  = await userDB.getUserByEmail(email)
+            const checkEmailDB = await userDB.getUserByEmail(email)
 
             if (checkEmailDB.length === 0) {
                 res.statusCode = 409
                 throw new Error("Email não cadastrado.")
             }
-          
+
             const hashManage = new HashManage()
             const checkPassword: boolean = await hashManage.compare(password, checkEmailDB[0].password)
 
@@ -103,8 +105,43 @@ export class UserController {
 
             res.status(200).send({ access_token: token })
 
-        } catch (error:any) {
-            res.send(error.message)
+        } catch (error: any) {
+            res.send({
+                message: error.slqMessage || error.message
+            })
+        }
+    }
+
+    public async getUserProfile(req: Request, res: Response) {
+        try {
+            const token = req.headers.authorization
+
+            if (!token) {
+                res.statusCode = 401
+                throw new Error("Não autorizado.")
+            }
+
+            const authenticator = new Authenticator()
+            const userData = authenticator.getTokenData(token)
+
+            if (!userData) {
+                res.statusCode = 401
+                throw new Error("Token expirado ou inválido.")
+            }
+
+            const userDB = new UserDB()
+            const userInfo = await userDB.getUserByEmail(userData.email)
+
+            res.status(200).send({
+                id: userInfo[0].id,
+                name: userInfo[0].name,
+                email: userInfo[0].email,
+            })
+
+        } catch (error: any) {
+            res.send({
+                message: error.slqMessage || error.message
+            })
         }
     }
 }

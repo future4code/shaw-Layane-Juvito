@@ -16,3 +16,10 @@ Content-Type: application/json
     "email": "lay@shaw.com",
     "password": "onepiece"
 }
+
+###
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNmNWQwMGQ0LTllZjctNGMwMS1hYjE5LTMzNTgzZWFiM2FkYiIsImVtYWlsIjoibGF5QHNoYXcuY29tIiwiaWF0IjoxNjU2NzA4Nzg1LCJleHAiOjE2NTcxNDA3ODV9.0C6DEWRsh-x3hg1-jPHbMRhIoBGeYlN1iIGMl_02KBM
+
+### Pegar perfil do usuário
+GET http://localhost:3003/user/profile
+Authorization: {{token}}
