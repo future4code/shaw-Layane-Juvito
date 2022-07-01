@@ -23,3 +23,7 @@ Content-Type: application/json
 ### Pegar perfil do usuário
 GET http://localhost:3003/user/profile
 Authorization: {{token}}
+
+### Pegar perfil de outro usuário
+GET http://localhost:3003/user/3c2d98ca-ae52-4aca-86d7-4718cfdf7554
+Authorization: {{token}}

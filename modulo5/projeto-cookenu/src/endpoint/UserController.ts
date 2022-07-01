@@ -144,4 +144,43 @@ export class UserController {
             })
         }
     }
+
+    public async getOtherUserProfile(req: Request, res: Response) {
+        try {
+            const token = req.headers.authorization
+            const {id} =  req.params
+
+            if (!token) {
+                res.statusCode = 401
+                throw new Error("Não autorizado.")
+            }
+
+            const authenticator = new Authenticator()
+            const userData = authenticator.getTokenData(token)
+
+            if (!userData) {
+                res.statusCode = 401
+                throw new Error("Token expirado ou inválido.")
+            }
+
+            const userDB = new UserDB()
+            const userInfo = await userDB.getUserById(id)
+
+            if(userInfo.length === 0){
+                res.statusCode = 404
+                throw new Error("Usuário não encontrado.")
+            }
+
+            res.status(200).send({
+                id: userInfo[0].id,
+                name: userInfo[0].name,
+                email: userInfo[0].email,
+            })
+
+        } catch (error: any) {
+            res.send({
+                message: error.slqMessage || error.message
+            })
+        }
+    }
 }
