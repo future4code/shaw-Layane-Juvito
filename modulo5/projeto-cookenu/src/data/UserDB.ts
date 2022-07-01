@@ -16,7 +16,7 @@ export default class UserDB extends BaseDB {
 
     public async getUserByEmail (email: string) {
         const result = await BaseDB.connection("cook_user")
-       .select("email")
+       .select("*")
        .where({email})
 
        return result

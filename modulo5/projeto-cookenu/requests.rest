@@ -1,5 +1,5 @@
 ### Cadastrar usuário
-POST http://localhost:3003/user
+POST http://localhost:3003/user/signup
 Content-Type: application/json
 
 {
@@ -8,3 +8,11 @@ Content-Type: application/json
     "password": "onepiece"
 }
 
+### Logar usuário
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+    "email": "lay@shaw.com",
+    "password": "onepiece"
+}
