@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import UserDB from '../data/UserDB'
 import UserModel from '../model/UserModel'
 import { Authenticator } from '../services/Authenticator'
-import { HashMenage } from '../services/HashManage'
+import { HashManage } from '../services/HashManage'
 import IdGenerator from '../services/IdGenerator'
 import { AuthenticationData, User } from '../types'
 
@@ -44,8 +44,8 @@ export class UserController {
             const newId = new IdGenerator()
             const id = newId.idGenerator()
 
-            const hashMenage = new HashMenage()
-            const hash = await hashMenage.generateHash(password)
+            const hashManage = new HashManage()
+            const hash = await hashManage.generateHash(password)
 
             const newUser: UserModel = new UserModel(id, email, hash, role)
 
@@ -77,8 +77,8 @@ export class UserController {
                 throw new Error("Usuário não cadastrado")
             }
 
-            const hashMenage = new HashMenage()
-            const passwordIsCorrect: boolean = await hashMenage.compare(password, checkUser.password)
+            const hashManage = new HashManage()
+            const passwordIsCorrect: boolean = await hashManage.compare(password, checkUser.password)
 
             if (!passwordIsCorrect) {
                 res.statusCode = 409

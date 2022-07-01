@@ -1,6 +1,6 @@
 import {genSalt, hash, compare} from "bcryptjs"
 
-export class HashMenage {
+export class HashManage {
     public generateHash = async (password: string): Promise<string> => {
         const rounds = Number(process.env.BCRYPT_COST)
         const salt = await genSalt(rounds)
