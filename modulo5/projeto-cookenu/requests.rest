@@ -18,7 +18,7 @@ Content-Type: application/json
 }
 
 ###
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNmNWQwMGQ0LTllZjctNGMwMS1hYjE5LTMzNTgzZWFiM2FkYiIsImVtYWlsIjoibGF5QHNoYXcuY29tIiwiaWF0IjoxNjU2NzA4Nzg1LCJleHAiOjE2NTcxNDA3ODV9.0C6DEWRsh-x3hg1-jPHbMRhIoBGeYlN1iIGMl_02KBM
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNmNWQwMGQ0LTllZjctNGMwMS1hYjE5LTMzNTgzZWFiM2FkYiIsImVtYWlsIjoibGF5QHNoYXcuY29tIiwiaWF0IjoxNjU2Nzg1NTEyLCJleHAiOjE2NTcyMTc1MTJ9.aaH4Z-dl6p0DmFoKDfu8E1TFw_WfptpR-sPAuSP3stw
 
 ### Pegar perfil do usuário
 GET http://localhost:3003/user/profile
@@ -27,3 +27,13 @@ Authorization: {{token}}
 ### Pegar perfil de outro usuário
 GET http://localhost:3003/user/3c2d98ca-ae52-4aca-86d7-4718cfdf7554
 Authorization: {{token}}
+
+### Criar Recita
+POST http://localhost:3003/recipe
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "title": "Brigadeirão",
+    "description": "2 latas de leite condensado, 1 lata de leite de vaca (use a lata de leite condensado como medida), 1 colher de manteiga, 200 g de chocolate em pó, 4 ovos açúcar suficiente para polvilhar a forma"
+}
