@@ -29,7 +29,7 @@ export class RecipeController {
                 throw new Error("Todos os campos são obrigatórios.")
             }
 
-            if (typeof title !== "string" || typeof description  !== "string") {
+            if (typeof title !== "string" || typeof description !== "string") {
                 res.statusCode = 422
                 throw new Error("Todos os campos devem ser do tipo 'string'.")
             }
@@ -40,11 +40,11 @@ export class RecipeController {
             const dateNow = new Date()
             const createdAt = dateNow.getFullYear() + '-' + (dateNow.getMonth() + 1) + '-' + dateNow.getDate();
 
-            const recipe = new RecipeModel(id,title,description,createdAt,userData.id)
+            const recipe = new RecipeModel(id, title, description, createdAt, userData.id)
 
             const recipeDB = new RecipeDB()
 
-           await recipeDB.createRecipe(recipe)
+            await recipeDB.createRecipe(recipe)
 
             res.status(201).send({ message: "Receita criada com sucesso" })
 
@@ -54,5 +54,47 @@ export class RecipeController {
             })
         }
     }
-    
+
+    public async getRecipe(req: Request, res: Response) {
+        try {
+            const token = req.headers.authorization
+
+            const { id } = req.params
+
+            if (!token) {
+                res.statusCode = 401
+                throw new Error("Não autorizado.")
+            }
+
+            const authenticator = new Authenticator()
+            const userData = authenticator.getTokenData(token)
+
+            if (!userData) {
+                res.statusCode = 401
+                throw new Error("Token expirado ou inválido.")
+            }
+
+            const recipeDB = new RecipeDB()
+
+            const recipe = await recipeDB.getRecipe(id)
+
+            if (recipe.length === 0) {
+                res.statusCode = 404
+                throw new Error("Receita não encontrada.")
+            }
+            
+            res.status(200).send({
+                id: recipe[0].id,
+                title: recipe[0].title,
+                description: recipe[0].description,
+                createdAt: recipe[0].createdAt.toLocaleDateString()
+            })
+        } catch (error: any) {
+            res.send({
+                message: error.slqMessage || error.message
+            })
+        }
+
+
+    }
 }

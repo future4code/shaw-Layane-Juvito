@@ -28,7 +28,7 @@ Authorization: {{token}}
 GET http://localhost:3003/user/3c2d98ca-ae52-4aca-86d7-4718cfdf7554
 Authorization: {{token}}
 
-### Criar Recita
+### Criar Receita
 POST http://localhost:3003/recipe
 Content-Type: application/json
 Authorization: {{token}}
@@ -37,3 +37,7 @@ Authorization: {{token}}
     "title": "Brigadeirão",
     "description": "2 latas de leite condensado, 1 lata de leite de vaca (use a lata de leite condensado como medida), 1 colher de manteiga, 200 g de chocolate em pó, 4 ovos açúcar suficiente para polvilhar a forma"
 }
+
+### Pegar Receita por ID
+GET http://localhost:3003/recipe/18973da1-188f-4cac-9d97-76c7dd1ac744
+Authorization: {{token}}
