@@ -248,7 +248,7 @@ export class UserController {
 
             if (!userToUnollowId) {
                 res.statusCode = 401
-                throw new Error("Deve informar o id do usuário a ser seguido.")
+                throw new Error("Deve informar o id do usuário a ser removido da lista de seguidos.")
             }
 
             const userDB = new UserDB()
@@ -263,7 +263,7 @@ export class UserController {
             
 
             res.status(200).send({
-                message: "Usuário foi retirado da lista de seguidores."
+                message: "Usuário foi retirado da lista de seguidos."
             })
         } catch (error:any) {
             res.send({
