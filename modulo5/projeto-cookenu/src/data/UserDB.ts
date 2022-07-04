@@ -29,4 +29,12 @@ export default class UserDB extends BaseDB {
 
        return result
     }
+
+    public async followUser ( userId:string, userToFollowId:string){
+        await BaseDB.connection("follow")
+        .insert({
+            user_id: userId,
+            followed_user_id: userToFollowId
+        })
+    }
 }

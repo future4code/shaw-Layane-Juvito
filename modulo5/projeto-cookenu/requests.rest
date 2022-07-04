@@ -41,3 +41,12 @@ Authorization: {{token}}
 ### Pegar Receita por ID
 GET http://localhost:3003/recipe/18973da1-188f-4cac-9d97-76c7dd1ac744
 Authorization: {{token}}
+
+### follow user
+POST http://localhost:3003/user/follow
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "userToFollowId": "3c2d98ca-ae52-4aca-86d7-4718cfdf7554"
+}

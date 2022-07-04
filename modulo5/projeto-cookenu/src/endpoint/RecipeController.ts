@@ -46,7 +46,7 @@ export class RecipeController {
 
             await recipeDB.createRecipe(recipe)
 
-            res.status(201).send({ message: "Receita criada com sucesso" })
+            res.status(201).send({ message: "Receita criada com sucesso." })
 
         } catch (error: any) {
             res.send({

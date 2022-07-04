@@ -183,4 +183,35 @@ export class UserController {
             })
         }
     }
+
+    public async followUser(req: Request, res: Response){
+        try {
+            const token = req.headers.authorization
+            const {userToFollowId} =  req.body
+
+            if (!token) {
+                res.statusCode = 401
+                throw new Error("Não autorizado.")
+            }
+
+            const authenticator = new Authenticator()
+            const userData = authenticator.getTokenData(token)
+
+            if (!userData) {
+                res.statusCode = 401
+                throw new Error("Token expirado ou inválido.")
+            }
+
+            const userDB = new UserDB()
+            await userDB.followUser(userData.id, userToFollowId)
+
+            res.status(200).send({
+                message: "Followed successfully"
+            })
+        } catch (error:any) {
+            res.send({
+                message: error.slqMessage || error.message    
+            })
+        }
+    }
 }
