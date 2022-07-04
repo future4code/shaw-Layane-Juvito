@@ -227,4 +227,48 @@ export class UserController {
             })
         }
     }
+
+    public async unfollowUser(req: Request, res: Response){
+        try {
+            const token = req.headers.authorization
+            const {userToUnollowId} =  req.body
+
+            if (!token) {
+                res.statusCode = 401
+                throw new Error("Não autorizado.")
+            }
+
+            const authenticator = new Authenticator()
+            const userData = authenticator.getTokenData(token)
+
+            if (!userData) {
+                res.statusCode = 401
+                throw new Error("Token expirado ou inválido.")
+            }
+
+            if (!userToUnollowId) {
+                res.statusCode = 401
+                throw new Error("Deve informar o id do usuário a ser seguido.")
+            }
+
+            const userDB = new UserDB()
+            const checkId = await userDB.getUserById(userToUnollowId)
+            
+            if(checkId.length === 0){
+                res.statusCode = 404
+                throw new Error("Não há um usuário cadastrado com o 'id' fornecido.")
+            }
+            
+            await userDB.unfollowUser(userData.id, userToUnollowId)
+            
+
+            res.status(200).send({
+                message: "Usuário foi retirado da lista de seguidores."
+            })
+        } catch (error:any) {
+            res.send({
+                message: error.slqMessage || error.message    
+            })
+        }
+    }
 }

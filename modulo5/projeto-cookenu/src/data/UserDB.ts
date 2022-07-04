@@ -37,4 +37,10 @@ export default class UserDB extends BaseDB {
             followed_user_id: userToFollowId
         })
     }
+
+    public async unfollowUser ( userId:string, userToUnollowId:string){
+        await BaseDB.connection("follow")
+        .delete("*")
+        .where({user_id:userId, followed_user_id: userToUnollowId})
+    }
 }

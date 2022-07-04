@@ -48,5 +48,14 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "userToFollowId": "3c2d98ca-e52-4aca-86d7-4718cfdf7554"
+    "userToFollowId": "32e9479a-3b5a-45cd-8cb0-50c9b93a1898"
+}
+
+### unfollow user
+POST http://localhost:3003/user/unfollow
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "userToUnollowId": "3c2d98ca-ae52-4aca-86d7-4718cfdf7554"
 }
