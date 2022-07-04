@@ -48,5 +48,5 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "userToFollowId": "3c2d98ca-ae52-4aca-86d7-4718cfdf7554"
+    "userToFollowId": "3c2d98ca-e52-4aca-86d7-4718cfdf7554"
 }
