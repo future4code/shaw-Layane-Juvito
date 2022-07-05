@@ -54,7 +54,23 @@ export class UserController {
             res.send(user)
 
         } catch (error: any) {
-            res.send({ message: error.message })
+            res.status(error.sqlStatusCode | 400).send({ message: error.message })
+        }
+    }
+
+    public async deleteProfile(req: Request, res: Response) {
+        try {
+            const token = req.headers.authorization
+            const {id} = req.params
+           
+            const userBusiness = new UserBusiness()
+
+            await userBusiness.deleteProfile(id, token as string)
+
+            res.send("Perfil deletado")
+
+        } catch (error: any) {
+            res.status(400).send({ message: error.message })
         }
     }
 } 

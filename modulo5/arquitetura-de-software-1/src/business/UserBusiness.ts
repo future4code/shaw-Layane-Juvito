@@ -134,4 +134,31 @@ export class UserBusiness {
         return usersMap
 
     }
+
+    public async deleteProfile(id: string, token: string){
+
+        if (!token) {
+            throw new Error("Token não enviado.")
+        }
+
+        const authenticator = new Authenticator()
+        const data = authenticator.getTokenData(token)
+
+        if (!data) {
+            throw new Error("Token inválido")
+        }
+
+        if (data.role !== "ADMIN") {
+            throw new Error("Usuário não autorizado.")
+        }
+
+        const userDB = new UserDB()
+
+        const checkId = await userDB.getUserById(id)
+        
+        if( checkId.length === 0){
+            throw new Error("Perfil a ser deletado não existe.")
+        }
+        await userDB.deleteProfile(id)
+    }
 } 

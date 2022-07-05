@@ -6,7 +6,7 @@ const tableName = "user"
 
 export default class UserDB extends BaseDB {
 
-    public async signup(user: UserModel) {
+    public async signup(user: UserModel): Promise<void> {
         await BaseDB.connection
             .insert({
                 id: user.getId(),
@@ -28,14 +28,30 @@ export default class UserDB extends BaseDB {
         return user
     }
 
+    public async getUserById(id: string): Promise<user[]> {
+
+        const user: user[] = await BaseDB.connection
+            .select("*")
+            .where({ id })
+            .from(tableName)
+
+        return user
+    }
+
     public async getUser(): Promise<user[]> {
 
         const user: user[] = await BaseDB.connection
             .select("*")
             .from(tableName)
 
-
         return user
 
+    }
+
+    public async deleteProfile(id:string): Promise<void>{
+        await BaseDB.connection
+        .delete("*")
+        .where({id})
+        .from(tableName)
     }
 } 

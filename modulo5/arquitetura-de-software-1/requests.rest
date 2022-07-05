@@ -1,0 +1,29 @@
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhNzQxOWM1LWE0ZmQtNDRiZC1iZGQ2LTNmOTgyNWQyNzkyNyIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY1Njk4MDU5NiwiZXhwIjoxNjU3NDEyNTk2fQ.c_5Ck-YnFAetAvHYQsJicK3ZxcitMk2whLToL_DsVdU
+
+### pegar perfil
+GET http://localhost:3003/all
+Authorization: {{token}}
+
+### deletar perfil
+DELETE http://localhost:3003/6c3843b1-055f-4506-b17d-ef1baae2c8ff
+Authorization: {{token}}
+
+### signup
+POST http://localhost:3003/signup
+Content-Type: application/json
+
+{
+	"name": "Lay",
+	"email": "lay@shaw.com",
+	"password": "senhaSegura",
+	"role": "NORMAL"
+}
+
+### login
+POST http://localhost:3003/login
+Content-Type: application/json
+
+{
+	"email": "larissa@ufpb.com",
+	"password": "senhaSegura"
+}
