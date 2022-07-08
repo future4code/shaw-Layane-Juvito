@@ -1,0 +1,61 @@
+### Cadastrar usuário
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+    "name": "Lay",
+    "email": "lay@shaw.com",
+    "password": "onepiece"
+}
+
+### Logar usuário
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+    "email": "lay@shaw.com",
+    "password": "onepiece"
+}
+
+###
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNmNWQwMGQ0LTllZjctNGMwMS1hYjE5LTMzNTgzZWFiM2FkYiIsImVtYWlsIjoibGF5QHNoYXcuY29tIiwiaWF0IjoxNjU2Nzg1NTEyLCJleHAiOjE2NTcyMTc1MTJ9.aaH4Z-dl6p0DmFoKDfu8E1TFw_WfptpR-sPAuSP3stw
+
+### Pegar perfil do usuário
+GET http://localhost:3003/user/profile
+Authorization: {{token}}
+
+### Pegar perfil de outro usuário
+GET http://localhost:3003/user/3c2d98ca-ae52-4aca-86d7-4718cfdf7554
+Authorization: {{token}}
+
+### Criar Receita
+POST http://localhost:3003/recipe
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "title": "Brigadeirão",
+    "description": "2 latas de leite condensado, 1 lata de leite de vaca (use a lata de leite condensado como medida), 1 colher de manteiga, 200 g de chocolate em pó, 4 ovos açúcar suficiente para polvilhar a forma"
+}
+
+### Pegar Receita por ID
+GET http://localhost:3003/recipe/18973da1-188f-4cac-9d97-76c7dd1ac744
+Authorization: {{token}}
+
+### follow user
+POST http://localhost:3003/user/follow
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "userToFollowId": "32e9479a-3b5a-45cd-8cb0-50c9b93a1898"
+}
+
+### unfollow user
+POST http://localhost:3003/user/unfollow
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "userToUnollowId": "3c2d98ca-ae52-4aca-86d7-4718cfdf7554"
+}
