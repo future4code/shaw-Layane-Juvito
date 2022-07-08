@@ -1,0 +1,17 @@
+
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+   "email":"larissa@ufpb.com",
+   "password": "tratante"
+}
+
+###
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+   "email":"larisskka@ufpb.com",
+   "password": "tratante"
+}
