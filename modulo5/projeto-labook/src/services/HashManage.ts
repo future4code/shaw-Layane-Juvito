@@ -1,6 +1,6 @@
 import { genSalt, hash, compare } from "bcryptjs"
 
-export class HashManage {
+export abstract class HashManage {
     
     public static generateHash = async (password: string): Promise<string> => {
 

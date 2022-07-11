@@ -1,9 +1,9 @@
 import * as jwt from "jsonwebtoken";
 import { AuthenticationData } from "../model/AuthenticationData";
 
-export class Authenticator {
+export abstract class Authenticator {
 
-    public generateToken = (payload: AuthenticationData): string => {
+    public static generateToken = (payload: AuthenticationData): string => {
 
         const token = jwt.sign(
             payload, process.env.JWT_KEY as string, { expiresIn: process.env.ACCESS_TOKEN_EXPIRES_IN }
@@ -12,14 +12,14 @@ export class Authenticator {
         return token;
     }
 
-    public getTokenData = (token: string): AuthenticationData | null => {
+    public static getTokenData = (token: string): AuthenticationData | null => {
         try {
 
             const data = jwt.verify(token, process.env.JWT_KEY as string) as AuthenticationData;
 
             return {
                 id: data.id,
-                role: data.role
+                email: data.email
             };
 
         } catch (error) {
