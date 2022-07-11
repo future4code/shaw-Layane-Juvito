@@ -13,7 +13,6 @@ export class PostDB extends BaseDB {
                 id: post.getId(),
                 photo: post.getPhoto(),
                 description: post.getDescription(),
-                created_at: post.getCreatedAt(),
                 type: post.getType(),
                 user_id: post.getUserId()
             })

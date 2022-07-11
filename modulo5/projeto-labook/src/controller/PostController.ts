@@ -17,7 +17,6 @@ export class PostController {
             const newPost: postInputDTO = {
                 photo,
                 description,
-                createdAt,
                 type,
                 token: token as string
             }

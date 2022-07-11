@@ -16,7 +16,7 @@ export class PostBusiness {
 
     public createPost = async (post: postInputDTO) => {
         try {
-            const { photo, description, createdAt, type, token }  = post
+            const { photo, description, type, token }  = post
 
             if (!token) {
                 throw new CustomError(401, "Token não enviado.")
@@ -34,7 +34,7 @@ export class PostBusiness {
                 throw new CustomError(401, "Usuário não cadastrado.")
             }
 
-            if ( !photo || !description || !createdAt || !type) {
+            if ( !photo || !description || !type) {
                 throw new CustomError(422, "Todos os campos são obrogatórios.")
             }
 
@@ -51,8 +51,7 @@ export class PostBusiness {
             const newPost: PostModel = new PostModel( 
                 id,
                 photo, 
-                description, 
-                createdAt, 
+                description,
                 type,
                 userInformation.id
             )

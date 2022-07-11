@@ -29,7 +29,6 @@ Authorization: {{token}}
 {
     "photo": "link",
     "description": "viva a vida",
-    "createdAt": "2022-07-11",
     "type": "NORMAL"
 }
 

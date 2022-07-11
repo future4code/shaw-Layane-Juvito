@@ -14,8 +14,7 @@ export type post = {
 
 export interface postInputDTO {
     photo: string,
-    description: string,
-    createdAt: string,
+    description: string
     type: PostType,
     token: string
 }
