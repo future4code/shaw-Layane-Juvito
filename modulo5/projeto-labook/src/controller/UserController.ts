@@ -26,7 +26,7 @@ export class UserController {
 
         } catch (error: any) {
             if (error instanceof CustomError) {
-                res.status(error.getStatusCode()).send({ message: error.message })
+                res.status(error.statusCode).send({ message: error.message })
             } else {
                 res.status(500).send({ message: error.sqlMessage})
             }
@@ -51,7 +51,7 @@ export class UserController {
         } catch (error: any) {
 
             if (error instanceof CustomError) {
-                res.status(error.getStatusCode()).send({ message: error.message })
+                res.status(error.statusCode).send({ message: error.message })
             } else {
                 res.status(500).send({ message: error.sqlMessage})
             }

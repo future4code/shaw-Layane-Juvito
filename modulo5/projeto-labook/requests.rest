@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIzMzE4MTRmLTYxMTMtNDA0YS05ODkyLTNlNDVlYmVkODlmZCIsImVtYWlsIjoicm9kcmlnbzEyQGVtYWlsLmNvbSIsImlhdCI6MTY1NzUzNjMwMywiZXhwIjoxNjU3OTY4MzAzfQ.Z4IgskZuEpzZ5wq8ixQUFkce7251a-GaIzjOYIxXsk0
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNmYmMwYWUwLWNjZGEtNDRjMS05YmQyLWQzMzUxY2ZlM2IzZiIsImVtYWlsIjoibGF5QHNoYXcuY29tIiwiaWF0IjoxNjU3NTUwMTY0LCJleHAiOjE2NTc5ODIxNjR9.oLrk8MEkR2eKo8okD_3puW824v1le-pfmmWaefl7rZc
 
 
 ###
@@ -6,9 +6,9 @@ POST http://localhost:3003/user/signup
 Content-Type: application/json 
 
 {
-    "name": 2,
-    "email": "rodrigo12@email.com",
-    "password": "1223145153"
+    "name": "Layane Bastos",
+    "email": "lay@shaw.com",
+    "password": "123456"
 }
 
 ###
@@ -17,12 +17,9 @@ POST http://localhost:3003/user/login
 Content-Type: application/json 
 
 {
-    "email": "rodrigo12@email.c",
-    "password": "1223145153"
+    "email": "lay@shaw.com",
+    "password": "123456"
 }
-###
-DELETE http://localhost:3003/
-
 
 ### 
 POST http://localhost:3003/post/create 

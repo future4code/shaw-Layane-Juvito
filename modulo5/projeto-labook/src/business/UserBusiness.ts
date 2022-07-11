@@ -54,7 +54,7 @@ export class UserBusiness {
             return token
 
         } catch (error: any) {
-            throw new CustomError(error.getStatusCode() || 500, error.sqlMessage || error.message)
+            throw new CustomError(error.statusCode || 500, error.sqlMessage || error.message)
         }
 
     }
@@ -86,7 +86,7 @@ export class UserBusiness {
         } catch (error: any) {
             
             if (error instanceof CustomError) {
-                throw new CustomError(error.getStatusCode(),  error.message)
+                throw new CustomError(error.statusCode,  error.message)
             }
 
             throw new CustomError(500,  error.message)

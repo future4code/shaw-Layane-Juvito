@@ -62,7 +62,7 @@ export class PostBusiness {
 
         } catch (error: any) {
             if (error instanceof CustomError) {
-                throw new CustomError(error.getStatusCode(),  error.message)
+                throw new CustomError(error.statusCode,  error.message)
             }
 
             throw new CustomError(500,  error.message)
@@ -102,7 +102,7 @@ export class PostBusiness {
 
         } catch (error: any) {
             if (error instanceof CustomError) {
-                throw new CustomError(error.getStatusCode(),  error.message)
+                throw new CustomError(error.statusCode,  error.message)
             }
 
             throw new CustomError(500,  error.message)
