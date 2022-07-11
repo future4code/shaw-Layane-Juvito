@@ -3,7 +3,7 @@ import PostModel from '../model/PostModel'
 import UserModel from '../model/UserModel'
 import { BaseDB } from './BaseDB'
 
-const tableName = "labook_post"
+const tableName = "labook_posts"
 
 export class PostDB extends BaseDB {
 

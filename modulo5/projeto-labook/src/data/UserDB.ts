@@ -3,7 +3,7 @@ import { user } from "../model/user";
 import UserModel from "../model/UserModel";
 import { BaseDB } from "./BaseDB";
 
-const tableName = "labook_user"
+const tableName = "labook_users"
 
 export class UserDB extends BaseDB {
 
