@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { UserBusiness } from "../business/UserBusiness";
 import { CustomError } from "../error/CustomError";
-import { UserInputDTO, UserLoginDTO } from "../model/user";
+import { RequestFriendshipDTO, UserInputDTO, UserLoginDTO } from "../model/user";
 
 export class UserController {
     constructor(
@@ -58,5 +58,53 @@ export class UserController {
         }
     }
 
+    public requestFriendship = async (req: Request, res: Response) => {
 
+        try {
+            const friendId = req.params.id as string
+            const token = req.headers.authorization as string
+
+            const input: RequestFriendshipDTO = {
+                friendId,
+                token
+            }
+
+            await this.userBusiness.requestFriendship(input)
+
+            res.status(200).send({ message: "Friendship registered." })
+
+        } catch (error: any) {
+
+            if (error instanceof CustomError) {
+                res.status(error.statusCode).send({ message: error.message })
+            } else {
+                res.status(500).send({ message: error.sqlMessage})
+            }
+        }
+    }
+
+    public deleteFriendship = async (req: Request, res: Response) => {
+
+        try {
+            const friendId = req.params.id as string
+            const token = req.headers.authorization as string
+
+            const input: RequestFriendshipDTO = {
+                friendId,
+                token
+            }
+
+            await this.userBusiness.deleteFriendship(input)
+
+            res.status(200).send({ message: "Frienship deleted." })
+
+        } catch (error: any) {
+
+            if (error instanceof CustomError) {
+                res.status(error.statusCode).send({ message: error.message })
+            } else {
+                res.status(500).send({ message: error.sqlMessage})
+            }
+        }
+    }
 }

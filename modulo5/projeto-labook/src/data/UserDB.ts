@@ -1,5 +1,4 @@
-import { Request, Response } from "express";
-import { user } from "../model/user";
+import { friendships, user } from "../model/user";
 import UserModel from "../model/UserModel";
 import { BaseDB } from "./BaseDB";
 
@@ -18,11 +17,19 @@ export class UserDB extends BaseDB {
             .into(tableName);
     }
 
+    public getUser = async (): Promise<user[]> => {
+        const user: user[] = await BaseDB.connection
+            .select("*")
+            .from(tableName)
+
+        return user
+    }
+
     public getUserByEmail = async (email: string): Promise<user[]> => {
         const user: user[] = await BaseDB.connection
             .select("*")
-            .where({ email })
             .from(tableName)
+            .where({ email })
 
         return user
     }
@@ -30,9 +37,36 @@ export class UserDB extends BaseDB {
     public getUserById = async (id: string): Promise<user[]> => {
         const user: user[] = await BaseDB.connection
             .select("*")
-            .where({ id })
             .from(tableName)
+            .where({ id })
 
         return user
+    }
+
+    public requestFriendship = async (id: string, friendId:string): Promise<void> => {
+        await BaseDB.connection
+            .insert({
+                user_id: id,
+                friend_id: friendId
+            })
+            .into("labook_friendship");
+    }
+
+    public checkFriends = async (user_id: string, friend_id: string): Promise<friendships[]> => {
+        const friendship:friendships[] = await BaseDB.connection
+            .select("user_id as userId", "friend_id as friendId")
+            .from("labook_friendship")
+            .where({user_id})
+            .andWhere({friend_id});
+
+        return friendship
+    }
+
+    public deleteFriendship = async (user_id: string, friend_id: string): Promise<void> => {
+        await BaseDB.connection
+            .delete()
+            .where({user_id})
+            .andWhere({friend_id})
+            .into("labook_friendship");
     }
 }

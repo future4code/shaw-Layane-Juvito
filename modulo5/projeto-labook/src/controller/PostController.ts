@@ -10,7 +10,7 @@ export class PostController {
 
     public createPost = async (req: Request, res: Response) => {
         try {
-            const { photo, description, createdAt, type } = req.body
+            const { photo, description, type } = req.body
             const token = req.headers.authorization
 
 
@@ -23,7 +23,7 @@ export class PostController {
 
             await this.postBusiness.createPost(newPost)
 
-            res.status(201).send({ message: "Post criado com sucesso!" })
+            res.status(201).send({ message: "Post created successfully" })
 
         } catch (error: any) {
             if (error instanceof CustomError) {

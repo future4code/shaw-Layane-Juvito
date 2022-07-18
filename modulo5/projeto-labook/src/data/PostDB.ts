@@ -1,6 +1,5 @@
 import { post } from '../model/post'
 import PostModel from '../model/PostModel'
-import UserModel from '../model/UserModel'
 import { BaseDB } from './BaseDB'
 
 const tableName = "labook_posts"

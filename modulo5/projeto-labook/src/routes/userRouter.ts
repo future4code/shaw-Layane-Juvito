@@ -14,3 +14,5 @@ export const userRouter = express.Router()
 
 userRouter.post('/signup', userController.signup)
 userRouter.post('/login', userController.login)
+userRouter.post('/friendship/request/:id', userController.requestFriendship)
+userRouter.post('/friendship/delete/:id', userController.deleteFriendship)

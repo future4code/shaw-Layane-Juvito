@@ -1,6 +1,6 @@
 import { UserDB } from '../data/UserDB'
 import { CustomError } from '../error/CustomError'
-import { user, UserInputDTO, UserLoginDTO } from '../model/user'
+import { RequestFriendshipDTO, user, UserInputDTO, UserLoginDTO } from '../model/user'
 import UserModel from '../model/UserModel'
 import { Authenticator } from '../services/Authenticator'
 import { HashManage } from '../services/HashManage'
@@ -17,25 +17,26 @@ export class UserBusiness {
             const { name, email, password } = user
 
             if (!name || !email || !password) {
-                throw new CustomError(422, "Todos os campos são obrogatórios.")
+                throw new CustomError(422, "Name, email and password are required.")
             }
 
             if (typeof name !== "string" || typeof email !== "string" || typeof password !== "string") {
-                throw new CustomError(422, "Os campos 'name', 'email' e 'password' devem ser do tipo string.")
+                throw new CustomError(422, "Invalid input.")
             }
+            const regexp = /\S+@\S+\.\S+/
 
-            if (!email.includes("@")) {
-                throw new CustomError(401, "Email inválido.")
+            if (!regexp.test(email)) {
+                throw new CustomError(422, "Invalid Email.")
             }
 
             if (password.length < 6) {
-                throw new CustomError(401, "Senha inválida.")
+                throw new CustomError(422, "Invalid password. Password must have at least 6 characters")
             }
 
             const checkEmail: user[] = await this.userDB.getUserByEmail(email)
 
             if (checkEmail.length > 0) {
-                throw new CustomError(409, "Email já cadastrado.")
+                throw new CustomError(409, "Email already registered.")
             }
 
             const id: string = IdGenerator.idGenerator()
@@ -64,20 +65,20 @@ export class UserBusiness {
         try {
             const { email, password } = user
 
+            if(!email || password){
+                throw new CustomError(422, "Name, email and password are required.")
+            }
+
             const checkUser = await this.userDB.getUserByEmail(email)
 
             if (checkUser.length === 0) {
-                throw new CustomError(401, "Usuário não cadastrado")
+                throw new CustomError(401, "Invalid credentials.")
             }
 
             const passwordIsCorrect: boolean = await HashManage.compare(password, checkUser[0].password)
 
             if (!passwordIsCorrect) {
-                throw new CustomError(401, "Senha ou email inválidos.")
-            }
-
-            if (!email || !email.includes("@")) {
-                throw new CustomError(401, "Email inválido.")
+                throw new CustomError(401, "Invalid credentials.")
             }
 
             const token = Authenticator.generateToken({ id: checkUser[0].id, email: checkUser[0].email })
@@ -95,5 +96,93 @@ export class UserBusiness {
 
     }
 
+    public  requestFriendship  = async (input: RequestFriendshipDTO) => {
 
+        try {
+            const { friendId, token } = input
+
+            if (!token) {
+                throw new CustomError(401, "This request needs authorization, please login to get your access token.")
+            }
+
+            const userInformation = Authenticator.getTokenData(token)
+    
+            if (!userInformation ) {
+                throw new CustomError(401,"Invalid token.")
+            }
+
+            if (!friendId || friendId === ":id") {
+                throw new CustomError(422, "Fill the :id with the user id")
+            }
+        
+            const checkFriend: user[] = await this.userDB.getUserById(friendId)
+            
+            if (checkFriend.length === 0) {
+                throw new CustomError(404, "Invalid credentials, no id registration.")
+            }
+
+            const checkFriendship = await this.userDB.checkFriends(userInformation.id, friendId)
+
+            if (checkFriendship.length > 0) {
+                throw new CustomError(409, "This friendship already exists.")
+            }
+            await this.userDB.requestFriendship(userInformation.id, friendId)
+
+            
+        } catch (error: any) {
+            
+            if (error instanceof CustomError) {
+                throw new CustomError(error.statusCode,  error.message)
+            }
+
+            throw new CustomError(500,  error.message)
+            
+        }
+
+    }
+
+    public  deleteFriendship  = async (input: RequestFriendshipDTO) => {
+
+        try {
+            const { friendId, token } = input
+
+            if (!token) {
+                throw new CustomError(401, "This request needs authorization, please login to get your access token.")
+            }
+
+            const userInformation = Authenticator.getTokenData(token)
+    
+            if (!userInformation ) {
+                throw new CustomError(401,"Invalid token.")
+            }
+
+            if (!friendId || friendId === ":id") {
+                throw new CustomError(422, "Fill the :id with the user id")
+            }
+        
+            const checkFriend: user[] = await this.userDB.getUserById(friendId)
+            
+            if (checkFriend.length === 0) {
+                throw new CustomError(404, "Invalid credentials, no id registration.")
+            }
+
+            const checkFriendship = await this.userDB.checkFriends(userInformation.id, friendId)
+
+            if (checkFriendship.length === 0) {
+                throw new CustomError(404, "Non Existing Friendship.")
+            }
+            await this.userDB.deleteFriendship(userInformation.id, friendId)
+
+            
+        } catch (error: any) {
+            
+            if (error instanceof CustomError) {
+                throw new CustomError(error.statusCode,  error.message)
+            }
+
+            throw new CustomError(500,  error.message)
+            
+        }
+
+    }
 }

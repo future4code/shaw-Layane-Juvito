@@ -19,31 +19,25 @@ export class PostBusiness {
             const { photo, description, type, token }  = post
 
             if (!token) {
-                throw new CustomError(401, "Token não enviado.")
+                throw new CustomError(401, "This request needs authorization, please login to get your access token.")
             }
 
             const userInformation = Authenticator.getTokenData(token)
     
             if (!userInformation ) {
-                throw new CustomError(401,"Token inválido")
-            }
-
-            const checkUser: user[] = await this.userDB.getUserById(userInformation.id)
-
-            if (checkUser.length === 0) {
-                throw new CustomError(401, "Usuário não cadastrado.")
+                throw new CustomError(401,"Invalid token.")
             }
 
             if ( !photo || !description || !type) {
-                throw new CustomError(422, "Todos os campos são obrogatórios.")
+                throw new CustomError(422, "Photo, description and type are required.")
             }
 
             if (typeof photo !== "string" || typeof description !== "string") {
-                throw new CustomError(422, "Os campos 'photo'e 'description' devem ser do tipo string.")
+                throw new CustomError(422, "Invalid input.")
             }
 
             if(type !== PostType.EVENT && type !== PostType.NORMAL){
-                throw new CustomError(422, "O campo 'type' deve assumir o valor 'NORMAL' ou 'EVENT'.")
+                throw new CustomError(422, "Invalid type. Type must be NORMAL or EVENTO.")
             }
 
             const id = IdGenerator.idGenerator()
@@ -74,26 +68,19 @@ export class PostBusiness {
             const { id, token }  = input
 
             if (!token) {
-                throw new CustomError(401, "Token não enviado.")
+                throw new CustomError(401, "This request needs authorization, please login to get your access token.")
             }
 
             const userInformation = Authenticator.getTokenData(token)
     
             if (!userInformation ) {
-                throw new CustomError(401,"Token inválido")
-            }
-
-            const checkUser: user[] = await this.userDB.getUserById(userInformation.id)
-
-            if (checkUser.length === 0) {
-                throw new CustomError(409, "Usuário não cadastrado.")
-            }        
+                throw new CustomError(401,"Invalid token.")
+            }     
 
             const post:post[] = await this.postDB.getPostById(id)
             
-
             if (post.length === 0) {
-                throw new CustomError(404, "Post não encontrado.")
+                throw new CustomError(404, "Post not found.")
             }   
 
             return post
