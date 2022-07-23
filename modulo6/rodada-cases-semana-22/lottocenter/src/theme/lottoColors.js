@@ -4,6 +4,5 @@ export const lottoColors =  {
     "LOTOFÁCIL": '#DD7AC6',
     "LOTOMANIA": '#FFAB64',
     "TIMEMANIA": '#5AAD7D',
-    "DIA DE SORTE": '#BFAF83',
-    "LOTTOCENTER": 'black'
+    "DIA DE SORTE": '#BFAF83'
 }

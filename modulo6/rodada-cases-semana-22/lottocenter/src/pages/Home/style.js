@@ -2,10 +2,12 @@ import styled from 'styled-components'
 import { lottoColors } from '../../theme/lottoColors'
 
 export const HomeContainer = styled.div`
-    min-height: 100vh;
+    height: 100vh;
     width: 100vw;
     display: flex;
+    align-items: center;
     background-color: ${props => lottoColors[props.lotto]};
+    overflow: hidden;
     @media screen and (max-device-width : 800px){
         flex-direction: column;
     }
@@ -61,7 +63,7 @@ export const RightSide = styled.div`
     background-color: #EFEFEF;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     gap:1%;
 

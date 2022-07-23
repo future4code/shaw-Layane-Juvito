@@ -9,7 +9,7 @@ const Home = () => {
     const [lotteries, setLotteries] = useState([])
     const [contests, setContests] = useState([])
     const [contest, setContest] = useState([])
-    const [selectController, setSelectController] = useState('LottoCenter')
+    const [selectController, setSelectController] = useState('MEGA-SENA')
     const [messageError, setMessageError] = useState("")
 
     useEffect(() => {
@@ -28,12 +28,18 @@ const Home = () => {
 
     useEffect(() => {
 
-        if(selectController === 'LottoCenter'){
-            setContest({})
-        }
+        contests.length>0 && GetRequest({
+            endpoint: `concursos/${contests[0].concursoId}`,
+            setData: setContest,
+            setMessageError: setMessageError
+        })
+    }, [contests])
+
+    useEffect(() => {
+
         const currentLottery = lotteries.find((lottery) => lottery.nome === selectController)
         const current = currentLottery && contests.find((contest) => contest.loteriaId === currentLottery.id)
-        
+
         current && GetRequest({
             endpoint: `concursos/${current.concursoId}`,
             setData: setContest,
@@ -47,12 +53,12 @@ const Home = () => {
         setSelectController(event.target.value)
     }
 
-    const lotteriesOptions = lotteries.map((lottery,index) => {
+    const lotteriesOptions = lotteries.map((lottery, index) => {
         return (<option key={index} value={lottery.nome}>{lottery.nome.toUpperCase()}</option>)
     })
 
-    const contestNumbers = contest.numeros && contest.numeros.map((number,index) => {
-        return(
+    const contestNumbers = contest.numeros && contest.numeros.map((number, index) => {
+        return (
             <NumberDiv key={index}>{number}</NumberDiv>
         )
     })
@@ -63,26 +69,18 @@ const Home = () => {
             <LeftSide>
                 <Select
                     onChange={handleSelect}
-                >   <option value={'LottoCenter'}>Selecione uma loteria</option>
+                >
                     {lotteriesOptions}
                 </Select>
                 <LottoContainer>
                     <Logo />
-                   <p>{selectController.toUpperCase()}</p> 
+                    <p>{selectController.toUpperCase()}</p>
                 </LottoContainer>
-                {
-                    contest.id ?
-                    <ContestInfoContainer>
-                        <p>CONCURSO</p>
-                        <ContestInfo>{contest.id}-{moment(contest.data).format('DD/MM/YYYY')}</ContestInfo>
-                    </ContestInfoContainer>
-                    :
-                    <ContestInfoContainer>
-                        <p>
-                            Acompanhe o resultado das melhores loterias aqui.
-                        </p>
-                    </ContestInfoContainer>
-                }
+                <ContestInfoContainer>
+                    <p>CONCURSO</p>
+                    <ContestInfo>{contest.id}-{moment(contest.data).format('DD/MM/YYYY')}</ContestInfo>
+                </ContestInfoContainer>
+
 
             </LeftSide>
 
