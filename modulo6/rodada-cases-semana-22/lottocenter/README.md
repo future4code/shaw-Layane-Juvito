@@ -28,15 +28,39 @@ O projeto foi desenvolvido com base no [layout](https://www.figma.com/file/H2qrY
 ## 🔗 Link Surge 
 Acesse a página do LottoCenter [clicando aqui](https://lottocenter.surge.sh/).
 
-##  👩🏻‍💻 Desenvolvedora
+## :file_folder: Acessar projeto localmente
+
+-  Clonar o repositório
+
+```$ git clone linkRepositório ```
+
+- Build
+
+Dentro da pasta do projeto rode o comando:
+
+```$ npm run build ```
+
+- Execução
+
+Para executar o projeto localmente rode o comando abaixo dentro da pasta do mesmo:
+
+```$ npm start ```
+
+##  :woman_technologist: Desenvolvedora
 
 | [<img src="https://avatars.githubusercontent.com/u/50851374?v=4" width=115><br><sub>Layane Bastos Juvito</sub>](https://www.linkedin.com/in/layanebastos/)
 | :---: | 
 
 ## 📷 Imagens
 #### MOBILE (Usando como modelo o iphone 12 Pro)
-
+![image](https://user-images.githubusercontent.com/50851374/180665737-9469a31d-b31f-4a7e-9ebb-88edc2be4220.png)
+![image](https://user-images.githubusercontent.com/50851374/180665704-0fedef3b-9dbb-47ae-a468-6fdc49dde48e.png)
 
 #### DESKTOP
+![image](https://user-images.githubusercontent.com/50851374/180665646-9412198a-b98b-4745-9d07-207508d56da4.png)
+![image](https://user-images.githubusercontent.com/50851374/180665668-c350db1d-4155-41b3-b99d-a55489f5eda7.png)
+
+
+
 
 
