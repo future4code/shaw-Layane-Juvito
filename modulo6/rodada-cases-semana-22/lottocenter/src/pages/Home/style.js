@@ -8,7 +8,7 @@ export const HomeContainer = styled.div`
     align-items: center;
     background-color: ${props => lottoColors[props.lotto]};
     overflow: hidden;
-    @media screen and (max-device-width : 800px){
+    @media screen and (max-device-width : 900px){
         flex-direction: column;
     }
 
@@ -21,7 +21,7 @@ export const LeftSide = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 92px 0;
-    @media screen and (max-device-width : 800px){
+    @media screen and (max-device-width : 900px){
         height: 50vh;
         width: 100vw;
         padding: 72px 0;
@@ -40,20 +40,34 @@ export const LottoContainer = styled.div`
     justify-content: center;
     align-items: center;
     color:white;
-    font-size: 30px;
+    font-size: 1.8rem;
     font-weight: 700;
-    @media screen and (max-device-width : 800px){
+    @media screen and (max-device-width : 900px){
         flex-direction: column;
     }
 `
 
 export const ContestInfo = styled.p`
     font-weight: 700;
+    @media screen and (max-device-width : 900px){
+        display: none;
+    }
+`
+export const ContestInfoMobile = styled.p`
+    display:none;
+    @media screen and (max-device-width : 900px){
+        display: block;
+    }
+
 `
 export const ContestInfoContainer = styled.div`
     p{
         color: white;
         text-align: center;
+    }
+    @media screen and (max-device-width : 900px){
+        display: flex;
+        gap:5px;
     }
 `
 export const RightSide = styled.div`
@@ -63,14 +77,27 @@ export const RightSide = styled.div`
     background-color: #EFEFEF;
     display: flex;
     flex-wrap: wrap;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     gap:1%;
+    padding-bottom: 10vh;
 
-    @media screen and (max-device-width : 800px){
+    @media screen and (max-device-width : 900px){
         height: 50vh;
         width: 100vw;
         border-radius:  50% 50% 0   0  / 5% 5% 0    0 ;
+    }
+    >p{
+        position: absolute;
+        bottom: 10vh;
+        text-align: center;
+        align-self: center;
+        padding: 0 1%;
+
+        @media screen and (max-device-width : 900px){
+        position: absolute;
+        bottom: 4vh;
+    }
     }
 `
 
@@ -81,7 +108,7 @@ export const NumberContainer = styled.div`
     align-items: center;
     justify-content: center;
     gap: 2%;
-    @media screen and (max-device-width : 800px){
+    @media screen and (max-device-width : 900px){
         width: 90%;
         overflow: auto;
         flex: none;
@@ -96,16 +123,17 @@ export const NumberDiv = styled.div`
     width: 100px;
     border-radius: 50%;
     background-color: #FFFFFF;
-    font-size: 27px;
+    font-size: 1.68rem;
     font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top:2%;
-    @media screen and (max-device-width : 800px){
+    
+    @media screen and (max-device-width : 900px){
         height: 70px;
         width: 70px;
-        font-size: 20px;
+        font-size: 1.5rem;
     }
 `
 

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import Logo from "../../components/logo/Logo"
 import { GetRequest } from "../../requests/GetRequest"
-import { ContestInfo, ContestInfoContainer, HomeContainer, LeftSide, LottoContainer, NumberContainer, NumberDiv, RightSide, Select } from "./style"
+import { ContestInfo, ContestInfoContainer, ContestInfoMobile, HomeContainer, LeftSide, LottoContainer, NumberContainer, NumberDiv, RightSide, Select } from "./style"
 import moment from "moment"
+import Loader from "../../components/Loader/Loader"
 
 const Home = () => {
 
@@ -11,27 +12,31 @@ const Home = () => {
     const [contest, setContest] = useState([])
     const [selectController, setSelectController] = useState('MEGA-SENA')
     const [messageError, setMessageError] = useState("")
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         GetRequest({
             endpoint: "loterias",
             setData: setLotteries,
-            setMessageError: setMessageError
+            setMessageError: setMessageError,
+            setLoading: setLoading
         })
 
         GetRequest({
             endpoint: "loterias-concursos",
             setData: setContests,
-            setMessageError: setMessageError
+            setMessageError: setMessageError,
+            setLoading: setLoading
         })
     }, [])
 
     useEffect(() => {
 
-        contests.length>0 && GetRequest({
+        contests.length > 0 && GetRequest({
             endpoint: `concursos/${contests[0].concursoId}`,
             setData: setContest,
-            setMessageError: setMessageError
+            setMessageError: setMessageError,
+            setLoading: setLoading
         })
     }, [contests])
 
@@ -43,7 +48,8 @@ const Home = () => {
         current && GetRequest({
             endpoint: `concursos/${current.concursoId}`,
             setData: setContest,
-            setMessageError: setMessageError
+            setMessageError: setMessageError,
+            setLoading: setLoading
         })
 
     }, [selectController])
@@ -78,16 +84,28 @@ const Home = () => {
                 </LottoContainer>
                 <ContestInfoContainer>
                     <p>CONCURSO</p>
-                    <ContestInfo>{contest.id}-{moment(contest.data).format('DD/MM/YYYY')}</ContestInfo>
+                    <ContestInfo>
+                        {contest.id}-{moment(contest.data).format('DD/MM/YYYY')}
+                    </ContestInfo>
+                    <ContestInfoMobile>
+                        Nº {contest.id}
+                    </ContestInfoMobile>
                 </ContestInfoContainer>
 
 
             </LeftSide>
 
             <RightSide>
-                <NumberContainer>
-                    {contestNumbers}
-                </NumberContainer>
+                {
+                    loading ?
+                        <Loader />
+                        :
+                        
+                        <NumberContainer>
+                            {messageError ? messageError : contestNumbers}
+                        </NumberContainer>
+                }
+                <p>Este sorteio é meramente ilustrativo e não possui nenhuma ligação com a CAIXA.</p>
             </RightSide>
         </HomeContainer>
     )
