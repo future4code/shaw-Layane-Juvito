@@ -1,11 +1,9 @@
 # 💻 Lotto Center
 
 ### :dart: Objetivo do projeto
-Primeiro case da rodada de cases proposta pela Labenu durante o sexto e o último módulo do bootcamp desenvolvimento web fullstack. Esse é um case frontend proposto pela Brainn na qual objetivo é construir uma aplicação web front-end que mostre os Resultados das Loterias.
+Primeiro case da rodada de cases proposta pela Labenu durante o sexto e último módulo do bootcamp desenvolvimento web fullstack. Esse é um case frontend proposto pela Brainn na qual objetivo é construir uma aplicação web front-end que mostre os Resultados das Loterias.
 
 O projeto foi desenvolvido com base no [layout](https://www.figma.com/file/H2qrYBCFMf4didYmxRwTxP/Brainn-Frontend-Challenge) e na [api](https://brainn-api-loterias.herokuapp.com) fornecidos pela Brainn.
-
-
 
 ### :small_blue_diamond: Os requisitos do projeto são:
 - A aplicação terá que suportar 6 sorteios: Mega-sena, Quina, Lotofácil, Lotomania, Timemania e Dia de sorte
@@ -30,21 +28,25 @@ Acesse a página do LottoCenter [clicando aqui](https://lottocenter.surge.sh/).
 
 ## :file_folder: Acessar projeto localmente
 
--  Clonar o repositório
+-  **Clonar o repositório**
 
 ```$ git clone linkRepositório ```
 
-- Build
+- **Instalar dependências**
 
-Dentro da pasta do projeto rode o comando:
+``` $ npm install ```
 
-```$ npm run build ```
-
-- Execução
+- **Execução**
 
 Para executar o projeto localmente rode o comando abaixo dentro da pasta do mesmo:
 
 ```$ npm start ```
+
+- **Build**
+
+Dentro da pasta do projeto rode o comando:
+
+```$ npm run build ```
 
 ##  :woman_technologist: Desenvolvedora
 
