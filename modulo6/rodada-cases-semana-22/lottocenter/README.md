@@ -1,11 +1,9 @@
 # 💻 Lotto Center
 
 ### :dart: Objetivo do projeto
-Primeiro case da rodada de cases proposta pela Labenu durante o sexto e o último módulo do bootcamp desenvolvimento web fullstack. Esse é um case frontend proposto pela Brainn na qual objetivo é construir uma aplicação web front-end que mostre os Resultados das Loterias.
+Primeiro case da rodada de cases proposta pela Labenu durante o sexto e último módulo do bootcamp desenvolvimento web fullstack. Esse é um case frontend proposto pela Brainn na qual objetivo é construir uma aplicação web front-end que mostre os Resultados das Loterias.
 
 O projeto foi desenvolvido com base no [layout](https://www.figma.com/file/H2qrYBCFMf4didYmxRwTxP/Brainn-Frontend-Challenge) e na [api](https://brainn-api-loterias.herokuapp.com) fornecidos pela Brainn.
-
-
 
 ### :small_blue_diamond: Os requisitos do projeto são:
 - A aplicação terá que suportar 6 sorteios: Mega-sena, Quina, Lotofácil, Lotomania, Timemania e Dia de sorte
@@ -28,15 +26,43 @@ O projeto foi desenvolvido com base no [layout](https://www.figma.com/file/H2qrY
 ## 🔗 Link Surge 
 Acesse a página do LottoCenter [clicando aqui](https://lottocenter.surge.sh/).
 
-##  👩🏻‍💻 Desenvolvedora
+## :file_folder: Acessar projeto localmente
+
+-  **Clonar o repositório**
+
+```$ git clone linkRepositório ```
+
+- **Instalar dependências**
+
+``` $ npm install ```
+
+- **Execução**
+
+Para executar o projeto localmente rode o comando abaixo dentro da pasta do mesmo:
+
+```$ npm start ```
+
+- **Build**
+
+Dentro da pasta do projeto rode o comando:
+
+```$ npm run build ```
+
+##  :woman_technologist: Desenvolvedora
 
 | [<img src="https://avatars.githubusercontent.com/u/50851374?v=4" width=115><br><sub>Layane Bastos Juvito</sub>](https://www.linkedin.com/in/layanebastos/)
 | :---: | 
 
 ## 📷 Imagens
 #### MOBILE (Usando como modelo o iphone 12 Pro)
-
+![image](https://user-images.githubusercontent.com/50851374/180665737-9469a31d-b31f-4a7e-9ebb-88edc2be4220.png)
+![image](https://user-images.githubusercontent.com/50851374/180665704-0fedef3b-9dbb-47ae-a468-6fdc49dde48e.png)
 
 #### DESKTOP
+![image](https://user-images.githubusercontent.com/50851374/180665646-9412198a-b98b-4745-9d07-207508d56da4.png)
+![image](https://user-images.githubusercontent.com/50851374/180665668-c350db1d-4155-41b3-b99d-a55489f5eda7.png)
+
+
+
 
 
