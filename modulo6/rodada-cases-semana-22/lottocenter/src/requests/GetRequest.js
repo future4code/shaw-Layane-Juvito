@@ -10,5 +10,6 @@ export const GetRequest = async (input) => {
     } catch (error) {
         input.setLoading(false)
         input.setMessageError("Sorry, something went wrong. Try again later!")
+
     }
 }

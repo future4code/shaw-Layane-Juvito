@@ -75,6 +75,7 @@ const Home = () => {
             <LeftSide>
                 <Select
                     onChange={handleSelect}
+                    value={selectController}
                 >
                     {lotteriesOptions}
                 </Select>
