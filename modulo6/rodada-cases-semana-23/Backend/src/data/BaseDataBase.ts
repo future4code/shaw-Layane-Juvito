@@ -1,9 +1,9 @@
-import knex, { Knex } from "knex";
-import dotenv from "dotenv";
+import knex, { Knex } from 'knex'
+import dotenv from 'dotenv'
 
 dotenv.config()
 
-export abstract class BaseDB {
+export abstract class BaseDataBase {
     protected static connection: Knex = knex({
         client: "mysql",
         connection: {

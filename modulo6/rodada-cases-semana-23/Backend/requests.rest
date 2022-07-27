@@ -1,12 +1,13 @@
 GET http://localhost:3003/
 
 ###
-POST http://localhost:3003/
+POST http://localhost:3003/form/send
 Content-Type: application/json
 
 {
-   "name":"Batman",
-   "movie": "Justice League"
+   "firstName": "Layane", 
+   "lastName": "Bastos", 
+   "participation": 23
 }
 
 ###
