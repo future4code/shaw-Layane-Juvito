@@ -1,0 +1,23 @@
+
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+   "email":"larissa@ufpb.com",
+   "password": "tratante"
+}
+
+###
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+   "email":"larissa@ufpb.com",
+   "password": "tratante"
+}
+
+###
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMxY2E5ZTQzLTA4NWQtNDk5MC1iMDViLWQxNjQyZjc2NDk2MiIsInJvbGUiOiJub3JtYWwiLCJpYXQiOjE2NTY0NDIzMDYsImV4cCI6MTY1NjQ0MjM2Nn0.FpgiN327gJN5XRbJ7qkQms0O5Pq7akAjb8ZpKvTt8r8
+
+GET http://localhost:3003/user/profile
+Authorization: {{token}}

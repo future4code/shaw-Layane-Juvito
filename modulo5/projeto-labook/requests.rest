@@ -1,0 +1,46 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ0ZWNhZjlmLTFkYzAtNDIyNi05Yzg3LWUwNzkzYzdkMmYwNCIsImVtYWlsIjoibGF5QHNoYXcuY29tIiwiaWF0IjoxNjU4MTU1MzQxLCJleHAiOjE2NTg1ODczNDF9.j6SPhovq9VZd2TpC8B5MJWdhJGrMyopoEgNBtV5YzHA
+
+
+### SIGNUP
+POST http://localhost:3003/user/signup 
+Content-Type: application/json 
+
+{
+    "name": "Karina Karla",
+    "email": "kah@ufpb.com",
+    "password": "123456"
+}
+
+### LOGIN
+POST http://localhost:3003/user/login 
+Content-Type: application/json 
+
+{
+    "email": "lay@shaw.com",
+    "password": "123456"
+}
+
+### CREATE POST
+POST http://localhost:3003/post/create 
+Content-Type: application/json 
+Authorization: {{token}}
+
+{
+    "photo": "link",
+    "description": "viva a vida",
+    "type": "NORMAL"
+}
+
+### GET POST BY ID
+GET http://localhost:3003/post/69b61e29-ac18-4b32-819c-18e7f86cf60f
+Authorization: {{token}}
+
+### REQUEST FRIENDSHIP
+POST http://localhost:3003/user/friendship/request/6d0fa2c4-c522-42b1-98ff-c6322a4cb135
+Content-Type: application/json 
+Authorization: {{token}}
+
+### DELETE FRIENDSHIP
+POST http://localhost:3003/user/friendship/delete/6d0fa2c4-c522-42b1-98ff-c6322a4cb135
+Content-Type: application/json 
+Authorization: {{token}}
