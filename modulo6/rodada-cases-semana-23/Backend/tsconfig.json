@@ -6,10 +6,9 @@
       "outDir": "./build",
       "rootDir": "./",
       "removeComments": true,
-      "noImplicitAny": true,
       "strict": true,
+      "noImplicitAny": true,
       "esModuleInterop": true,
-      "skipLibCheck": true,
       "forceConsistentCasingInFileNames": true
    }
 }
