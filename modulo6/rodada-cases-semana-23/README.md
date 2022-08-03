@@ -2,13 +2,13 @@
 
 O objetivo deste desafio é avaliar o domínio das habilidades FullStack, a organização, estilo, e boas práticas com código, criação de APIs, conhecimento de frameworks e tecnologias.
 
-O desafio é disponibilizado acessando o seguinte link: https://github.com/cubonetwork/fullstack-challenge.
+O desafio é disponibilizado acessando no [link](https://github.com/cubonetwork/fullstack-challenge).
 
 ## :link: Link Surge 
-- Acesse o site clicando no link **LINK**.
+- Acesse o site clicando [aqui](https://cubotest.surge.sh/).
 
 ## :link: Link Documentação
-- Acesse a documentação clicando no link **LINK**.
+- Acesse a documentação clicando [aqui](https://documenter.getpostman.com/view/14453564/Uzs42Qf7).
 
 
 ## ⚙️ Funcionalidades
@@ -47,7 +47,7 @@ O desafio é disponibilizado acessando o seguinte link: https://github.com/cubon
 
 ## :computer: Layout Desenvolvido
 
-![image](https://user-images.githubusercontent.com/98998030/182630073-bbcfff83-355d-45fe-a9d1-7df8ab088df2.png)
+![image](https://user-images.githubusercontent.com/50851374/182676057-03bcbb01-ff56-4b57-b5dc-9fd8a5143f76.png)
 
 ## 📁 Acessar Projeto Localmente
 
@@ -100,15 +100,16 @@ $ cd cubo-challenge
 $ npm install
 ```
 
-- *Muda URL base:*
+- *Mudar URL base:*
 
 Caso queira testar toda a aplicação localmente, é necessário alterar a baseURL utilizada para conectar os projetos frontend e o backend. Para isso siga o caminho
 
  ```src/ -> request/ -> requests.ts```
+
 Subistitua a linha:
 
 ```
-6 const baseURL = 'http://localhost:3003/'
+const baseURL = 'https://cubos-challenge.herokuapp.com/'
 ```
 por:
 ```

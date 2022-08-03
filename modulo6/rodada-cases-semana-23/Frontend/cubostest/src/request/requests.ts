@@ -3,7 +3,7 @@ import { GetFormDTO } from "../interfaces/GetFormDTO"
 import { PostProps } from "../interfaces/PostProps"
 
 
-const baseURL = 'http://localhost:3003/'
+const baseURL = 'https://cubos-challenge.herokuapp.com/'
 
 export const getRequest = async (endpoint: string, setData:  React.Dispatch<React.SetStateAction<GetFormDTO[]>>, setError: (error:string)=> void)=> {
     try {
