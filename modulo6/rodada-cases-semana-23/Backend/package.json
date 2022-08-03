@@ -1,9 +1,9 @@
 {
-  "name": "my-server",
+  "name": "cubos-chalenge",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "clear && echo \"Running tests...\" && jest",
+    "test": "echo \"Running tests...\" && jest",
     "start": "node ./build/src/controller/index.js",
     "dev": "tsnd --transpile-only --ignore-watch node_modules ./src/controller/index.ts",
     "build": "tsc"

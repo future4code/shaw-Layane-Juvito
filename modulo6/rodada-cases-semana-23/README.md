@@ -10,20 +10,17 @@ O desafio é disponibilizado acessando o seguinte link: https://github.com/cubon
 ## :link: Link Documentação
 - Acesse a documentação clicando no link **LINK**.
 
-## :link: Link Heroku
-- Acesse o deploy clicando no link **LINK**.
-
 
 ## ⚙️ Funcionalidades
-[✅] Todos os campos do formulário são obrigatórios;
+✅ Todos os campos do formulário são obrigatórios;
 
-[✅] Os dados enviados pelo formulário são salvos no banco de dados;
+✅ Os dados enviados pelo formulário são salvos no banco de dados;
 
-[✅] APIs para enviar e receber os dados;
+✅ APIs para enviar e receber os dados;
 
-[✅] Resetar banco de dados clicando no ícone no canto superior esquerdo da tabela;
+✅ Resetar banco de dados clicando no ícone no canto superior esquerdo da tabela;
 
-[✅] Representar tabela por meio de um gráfico dinâmico.
+✅ Representar tabela por meio de um gráfico dinâmico.
 
 ## :hammer_and_wrench: Ferramentas 
 ### 🍮 Frontend
