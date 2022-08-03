@@ -13,4 +13,6 @@ const formController = new FormController(
 
 export const formRouter = express.Router()
 
-formRouter.post('/send', formController.postForm)
+formRouter.post('', formController.postForm)
+formRouter.get('', formController.getUserData)
+formRouter.delete('', formController.deleteData)

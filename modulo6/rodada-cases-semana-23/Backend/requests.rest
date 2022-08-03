@@ -1,7 +1,8 @@
-GET http://localhost:3003/
+### Pegar informações
+GET http://localhost:3003/form
 
-###
-POST http://localhost:3003/form/send
+### Postar informações
+POST http://localhost:3003/form
 Content-Type: application/json
 
 {
@@ -10,5 +11,6 @@ Content-Type: application/json
    "participation": 23
 }
 
-###
-DELETE http://localhost:3003/
+### delete
+
+DELETE http://localhost:3003/form
