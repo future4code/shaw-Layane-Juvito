@@ -20,16 +20,16 @@ Points to be evaluated:
 ## ⚙️ Requirements and Features
 The web app must have two pages/routes:
 
-    ✅ Search Page:
+✅ Search Page:
 
-    - Must have a search field;
-    - Show the user profile metadata and his repositories metadata info.
+- Must have a search field;
+- Show the user profile metadata and his repositories metadata info.
 
-    ✅ History Page:
+✅ History Page:
 
-    - The page must show all previous terms searched by the user, sorted by timestamp;
-    - The user must be able to click in the history item and search again using the searched term.
-    - Extra: delete the history search
+- The page must show all previous terms searched by the user, sorted by timestamp;
+- The user must be able to click in the history item and search again using the searched term.
+- Extra: delete the history search
 
 ## :hammer_and_wrench: Tecnologies
 - [React](https://pt-br.reactjs.org/)
@@ -49,7 +49,7 @@ The web app must have two pages/routes:
 ![image](https://user-images.githubusercontent.com/50851374/184438576-6ea018b6-0e19-43a6-8975-2a99c6a3f947.png)
 ![image](https://user-images.githubusercontent.com/50851374/184439196-cee12e60-c86e-40f4-90fe-a09e0a573114.png)
 
-### 📱 Mobile
+### 📱 Mobile (iPhone 12 Pro)
 
 ![image](https://user-images.githubusercontent.com/50851374/184440694-3ce36c57-62fa-40dc-9b2d-748f1141fc9a.png)
 ![image](https://user-images.githubusercontent.com/50851374/184441053-c2c85eba-1da9-4a29-8cf1-a4fb14789899.png)
@@ -85,5 +85,5 @@ $ npm run start
 ```
 
 ## 👨‍💻 Developer
-[<img src="https://avatars.githubusercontent.com/u/50851374?v=4" width=115><br><sub>Layane Bastos Juvito</sub>](https://github.com/MatthsMB) |
+[<img src="https://avatars.githubusercontent.com/u/50851374?v=4" width=115><br><sub>Layane Bastos Juvito</sub>](https://github.com/LayaneB) |
 | :---: |
