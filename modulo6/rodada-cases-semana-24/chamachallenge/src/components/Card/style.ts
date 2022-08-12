@@ -7,9 +7,13 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     gap:10px;
-    border: 1px solid #312f2fe3;
     padding: 10px;
     color:whitesmoke;
+    @media screen and (max-device-width : 800px) {
+       width: 90%;
+       padding: 10px 0;
+       height: fit-content;
+    }
 `
 
 export const Avatar = styled.img`
@@ -17,13 +21,15 @@ export const Avatar = styled.img`
     border-radius: 50%;
     border: 2px solid #211f1fb8;
     margin: 0 auto;
+    @media screen and (max-device-width : 800px) {
+       width: 80%;
+    }
 `
 
 export const Link = styled.a`
     display: flex;
     gap:5px;
     text-decoration: none;
-    
 `
 
 export const Name = styled.p`
@@ -48,13 +54,14 @@ export const Paragraph = styled.p`
     display: flex;
     align-items: center;
     gap:5px;
-    font-size: 0.9rem;
+    font-size: 0.9rem; 
 `
 
 export const Follow = styled.span`
     color: #cdc8c8c9;
     font-weight: 200;
 `
+
 export const FollowContainer = styled.span`
     cursor: pointer;
     display: flex;
@@ -71,6 +78,7 @@ export const FollowContainer = styled.span`
 export const Bio = styled.p`
     font-size: 0.9rem;
     font-weight: 500;
+
 `
 
 export const RepoNumber = styled.span`
@@ -78,4 +86,5 @@ export const RepoNumber = styled.span`
     border-radius: 40%;
     font-size: 0.7rem;
     padding: 3px 7px;
+
 `

@@ -1,15 +1,23 @@
 import styled from "styled-components";
 
 export const HeaderContainer = styled.div`
+    position: relative;
     height: 12vh;
     width: 100vw;
     background-color: #3b3b3b;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 2rem;
+    padding-right: 2rem;
+    @media screen and (max-device-width : 800px) {
+        justify-content: space-around;
+        padding: 0  1rem;
+        gap: 1rem;
+    }
 `
 
-export const Input = styled.input`
+export const Select = styled.select`
     padding: 10px;
     width: 400px;
     font-size: 1.2rem;
@@ -17,36 +25,17 @@ export const Input = styled.input`
     color: white;
     border: 1px solid #bda2c63d;
     outline: none;
-    border-radius: 5px 0 0 5px;
+    border-radius: 5px;
     @media screen and (max-device-width : 800px) {
-        width: 70%;
-        font-size: 1rem;
+        width: 65%;
     }
+`
+
+export const Option = styled.option`
+    color: #3b3b3b;
 `
 
 export const Button = styled.button`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 9px 15px;
-    font-size: 1.6rem;
-    background-color: whitesmoke;
-    outline: none;
-    border: none;
-    border-radius: 0 5px 5px 0;
-    color: #3b3b3b;
-    :hover{
-        opacity: 80%;
-    }
-
-    @media screen and (max-device-width : 800px) {
-        font-size: 1.45rem;
-    }
-`
-
-export const ButtonHistory = styled.button`
-    position: absolute;
-    right: 2rem;
     padding: 10px;
     font-size: 1.2rem;
     display: flex;
@@ -60,13 +49,25 @@ export const ButtonHistory = styled.button`
     :hover{
         opacity:80%;
     }
+`
 
+export const DeleteButton = styled(Button)`
+    position: absolute;
+    top:center;
+    right: 2rem;
     @media screen and (max-device-width : 800px) {
-        position: fixed;
-        bottom: 1rem;
-        right: 1rem;
-        background-color: #171616e4;
-        color: white;
-        font-size: 1rem;
+        position: relative;
+        top:0;
+        right: 0;
+    }
+`
+export const CleanButton = styled(Button)`
+    position: absolute;
+    top:center;
+    right: 6rem;
+    @media screen and (max-device-width : 800px) {
+        position:relative;
+        top:0;
+        right: 0;
     }
 `

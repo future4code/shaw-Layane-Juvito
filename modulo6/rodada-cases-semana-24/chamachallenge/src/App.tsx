@@ -1,12 +1,13 @@
-import { GlobalStyle } from "./GlobalStyle";
-import HomePage from "./pages/HomePage";
+import GlobalState from './Global/GlobalState';
+import { GlobalStyle } from './GlobalStyle';
+import Router from './routes/Router'
 
 function App() {
   return (
-    <>
-    <GlobalStyle />
-    <HomePage />
-    </>
+    <GlobalState>
+      <GlobalStyle />
+      <Router />
+    </GlobalState>
   );
 }
 

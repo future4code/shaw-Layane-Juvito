@@ -1,22 +1,17 @@
 import styled from "styled-components"
 
-export const HomeContainer = styled.div`
-    height: 88vh;
-    width: 100vw;
-    display: flex;
-    align-items:center;
-    justify-content: center;
-    font-size: 4rem;
-    font-weight: 500;
-    gap:10px;
-`
-
-export const HomeMain = styled.div`
+export const Main = styled.div`
     height: 88vh;
     max-width: 100vw;
     display: flex;
     background-color: #171616e4;
     padding-left: 5rem;
+    @media screen and (max-device-width : 800px) {
+       flex-direction: column;
+       align-items: center;
+       height: fit-content;
+       padding: 10px;
+    }
 `
 
 export const InfosContainer = styled.div`
@@ -32,16 +27,33 @@ export const InfosContainer = styled.div`
         text-align: center;
         padding: 1rem;
     }
+
+    @media screen and (max-device-width : 800px) {
+        align-items: center;
+        height: fit-content;
+        h1{
+            font-size: 1.5rem;
+        }
+    }
 `
 
 export const Scroll = styled.div`
-     display: flex;
-     flex-direction: column;
+    display: flex;
+    flex-direction: column;
     padding: 0 5rem;
     overflow-y: scroll;
     height: 88vh;
     width: 100%;
-    flex-grow:1;
+
+    @media screen and (max-device-width : 800px) {
+       flex-grow: 1;
+       overflow:visible;
+       align-items: center;
+       padding: 0;
+       width: 100vw;
+       min-height: 88vh;
+       height: fit-content;
+    }
 
 `
 export const Infos = styled.div`
@@ -53,5 +65,10 @@ export const Infos = styled.div`
     align-content: center;
     justify-content: center;
     gap:20px;
-
+    @media screen and (max-device-width : 800px) {
+       width: 95%;
+       padding: 20px 5px;
+       align-items: center;
+       
+    }
 `

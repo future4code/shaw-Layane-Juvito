@@ -16,8 +16,13 @@ export const Container = styled.a`
         opacity: 70%;
     }
 
+    @media screen and (max-device-width : 800px) {
+       width: 90%;
+       font-size: 0.8rem;
+    }
+
 `
 export const Image = styled.img`
-    width: 50px;
+    width: 35px;
     border-radius: 50%;
 `

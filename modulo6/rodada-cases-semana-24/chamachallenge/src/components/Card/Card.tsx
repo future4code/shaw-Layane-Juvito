@@ -36,9 +36,9 @@ const Card = (props: CardProps) => {
             {userData.email && <Paragraph>
                 <MdMailOutline color="#cdc8c8c9" />{userData.email}
             </Paragraph>}
-            <Paragraph onClick={getUserRepos}>
+            <FollowContainer onClick={getUserRepos}>
                 <BiBookBookmark color="#cdc8c8c9" /> Repositórios <RepoNumber>{userData.public_repos}</RepoNumber>
-            </Paragraph>
+            </FollowContainer>
             <Paragraph>
                 <MdCreate color="#cdc8c8c9" /> Criado: {moment(userData.created_at).format("DD/MM/YYYY")}
             </Paragraph>
