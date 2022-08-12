@@ -11,6 +11,7 @@ import { GlobalContext } from "../../Global/GlobalContext"
 import UserInfo from "../../components/UserInfo/UserInfo"
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { UserDataInitialState } from "../../constants/UserDataInicialState"
 
 const HomePage = () => {
     const [search, setSearch] = React.useState('')
@@ -34,6 +35,11 @@ const HomePage = () => {
 
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(event.target.value)
+    }
+
+    const goHistory = () => {
+        setUserData(UserDataInitialState)
+        setResetData(!resetData)
     }
 
     const notify = (message: String) => toast.error(message);
@@ -82,6 +88,7 @@ const HomePage = () => {
                 onChange={onChange}
                 onClick={getUserData}
                 search={search}
+                goHistory={goHistory}
             />
             {
                 !userData.id ?

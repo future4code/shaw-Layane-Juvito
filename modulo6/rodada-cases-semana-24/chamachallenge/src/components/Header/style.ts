@@ -63,7 +63,7 @@ export const ButtonHistory = styled.button`
 
     @media screen and (max-device-width : 800px) {
         position: fixed;
-        bottom: 1rem;
+        top: 14vh;
         right: 1rem;
         background-color: #171616e4;
         color: white;

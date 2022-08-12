@@ -6,8 +6,13 @@ import { useNavigate } from "react-router-dom"
 
 const Header = (props: HeaderProps) => {
 
-    const {onChange, search, onClick} = props
+    const {onChange, search, onClick, goHistory} = props
     const navigate = useNavigate()
+
+    const navigateHistory = () => {
+        goHistory()
+        navigate('/history')
+    }
 
     return (
         
@@ -22,7 +27,7 @@ const Header = (props: HeaderProps) => {
                 <MdPersonSearch />
             </Button>
 
-            <ButtonHistory onClick={() => navigate('/history')}>
+            <ButtonHistory onClick={navigateHistory}>
                 <RiHistoryLine />
             </ButtonHistory>
         </HeaderContainer>
