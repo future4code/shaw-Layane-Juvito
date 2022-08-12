@@ -85,5 +85,5 @@ $ npm run start
 ```
 
 ## 👨‍💻 Developer
-[<img src="https://avatars.githubusercontent.com/u/50851374?v=4" width=115><br><sub>Layane Bastos Juvito</sub>](https://github.com/LayaneB) |
+[<img src="https://avatars.githubusercontent.com/u/50851374?v=4" width=115><br><sub>Layane Bastos Juvito</sub>](https://www.linkedin.com/in/layanebastos/) |
 | :---: |
