@@ -13,6 +13,7 @@ export const Container = styled.div`
        width: 90%;
        padding: 10px 0;
        height: fit-content;
+       border-bottom: 1px solid #bda2c63d;
     }
 `
 

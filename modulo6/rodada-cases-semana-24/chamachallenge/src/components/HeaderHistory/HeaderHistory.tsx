@@ -8,12 +8,12 @@ const HeaderHistory = (props: HeaderHistoryProps) => {
 
     const { goBack, deleteHistory, onChange, search, options } = props
     const navigate = useNavigate()
-
+  
     const renderOptions = options.map((option: string, index: number) => {
         return (
             <Option key={index} value={option}>{option}</Option>
         )
-    })
+    }).reverse()
 
     const goToSearchPage = () => {
         goBack()

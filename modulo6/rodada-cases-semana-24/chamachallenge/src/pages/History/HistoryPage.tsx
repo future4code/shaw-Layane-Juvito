@@ -112,7 +112,7 @@ const HistoryPage = () => {
             {
                 !userData.id ?
                     <HomeContainer>
-                        <BsGithub /> GitHub Seacher
+                        <BsGithub /> GitHub Searcher
                     </HomeContainer>
                     :
                     <UserInfo

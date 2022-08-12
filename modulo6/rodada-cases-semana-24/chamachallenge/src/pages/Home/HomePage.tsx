@@ -12,6 +12,7 @@ import UserInfo from "../../components/UserInfo/UserInfo"
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { UserDataInitialState } from "../../constants/UserDataInicialState"
+import Loader from "../../components/Loader/Loader"
 
 const HomePage = () => {
     const [search, setSearch] = React.useState('')
@@ -26,7 +27,7 @@ const HomePage = () => {
     }, [resetData])
 
     React.useEffect(() => {
-        if(userData.login){
+        if (userData.login) {
             getRepos(userData.login, setRepos, setLoading, page, notify)
             getFollowers(userData.login, setFollowers, setLoading, notify)
             getFollowing(userData.login, setFollowing, setLoading, notify)
@@ -90,10 +91,12 @@ const HomePage = () => {
                 search={search}
                 goHistory={goHistory}
             />
-            {
+            {loading ?
+                <Loader />
+                :
                 !userData.id ?
                     <HomeContainer>
-                        <BsGithub /> GitHub Seacher
+                        <BsGithub /> GitHub Searcher
                     </HomeContainer>
                     :
                     <UserInfo

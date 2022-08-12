@@ -8,6 +8,7 @@ export const Main = styled.div`
     padding-left: 5rem;
     @media screen and (max-device-width : 800px) {
        flex-direction: column;
+       min-height: 88vh;
        align-items: center;
        height: fit-content;
        padding: 10px;
@@ -51,7 +52,6 @@ export const Scroll = styled.div`
        align-items: center;
        padding: 0;
        width: 100vw;
-       min-height: 88vh;
        height: fit-content;
     }
 
