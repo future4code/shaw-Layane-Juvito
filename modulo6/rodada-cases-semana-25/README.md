@@ -3,7 +3,7 @@
 The objective of this [challenge](https://github.com/amaroteam/back-end-challenge) is to develop an API for product registration and consultation.
 
 ## :link: Documentation
-- Access the API Documentation by clicking [here](https://chama-challenge.surge.sh/).
+- Access the API Documentation by clicking [here](https://documenter.getpostman.com/view/14453564/VUqmuJUP).
 
 
 ## ⚙️ Requirements
