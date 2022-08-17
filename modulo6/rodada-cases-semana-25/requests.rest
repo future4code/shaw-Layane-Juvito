@@ -1,0 +1,11 @@
+GET http://localhost:3003/product
+
+###
+POST http://localhost:3003/product
+Content-Type: application/json
+
+{
+   "name":"Óculos de Sol",
+   "price": 498.23,
+   "tags": ["oi", 2]
+}
