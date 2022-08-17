@@ -1,7 +1,7 @@
-GET http://localhost:3003/product
+GET https://amarochallenge.herokuapp.com/product
 
 ###
-POST http://localhost:3003/product
+POST https://amarochallenge.herokuapp.com/product
 Content-Type: application/json
 
 {
