@@ -1,0 +1,16 @@
+### Pegar informações
+GET http://localhost:3003/form
+
+### Postar informações
+POST http://localhost:3003/form
+Content-Type: application/json
+
+{
+   "firstName": "Layane", 
+   "lastName": "", 
+   "participation": 23
+}
+
+### delete
+
+DELETE http://localhost:3003/form
