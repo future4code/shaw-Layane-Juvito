@@ -1,0 +1,11 @@
+GET https://amarochallenge.herokuapp.com/product
+
+###
+POST https://amarochallenge.herokuapp.com/product
+Content-Type: application/json
+
+{
+   "name":"Óculos de Sol",
+   "price": 498.23,
+   "tags": ["oi", 2]
+}
